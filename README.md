@@ -3,9 +3,9 @@
 This is an AI Fitness application that uses AI chat to help you reach your fitness goals
 
 # Commands
-* [To enter virtual environment](source djangoenv/Scripts/activate)
-* [To start project in local host](python manage.py runserver)
-* [To turn on tailwind compiling](python manage.py tailwind start)
+* To enter virtual environment: source djangoenv/Scripts/activate
+* To start project in local host: python manage.py runserver
+* To turn on tailwind compiling: python manage.py tailwind start
 
 [Software Demo Video](http://youtube.link.goes.here)
 
