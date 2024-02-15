@@ -34,3 +34,6 @@ This is an AI Fitness application that uses AI chat to help you reach your fitne
 * Item 1
 * Item 2
 * Item 3
+
+# Install 
+* pip install --upgrade firebase-admin
