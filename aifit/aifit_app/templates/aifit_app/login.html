@@ -1,0 +1,44 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Login</title>
+      {% tailwind_css %}
+  </head>
+  <body>
+      <h1>Login</h1>
+      <form method="post">
+          {% csrf_token %}
+          <!-- Your login form fields go here -->
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <button type="submit">Login</button>
+      </form>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: '{{ firebase_config.apiKey }}',
+      authDomain: '{{ firebase_config.authDomain }}',
+      projectId: '{{ firebase_config.projectId }}',
+      storageBucket: '{{ firebase_config.storageBucket }}',
+      messagingSenderId: '{{ firebase_config.messagingSenderId }}',
+      appId: '{{ firebase_config.appId }}',
+      measurementId: '{{ firebase_config.measurementId }}'
+    }
+    firebase.initializeApp(firebaseConfig);
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        user.getIdToken().then(function(idToken) {
+          document.getElementById('id_token').value = idToken;
+          document.forms[0].submit();
+        });
+      }
+    });
+  </script>
+</html>
