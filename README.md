@@ -6,6 +6,7 @@ This is an AI Fitness application that uses AI chat to help you reach your fitne
 * To enter virtual environment: source djangoenv/Scripts/activate
 * To start project in local host: python manage.py runserver
 * To turn on tailwind compiling: python manage.py tailwind start
+* To install dependencies: pip install -r requirements.txt
 
 [Software Demo Video](http://youtube.link.goes.here)
 
@@ -37,3 +38,4 @@ This is an AI Fitness application that uses AI chat to help you reach your fitne
 
 # Install 
 * pip install --upgrade firebase-admin
+* pip install -r requirements.txt
