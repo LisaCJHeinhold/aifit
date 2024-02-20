@@ -7,17 +7,19 @@
       <title>Login</title>
       {% tailwind_css %}
   </head>
-  <body>
-    <div class="bg-green-300 p-10 max-w-md m-auto mt-10 rounded">
-      <h1 class="text-3xl font-bold pb-5 text-center">Login</h1>
-        <form method="post" class="flex flex-col">
+  <body class="bg-black">
+    <div class="bg-light-green max-w-md m-auto mt-10 rounded">
+      <div class="bg-dark-green m-0 rounded-t">
+        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Login</h1>
+      </div>
+        <form method="post" class="flex flex-col px-10 py-5">
             {% csrf_token %}
             <!-- Your login form fields go here -->
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
-            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-5 rounded">Login</button>
+            <button type="submit" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Login</button>
         </form>
     </div>
   </body>
