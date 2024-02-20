@@ -8,16 +8,18 @@
       {% tailwind_css %}
   </head>
   <body>
-      <h1>Login</h1>
-      <form method="post">
-          {% csrf_token %}
-          <!-- Your login form fields go here -->
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password">
-          <button type="submit">Login</button>
-      </form>
+    <div class="bg-green-300 p-10 max-w-md m-auto mt-10 rounded">
+      <h1 class="text-3xl font-bold pb-5 text-center">Login</h1>
+        <form method="post" class="flex flex-col">
+            {% csrf_token %}
+            <!-- Your login form fields go here -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-5 rounded">Login</button>
+        </form>
+    </div>
   </body>
   <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js"></script>
