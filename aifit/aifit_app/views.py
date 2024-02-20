@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from fire.firebase import firebaseInit
+from fire.firebase import firebaseInit, Firebase
 from django.contrib import auth
 from fire.firebase_auth import verify_id_token
 from django.conf import settings
