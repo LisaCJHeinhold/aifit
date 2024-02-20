@@ -5,3 +5,4 @@ aifit/aifit/__pycache__
 aifit/aifit_app/__pycache__
 aifit/aifit_app/migrations/__pycache__
 aifit/aifit_app/__pycache__/views.cpython-311.pyc
+*__pycache__/
