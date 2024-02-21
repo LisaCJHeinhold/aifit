@@ -1,9 +1,13 @@
 {
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "chart.js": "^4.4.1",
 >>>>>>> 66c78c6 (hehe)
+=======
+    "chart.js": "^4.4.1",
+>>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
     "tailwindcss": "^3.4.1"
   }
 }

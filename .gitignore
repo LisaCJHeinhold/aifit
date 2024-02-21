@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 djangoenv
 aifit/theme/__pycache__
 aifit/fire/aifit-42d60-4b74ea669715.json
@@ -26,3 +27,14 @@ python3 -m venv djangoenv/bin/activate
 aifit/fire/.env
 python3 -m venv djangoenv/bin/activate
 >>>>>>> 66c78c6 (hehe)
+=======
+aifit/aifit/__pycache__
+aifit/aifit_app/__pycache__
+aifit/aifit_app/migrations/__pycache__
+aifit/theme/__pycache__
+node_modules
+djangoenv
+
+// npm install chart.js
+// pip install django-chartjs
+>>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
