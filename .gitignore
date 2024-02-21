@@ -1,0 +1,9 @@
+aifit/aifit/__pycache__
+aifit/aifit_app/__pycache__
+aifit/aifit_app/migrations/__pycache__
+aifit/theme/__pycache__
+node_modules
+djangoenv
+
+// npm install chart.js
+// pip install django-chartjs

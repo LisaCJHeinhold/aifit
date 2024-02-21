@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('aifit_app.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
+    path('graph', include('aifit_app.urls'))
 ]
