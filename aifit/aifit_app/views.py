@@ -37,3 +37,21 @@ def home(request):
     print(data)
     
     return render(request, 'aifit_app/index.html')
+
+def dashboard(request):
+    return render(request,'aifit_app/dashboard.html')
+
+def chat(request):
+    return render(request,'aifit_app/chat.html')
+
+def profile(request):
+    return render(request,'aifit_app/profile.html')
+
+def goals(request):
+    return render(request,'aifit_app/goals.html')
+
+def graph(request):
+    return render(request,'aifit_app/graph.html')
+
+def previous_workouts(request):
+    return render(request,'aifit_app/previousworkouts.html')
