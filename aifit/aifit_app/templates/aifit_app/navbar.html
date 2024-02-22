@@ -1,0 +1,50 @@
+<!-- navbar.html -->
+<!--needs work still but this is what I have started:)-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        /*Need to change colors and the like, add links to the different pages*/
+        .navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+        
+        .navbar li {
+            float: left;
+        }
+        
+        .navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        .navbar li a:hover {
+            background-color: #555;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<ul class="navbar">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'chat' %}">Chat</a></li>
+    <li><a href="{% url 'profile' %}">Profile Page</a></li>
+    <li><a href="{% url 'goals' %}">Goals</a></li>
+    <li><a href="{% url 'graph' %}">Graph</a></li>
+    <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+</ul>
+{% block content %}
+{% endblock %}
+</body>
+</html>
