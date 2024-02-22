@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
+    <title>{% block title %}{% endblock %}</title>
     <style>
         /*Need to change colors and the like, add links to the different pages*/
         .navbar {
@@ -44,6 +44,7 @@
     <li><a href="{% url 'graph' %}">Graph</a></li>
     <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
 </ul>
-
+{% block content %}
+{% endblock %}
 </body>
 </html>
