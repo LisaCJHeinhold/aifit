@@ -11,23 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
+import firebase_admin
+from firebase_admin import credentials
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Firebase Config
-FIREBASE_CONFIG = {
-    "apiKey": os.getenv("API_KEY"),
-    "authDomain": os.getenv("AUTH_DOMAIN"),
-    "projectId": os.getenv("PROJECT_ID"),
-    "storageBucket": os.getenv("STORAGE_BUCKET"),
-    "messagingSenderId": os.getenv("MESSAGING_SENDER_ID"),
-    "appId": os.getenv("APP_ID"),
-    "measurementId": os.getenv("MEASUREMENT_ID")
-}
-
+cred = credentials.Certificate("./fire/aifit-42d60-4b74ea669715.json")
+firebase_admin.initialize_app(cred)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

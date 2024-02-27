@@ -12,11 +12,11 @@
       <div class="bg-dark-green m-0 rounded-t">
         <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Login</h1>
       </div>
-        <form method="post" class="flex flex-col px-10 py-5">
+        <form method="post" action="{% url 'dashboard' %}" class="flex flex-col px-10 py-5">
             {% csrf_token %}
             <!-- Your login form fields go here -->
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
             <button type="submit" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Login</button>

@@ -3,20 +3,43 @@ from fire.firebase import firebaseInit, Firebase
 from django.contrib import auth
 from fire.firebase_auth import verify_id_token
 from django.conf import settings
+from django.http import JsonResponse
+import firebase_admin
+from firebase_admin import auth
 
+
+# def login(request):
+#     firebase_config = settings.FIREBASE_CONFIG
+#     if request.method == 'POST':
+#         id_token = request.POST.get('id_token')
+#         user = verify_id_token(id_token)
+#         if user:
+#             auth.login(request, user)
+#             return redirect('dashboard')  # Redirect to dashboard page after login
+#         else:
+#             # Handle invalid login
+#             pass
+#     return render(request, 'aifit_app/login.html')
 
 def login(request):
-    firebase_config = settings.FIREBASE_CONFIG
-    if request.method == 'POST':
-        id_token = request.POST.get('id_token')
-        user = verify_id_token(id_token)
-        if user:
-            auth.login(request, user)
-            return redirect('dashboard')  # Redirect to dashboard page after login
-        else:
-            # Handle invalid login
-            pass
-    return render(request, 'aifit_app/login.html')
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        
+        if email is None or password is None:
+            return JsonResponse({"error": "Email or password is missing"}, status=400)
+
+        try:
+            user = auth.get_user_by_email(email)
+            # Firebase user exists, try to sign in
+            user = auth.sign_in_with_email_and_password(email, password)
+            # Authentication successful, return user's Firebase UID
+            return JsonResponse({"uid": user["localId"]})
+        except firebase_admin.auth.UserNotFoundError:
+            # Firebase user doesn't exist
+            return JsonResponse({"error": "User not found"}, status==400)
+    
+    return render(request, "aifit_app/login.html")
 
 def signup(request):
     # Implement signup logic here
