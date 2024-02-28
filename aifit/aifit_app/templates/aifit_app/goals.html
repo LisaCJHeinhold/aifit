@@ -1,11 +1,110 @@
 {% extends "aifit_app/navbar.html" %}
 
-
 {% block title %}
  Goals
 {% endblock %}
 
-
 {% block content %}
- Goals
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Goals</title>
+      {% tailwind_css %}
+  </head>
+  <body class="bg-black">
+    <div class="bg-light-green max-w-md m-8 mt-10 rounded">
+      <!-- Progress bar  -->
+      <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+        <div class="flex bg-dark-green items-center justify-center w-1/4 h-full overflow-hidden text-white break-all rounded-t">
+          25% Complete
+        </div>
+      </div>  
+      <div class="bg-dark-green m-0">
+        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Weekly Goals</h1>
+      </div>
+      <form method="post" class="flex flex-col px-10 py-5">
+        {% csrf_token %}
+        
+        <button type="button" id="addButton" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Add goal</button>
+        <div id="inputContainer"></div>
+        <ul id="inputList"></ul>
+      </form>
+    </div>
+
+    <div class="bg-light-green max-w-md m-8 mt-20 rounded mt-800">
+      <!-- Progress bar  -->
+      <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+        <div class="flex bg-dark-green items-center justify-center w-1/2 h-full overflow-hidden text-white break-all rounded-t">
+          50% Complete
+        </div>
+      </div>  
+      <div class="bg-dark-green m-0">
+        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Overall Goals</h1>
+      </div>
+      <form method="post" class="flex flex-col px-10 py-5">
+        {% csrf_token %}
+        
+        <button type="button" id="addButton" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Add goal</button>
+        <div id="inputContainer"></div>
+        <ul id="inputList"></ul>
+      </form>
+    </div>
+
+    <div class="flex w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-full flex-start bg-blue-gray-50">
+      <div class="flex items-center justify-center w-1/2 h-full overflow-hidden text-white break-all bg-gray-900 rounded-t">
+        50% Completed
+      </div>
+    </div>  
+
+    <script>
+      
+      document.getElementById("addButton").addEventListener("click", function() {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "typeGoal";
+        input.name = "Goal";
+        input.value = ""
+
+        var inputContainer = document.createElement("div")
+        inputContainer.style.width = "300px"
+        inputContainer.appendChild(input)
+        document.getElementById("inputContainer").appendChild(inputContainer)
+
+        var list = document.getElementById("inputList")
+        input.addEventListener("keydown", function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault(); 
+
+            var checklistContainer = document.createElement("div");
+
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = "goalCheckbox" + (list.childElementCount + 1);
+            checkbox.className = "form-checkbox h-5 w-5 text-light-green";
+            checkbox.name = "goal";
+
+            var label = document.createElement("label");
+            label.htmlFor = checkbox.id;
+            label.className = "m1-2 text-light-gray";
+            label.textContent = input.value;
+
+            checklistContainer.appendChild(checkbox);
+            checklistContainer.appendChild(label);
+
+            document.getElementById("inputContainer").appendChild(checklistContainer);
+
+            // Removes the input container
+            inputContainer.remove(); 
+
+            input.value = "";
+            
+          }
+        }); 
+      });
+    </script>
+  </body>
+</html>
 {% endblock %}
