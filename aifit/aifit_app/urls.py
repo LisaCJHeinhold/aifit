@@ -8,8 +8,12 @@ urlpatterns = [
     # chart graph url
     path('chart', views.line_chart, name='line_chart'),
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
+<<<<<<< HEAD
     path('line_chart', views.line_chart, name='line_chart'),
     # other urls
+=======
+    path('graph', views.line_chart, name='line_chart'),
+>>>>>>> d8d9c91 (views and gitignore)
     path('workout', views.workout, name='workout'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
@@ -18,6 +22,7 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('profile/', views.profile, name='profile'),
     path('goals/', views.goals, name='goals'),
+<<<<<<< HEAD
     path('graph/', views.graph, name='graph'),
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -41,4 +46,7 @@ urlpatterns = [
     path('graph', views.line_chart, name='line_chart'),
     path('workout', views.workout, name='workout')
 >>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
+=======
+    path('previousworkouts/', views.previous_workouts, name='previous_workouts'),
+>>>>>>> d8d9c91 (views and gitignore)
 ]
