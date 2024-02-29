@@ -7,7 +7,7 @@ urlpatterns = [
     path('chart', views.line_chart, name='line_chart'),
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
     path('graph', views.line_chart, name='line_chart'),
-    path('workout', views.workout, name='workout')
+    path('workout', views.workout, name='workout'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('signup/', views.signup, name='signup'),
@@ -17,6 +17,4 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('goals/', views.goals, name='goals'),
     path('previousworkouts/', views.previous_workouts, name='previous_workouts'),
-    
-    
 ]
