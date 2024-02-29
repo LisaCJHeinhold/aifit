@@ -1,0 +1,48 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Login</title>
+      {% tailwind_css %}
+  </head>
+  <body class="bg-black">
+    <div class="bg-light-green max-w-md m-auto mt-10 rounded">
+      <div class="bg-dark-green m-0 rounded-t">
+        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Login</h1>
+      </div>
+        <form method="post" action="{% url 'dashboard' %}" class="flex flex-col px-10 py-5">
+            {% csrf_token %}
+            <!-- Your login form fields go here -->
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <button type="submit" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Login</button>
+        </form>
+    </div>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: '{{ firebase_config.apiKey }}',
+      authDomain: '{{ firebase_config.authDomain }}',
+      projectId: '{{ firebase_config.projectId }}',
+      storageBucket: '{{ firebase_config.storageBucket }}',
+      messagingSenderId: '{{ firebase_config.messagingSenderId }}',
+      appId: '{{ firebase_config.appId }}',
+      measurementId: '{{ firebase_config.measurementId }}'
+    }
+    firebase.initializeApp(firebaseConfig);
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        user.getIdToken().then(function(idToken) {
+          document.getElementById('id_token').value = idToken;
+          document.forms[0].submit();
+        });
+      }
+    });
+  </script>
+</html>
