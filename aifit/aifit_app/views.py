@@ -162,7 +162,11 @@ def login(request):
     #         messages.error(request, "Sign-up failed. Please try again.")
     #         return render(request,'aifit_app/signup.html')
         
+<<<<<<< HEAD
     # return render(request,'aifit_app/signup.html')
+=======
+    return render(request,'aifit_app/signup.html')
+>>>>>>> 00b6b73 (error fixes)
 
 def logout(request):
     logout(request)
