@@ -49,7 +49,7 @@ def signup(request):
             messages.error(request, "Sign-up failed. Please try again.")
             return render(request,'aifit_app/signup.html')
         
-    return render(request,'aifit_app/login.html')
+    return render(request,'aifit_app/signup.html')
 
 def logout(request):
     return render(request,'aifit_app/login.html')
