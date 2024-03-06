@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style> </style>
-    <title>AiFit</title>
-</head>
-<body>
-        <div class="quote-section">
-        <h3>Quote of the Day</h3>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada 
-            fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
-            ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam 
-            egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-        <p>- author</p>
-        </div>
-        {% block goals_content %}
-            {{ goals_content }}
-        {% endblock %}
-        <div class="image">
-            <h3>Graph: </h3>
-        </div>
-        </div>
-</body>
-</html>
+{% extends "aifit_app/navbar.html" %}
+
+{% load static tailwind_tags %}
+
+{% tailwind_css %}
+{% block title %}
+    AiFit
+{% endblock %}
+
+
+{% block content %}
+  AiFit
+{% endblock %}
+
+    

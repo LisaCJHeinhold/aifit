@@ -1,14 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
+
     <title>{% block title %}{% endblock %}</title>
-=======
     <title>Navbar</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
->>>>>>> d9419a0 (nav bar update)
     <style>
         
         .navbar {
@@ -52,24 +51,7 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-<!-- <ul class="navbar">
-    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-    <li><a href="{% url 'chat' %}">Chat</a></li>
-    <li><a href="{% url 'profile' %}">Profile Page</a></li>
-    <li><a href="{% url 'goals' %}">Goals</a></li>
-    <li><a href="{% url 'graph' %}">Graph</a></li>
-    <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-    <li><a href="{% url 'login' %}">Login</a></li>
-</ul> -->
-{% block content %}
-{% endblock %}
-</body>
-<script>
-    
-</script>
-</html>
-=======
+
 
 <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
 
@@ -80,7 +62,37 @@
         <li><a href="{% url 'chat' %}">Chat</a></li>
         <li><a href="{% url 'goals' %}">Goals</a></li>
         <li><a href="{% url 'graph' %}">Graph</a></li>
-        <li><a href="{% url 'previousworkouts' %}">Previous Workouts</a></li>
+        <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        <li><a href="../accounts/google/login/?process=login">Sign Up</a></li>
+
+    </ul>
+</div>
+
+<!-- Content -->
+{% block content %}
+{% endblock %}
+
+
+<script src="{% static 'js/navbar.js' %}"></script>
+
+
+</body>
+<script>
+    
+</script>
+</html>
+
+<div class="navbar-toggle" onclick="toggleNavbar()">=</div>
+
+<!-- the links to the different pages -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'chat' %}">Chat</a></li>
+        <li><a href="{% url 'goals' %}">Goals</a></li>
+        <li><a href="{% url 'graph' %}">Graph</a></li>
+        <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
         <li><a href="{% url 'profile' %}">Profile</a></li>
     </ul>
 </div>
@@ -91,8 +103,8 @@
     <p></p>
 </div>
 
-<script src="navbar.js"></script>
+<script src="{% static 'js/navbar.js'%}"></script>
 
 </body>
 </html>
->>>>>>> d9419a0 (nav bar update)
+

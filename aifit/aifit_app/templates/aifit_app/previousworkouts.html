@@ -1,11 +1,17 @@
 {% extends "aifit_app/navbar.html" %}
 
 
+
 {% block title %}
   Previous Workouts
 {% endblock %}
 
-
-{% block content %}
-  Previous Workouts
-{% endblock %}
+{% for workout in workouts %}
+  <div class="grid">
+    <h2 >{workout.type}</h2>
+    <p>Est. Time: {{workout.time}}</p>
+    <p>{{workout.numberExercises}} Exercises</p>
+    <p>Last completed: {{workout.dateCreated}}</p>
+  </div>
+{% endfor %}
+ 
