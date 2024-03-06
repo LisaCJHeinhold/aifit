@@ -19,6 +19,7 @@ urlpatterns = [
     path('goals/', views.goals, name='goals'),
     path('graph/', views.graph, name='graph'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('previous_workouts/', views.previous_workouts, name='previous_workouts'),
     # path('display_first_name/', views.display_first_name, name='display_first_name'),
     # path('display_last_name/', views.display_last_name, name='display_last_name'),
@@ -26,6 +27,9 @@ urlpatterns = [
 =======
     path('previousworkouts/', views.previous_workouts, name='previousworkouts'),
 >>>>>>> 00b6b73 (error fixes)
+=======
+    path('previous_workouts/', views.previous_workouts, name='previous_workouts'),
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
     
     # allauth
     path('accounts/profile/', views.profile, name="profile"),

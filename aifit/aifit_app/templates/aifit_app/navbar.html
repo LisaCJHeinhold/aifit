@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 
     <title>{% block title %}{% endblock %}</title>
     <title>Navbar</title>
+=======
+    <title>{% block title %}{% endblock %}</title>
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         
@@ -63,6 +67,7 @@
         <li><a href="{% url 'goals' %}">Goals</a></li>
         <li><a href="{% url 'graph' %}">Graph</a></li>
         <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+<<<<<<< HEAD
         <li><a href="{% url 'profile' %}">Profile</a></li>
         <li><a href="../accounts/google/login/?process=login">Sign Up</a></li>
 
@@ -93,17 +98,23 @@
         <li><a href="{% url 'goals' %}">Goals</a></li>
         <li><a href="{% url 'graph' %}">Graph</a></li>
         <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+=======
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
         <li><a href="{% url 'profile' %}">Profile</a></li>
     </ul>
 </div>
 
 <!-- Content -->
-<div class="ml-200px p-4"> <!-- Adjust margin-left to match the width of the navbar -->
-    <h1></h1>
-    <p></p>
-</div>
+{% block content %}
+{% endblock %}
 
+<<<<<<< HEAD
 <script src="{% static 'js/navbar.js'%}"></script>
+=======
+
+<script src="{% static 'js/navbar.js' %}"></script>
+
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
 
 </body>
 </html>

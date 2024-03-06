@@ -1,6 +1,7 @@
 {% extends "navbar.html" %}
 {% load static tailwind_tags %}
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,6 +36,16 @@
     <div class="bg-dark-green m-0 rounded-t">
       <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Login</h1>
     </div>
+=======
+{% block title %}Login{% endblock %}
+{% tailwind_css %}
+{% block content %}
+<div class="bg-black">
+  <div class="bg-light-green max-w-md m-auto mt-10 rounded">
+    <div class="bg-dark-green m-0 rounded-t">
+      <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Login</h1>
+    </div>
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
       <form method="post" class="flex flex-col px-10 py-5">
           {% csrf_token %}
           <label for="email">Email:</label>
@@ -48,4 +59,7 @@
 </div>      
 {% endblock %}
   
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
