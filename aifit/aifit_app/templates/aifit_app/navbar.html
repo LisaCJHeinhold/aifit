@@ -1,54 +1,93 @@
-<!-- navbar.html -->
-<!--needs work still but this is what I have started:)-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
-        /*Need to change colors and the like, add links to the different pages*/
+        
         .navbar {
+            width: 150px; /* Set the width of the vertical navbar */
+            background-color: #000000;
+            position: fixed; /* Fix the navbar position */
+            height: 100%; /* Make the navbar full height */
+            overflow-y: auto; /* Add scroll if needed? */
+            display: none; /* Initially hide the navbar */
+        }
+
+        .navbar ul {
             list-style-type: none;
-            margin: 0;
             padding: 0;
-            background-color: #333;
-            overflow: hidden;
+            margin: 0;
         }
-        
-        .navbar li {
-            float: left;
-        }
-        
+
         .navbar li a {
             display: block;
             color: white;
-            text-align: center;
-            padding: 14px 16px;
+            padding: 16px;
             text-decoration: none;
+            font-family: 'Arial', sans-serif;
         }
-        
+
         .navbar li a:hover {
-            background-color: #555;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            background-color: #000000;
+            color: #104303;
+        }
+
+        
+        .navbar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #104303;
+            font-size: 24px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<ul class="navbar">
-    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-    <li><a href="{% url 'chat' %}">Chat</a></li>
-    <li><a href="{% url 'profile' %}">Profile Page</a></li>
-    <li><a href="{% url 'goals' %}">Goals</a></li>
-    <li><a href="{% url 'graph' %}">Graph</a></li>
-    <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-    <li><a href="{% url 'login' %}">Login</a></li>
-</ul>
-{% block content %}
-{% endblock %}
-</body>
+
+
+<div class="navbar-toggle" onclick="toggleNavbar()">=</div>
+
+<!-- the links to the different pages -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'chat' %}">Chat</a></li>
+        <li><a href="{% url 'goals' %}">Goals</a></li>
+        <li><a href="{% url 'graph' %}">Graph</a></li>
+        <li><a href="{% url 'previousworkouts' %}">Previous Workouts</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+    </ul>
+</div>
+
+<!-- Content -->
+<div class="ml-200px p-4"> <!-- Adjust margin-left to match the width of the navbar -->
+    <h1></h1>
+    <p></p>
+</div>
+
+<!-- JavaScript to toggle navbar 
 <script>
-    
+    function toggleNavbar() {
+        var navbar = document.getElementById('navbar');
+        navbar.style.display = (navbar.style.display === 'none' || navbar.style.display === '') ? 'block' : 'none';
+
+    }
+    document.addEventListener('click', function(event) {
+        var navbar = document.getElementById('navbar');
+        var toggleButton = document.querySelector('.navbar-toggle');
+        if (!navbar.contains(event.target) && event.target !== toggleButton) {
+            navbar.style.display = 'none';
+        }
+    });
 </script>
+-->
+
+</body>
 </html>
+
