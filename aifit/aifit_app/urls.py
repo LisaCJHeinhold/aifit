@@ -12,7 +12,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('goals/', views.goals, name='goals'),
     path('graph/', views.graph, name='graph'),
-    path('previousworkouts/', views.previous_workouts, name='previous_workouts'),
+    path('previousworkouts/', views.previous_workouts, name='previousworkouts'),
     
     
 ]
