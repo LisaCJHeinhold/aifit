@@ -15,30 +15,30 @@
       {% tailwind_css %}
   </head>
   <body class="bg-black">
-    <div class="bg-light-green max-w-md m-8 mt-10 rounded">
-      <!-- Progress bar  -->
-      <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
-        <div class="flex bg-dark-green items-center justify-center w-1/4 h-full overflow-hidden text-white break-all rounded-t">
-          25% Complete
-        </div>
+    <div class="bg-light-green max-w-xl m-auto m-8 mt-10 rounded">
+      <!-- Weekly progress bar -->
+      <div id="weeklyProgressBar" class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+        <div class="flex bg-dark-green items-center justify-center w-0 h-full overflow-hidden text-white break-all rounded-t">
+          0% Complete
+        </div>  
       </div>  
       <div class="bg-dark-green m-0">
         <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Weekly Goals</h1>
       </div>
       <form method="post" class="flex flex-col px-10 py-5">
         {% csrf_token %}
-        
-        <button type="button" id="addButton" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Add goal</button>
-        <div id="inputContainer"></div>
-        <ul id="inputList"></ul>
+        <button type="button" id="addButton1" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
+        <!-- h-12 w-12 absolute bottom-0 right-0">+< -->
+        <div id="inputContainer1"></div>
+        <ul id="inputList1"></ul>
       </form>
     </div>
 
-    <div class="bg-light-green max-w-md m-8 mt-20 rounded mt-800">
-      <!-- Progress bar  -->
-      <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
-        <div class="flex bg-dark-green items-center justify-center w-1/2 h-full overflow-hidden text-white break-all rounded-t">
-          50% Complete
+    <div class="bg-light-green max-w-xl m-auto m-8 mt-20 rounded mt-800">
+      <!-- Overall progress bar  -->
+      <div id="overallProgressBar" class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+        <div class="flex bg-dark-green items-center justify-center w-0 h-full overflow-hidden text-white break-all rounded-t">
+          0% Complete
         </div>
       </div>  
       <div class="bg-dark-green m-0">
@@ -46,37 +46,43 @@
       </div>
       <form method="post" class="flex flex-col px-10 py-5">
         {% csrf_token %}
-        
-        <button type="button" id="addButton" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold py-2 px-4 my-5 rounded">Add goal</button>
-        <div id="inputContainer"></div>
-        <ul id="inputList"></ul>
+        <button type="button" id="addButton2" class="bg-light-gray hover:bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
+        <!-- h-12 w-12 absolute bottom-0 right-0">+< -->
+        <div id="inputContainer2"></div>
+        <ul id="inputList2"></ul>
       </form>
     </div>
-
-    <div class="flex w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-full flex-start bg-blue-gray-50">
-      <div class="flex items-center justify-center w-1/2 h-full overflow-hidden text-white break-all bg-gray-900 rounded-t">
-        50% Completed
-      </div>
-    </div>  
-
     <script>
-      
-      document.getElementById("addButton").addEventListener("click", function() {
+
+      function updateCompletion(container, list, progressBarId) {
+        var completionElement = document.getElementById(progressBarId).querySelector('.flex .bg-dark-green');
+        var list = document.getElementById(list);
+        var progressBar = document.getElementById(progressBarId)
+        var completion = (list.childElementCount > 0) ? (list.querySelectorAll('input[type="checkbox"]:checked').length / list.childElementCount) * 100 : 0;
+
+         // Update progress bar text and fill
+        completionElement.textContent = completion.toFixed(0) + '% Complete';
+        completionElement.style.width = completion.toFixed(0) + '%';
+        console.log("Updating completion...");
+      }
+    
+      function addGoal(containerId, listId, progressBarId) {
         var input = document.createElement("input");
         input.type = "text";
         input.id = "typeGoal";
         input.name = "Goal";
-        input.value = ""
+        input.value = "";
 
-        var inputContainer = document.createElement("div")
-        inputContainer.style.width = "300px"
-        inputContainer.appendChild(input)
-        document.getElementById("inputContainer").appendChild(inputContainer)
+        var inputContainer = document.createElement("div");
+        inputContainer.style.width = "300px";
+        inputContainer.appendChild(input);
+        document.getElementById(containerId).appendChild(inputContainer);
 
-        var list = document.getElementById("inputList")
-        input.addEventListener("keydown", function(event) {
+        var list = document.getElementById(listId);
+
+        input.addEventListener("keydown", function (event) {
           if (event.keyCode === 13) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             var checklistContainer = document.createElement("div");
 
@@ -88,22 +94,37 @@
 
             var label = document.createElement("label");
             label.htmlFor = checkbox.id;
-            label.className = "m1-2 text-light-gray";
+            label.className = "m-2 text-light-gray";
             label.textContent = input.value;
 
             checklistContainer.appendChild(checkbox);
             checklistContainer.appendChild(label);
 
-            document.getElementById("inputContainer").appendChild(checklistContainer);
+            list.appendChild(checklistContainer);
 
-            // Removes the input container
-            inputContainer.remove(); 
-
+            inputContainer.remove();
             input.value = "";
-            
+
+            checkbox.addEventListener("change", function () {
+                updateCompletion(document.querySelector('.bg-light-green'), listId, progressBarId);
+            });
+
+            // Update completion when a goal is added
+            updateCompletion(document.querySelector('#weeklyProgressBar'), 'inputList1', 'weeklyProgressBar');
+            updateCompletion(document.querySelector('#overallProgressBar'), 'inputList2', 'overallProgressBar');
           }
-        }); 
+        });
+      }
+      // Weekly Goals
+      document.getElementById("addButton1").addEventListener("click", function () {
+          addGoal("inputContainer1", "inputList1", "weeklyProgressBar");
       });
+
+      // Overall Goals
+      document.getElementById("addButton2").addEventListener("click", function () {
+          addGoal("inputContainer2", "inputList2", "overallProgressBar");
+      });
+      
     </script>
   </body>
 </html>
