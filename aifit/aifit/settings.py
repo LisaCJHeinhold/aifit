@@ -17,6 +17,7 @@ from firebase_admin import credentials
 cred = credentials.Certificate("./fire/aifit-42d60-4b74ea669715.json")
 firebase_admin.initialize_app(cred)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+AUTH_USER_MODEL = 'aifit_app.User'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
