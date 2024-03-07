@@ -56,6 +56,17 @@ def login(request):
         form = UserLoginForm()
 
     return render(request, 'aifit_app/login.html', {'form': form})
+        email = request.POST['email']
+        password = request.POST['password']
+        try:
+            user = auth.create_user(email=email, password=password)
+            messages.success(request, "Sign-up successful!")
+            return redirect('login')
+        except Exception as e:
+            messages.error(request, "Sign-up failed. Please try again.")
+            return render(request,'aifit_app/signup.html')
+        
+    return render(request,'aifit_app/signup.html')
 
 def logout(request):
     logout(request)
