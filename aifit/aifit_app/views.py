@@ -15,11 +15,14 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+<<<<<<< HEAD
 =======
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
+=======
+>>>>>>> 618aa41 (models n stuff for graph and workouts)
 
 class LineChartJSONView(BaseLineChartView):
     def get_labels(self):
@@ -104,11 +107,14 @@ class LineChartJSONView(BaseLineChartView):
 # previous workouts function testing
 def workouts(request):
 <<<<<<< HEAD
+<<<<<<< HEAD
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     
 =======
 >>>>>>> 66c78c6 (hehe)
+=======
+>>>>>>> 618aa41 (models n stuff for graph and workouts)
     previous_workouts = firestore.client().collection('workouts').where('user_id', '== ', 'user_workouts.user_id').stream()
     workouts = []
     for workout in previous_workouts:

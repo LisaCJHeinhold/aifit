@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {% extends "aifit_app/navbar.html" %}
 {% load static %}
 
@@ -52,3 +53,31 @@
     </body>
 </html>
 >>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
+=======
+{% extends "aifit_app/navbar.html" %}
+{% load static %}
+
+
+{% block title %}
+ Graph
+{% endblock %}
+
+
+{% block content %}
+ graph
+ <h1>Muscle Mass & Body Fat</h1>
+
+ <canvas id="myChart" width="300" height="200"></canvas>
+
+ <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+ <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+ <script type="text/javascript">
+     $.get('{% url "line_chart_json" %}', function(data) {
+         var ctx = $("#myChart").get(0).getContext("2d");
+         new Chart(ctx, {
+             type: 'line', data: data
+         });
+     });
+ </script>
+{% endblock %}
+>>>>>>> 618aa41 (models n stuff for graph and workouts)

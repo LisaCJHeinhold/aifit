@@ -55,6 +55,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 
 
 <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
@@ -75,6 +76,17 @@
 </div>
 
 <!-- Content -->
+=======
+<ul class="navbar">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'chat' %}">Chat</a></li>
+    <li><a href="{% url 'profile' %}">Profile Page</a></li>
+    <li><a href="{% url 'goals' %}">Goals</a></li>
+    <li><a href="{% url 'line_chart' %}">Graph</a></li>
+    <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+    <li><a href="{% url 'login' %}">Login</a></li>
+</ul>
+>>>>>>> 618aa41 (models n stuff for graph and workouts)
 {% block content %}
 {% endblock %}
 

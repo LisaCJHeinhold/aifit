@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+<<<<<<< HEAD
 from django.db import models
 from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
@@ -58,6 +59,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 =======
 >>>>>>> 66c78c6 (hehe)
       return self.email.split('@')[0]
+=======
+
+>>>>>>> 618aa41 (models n stuff for graph and workouts)
 #Workout model -alyssa
 class Workout(models.Model):
     type = models.CharField(max_length=100)

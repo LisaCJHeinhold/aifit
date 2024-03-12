@@ -12,6 +12,7 @@ aifit/aifit_app/__pycache__/views.cpython-311.pyc
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 *.pyc
 aifit/fire/.env
@@ -38,3 +39,7 @@ djangoenv
 // npm install chart.js
 // pip install django-chartjs
 >>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
+=======
+aifit/fire/.env
+python3 -m venv djangoenv/bin/activate
+>>>>>>> 618aa41 (models n stuff for graph and workouts)

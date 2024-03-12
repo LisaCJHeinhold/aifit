@@ -5,6 +5,7 @@ from .views import line_chart, line_chart_json, workout
 urlpatterns = [
     path('', views.home, name='home'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     # chart graph url
     path('chart', views.line_chart, name='line_chart'),
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
@@ -14,6 +15,13 @@ urlpatterns = [
 =======
     path('graph', views.line_chart, name='line_chart'),
 >>>>>>> d8d9c91 (views and gitignore)
+=======
+    # chart graph url
+    path('chart', views.line_chart, name='line_chart'),
+    path('chartJSON', views.line_chart_json, name='line_chart_json'),
+    path('line_chart', views.line_chart, name='line_chart'),
+    # other urls
+>>>>>>> 618aa41 (models n stuff for graph and workouts)
     path('workout', views.workout, name='workout'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
