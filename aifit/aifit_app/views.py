@@ -5,8 +5,11 @@ from fire.firebase_auth import verify_id_token
 from django.conf import settings
 from django.http import JsonResponse
 import firebase_admin
-from firebase_admin import auth
-
+from firebase_admin import auth, firestore
+from django.http import HttpResponse
+from django.template import loader
+from .models import Workout
+from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -52,7 +55,7 @@ def logout(request):
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
-
+# GRAPH FUNCTIONS
 class LineChartJSONView(BaseLineChartView):
     def get_labels(self):
         """Return 7 labels for the x-axis."""
@@ -68,6 +71,26 @@ class LineChartJSONView(BaseLineChartView):
         return [[28, 27 , 24, 23, 23, 20, 20],
                 [12, 13, 15, 15, 17, 16, 17]]
 
+# previous workouts function testing
+def workouts(request):
+    previous_workouts = firestore.client().collection('workouts').where('user_id', '== ', 'user_workouts.user_id').stream()
+    workouts = []
+    for workout in previous_workouts:
+        workouts_data = workout.to_dict()
+        workouts.append({
+            'user_id': workouts_data.get('user_id', ''),
+            'type': workouts_data.get('type', ''),
+            'time': workouts_data.get('time', ''),
+            'date_created': workouts_data.get('date_reated', ''),
+            'number_exercises': workouts_data.get('number_exercises', ''),
+
+        })
+
+    return workouts
+        # workouts=Workout.objects.all()
+        # template = loader.get_template('aifit_app/previousworkouts.html')
+        # context = {'workouts': workouts}
+        # return HttpResponse(template.render(context, request))
 
 line_chart = TemplateView.as_view(template_name='graph.html')
 line_chart_json = LineChartJSONView.as_view()

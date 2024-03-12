@@ -1,3 +1,4 @@
+
 {% load static tailwind_tags%}
 <!DOCTYPE html>
 <html lang="en">
@@ -147,6 +148,7 @@
         </div>
 
         <div id="exercises">
+            <h2 class="h2-w">Leg Day Exercises</h2>
             <section class="flex">
                 <p class="sets">3 SETS 10 REPS</p>
                 <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
@@ -171,6 +173,32 @@
                 <p class="exerciseName">EXERCISE NAME: short description</p>
                 <p class="personal">PERSONAL BEST: </p>
             </section>
+            <button> Add Exercise</button>
+        </div>
+
+        <div id="previous-workouts">
+            <h2 class="h2-w">Recently Completed Workouts</h2>
+            <section class="flex">
+                <div class="grid">
+                    <h2 >Leg Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/25/23</p>
+                </div>
+                <div class="grid">
+                    <h2 class="uppercase">Pull Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/12/23</p>
+                </div>
+                <div class="grid">
+                    <h2 class="uppercase">Push Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/2/23</p>
+                </div>
+            </section>
+            <button> View All Past Workouts</button>
         </div>
     </main> 
 </body>
