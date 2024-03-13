@@ -33,6 +33,7 @@ class CustomUserManager(UserManager) :
     # return self._create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # username = None
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(blank=True, default='', unique=True)
     is_staff = models.BooleanField(default=False)

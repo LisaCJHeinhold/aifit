@@ -163,10 +163,14 @@ def login(request):
     #         return render(request,'aifit_app/signup.html')
         
 <<<<<<< HEAD
+<<<<<<< HEAD
     # return render(request,'aifit_app/signup.html')
 =======
     return render(request,'aifit_app/signup.html')
 >>>>>>> 00b6b73 (error fixes)
+=======
+    # return render(request,'aifit_app/signup.html')
+>>>>>>> fb48dc2 (putting my code to the side to pull)
 
 def logout(request):
     logout(request)

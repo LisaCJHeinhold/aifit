@@ -98,6 +98,7 @@
         }
 
 
+<<<<<<< HEAD
 
     </style>
 </head>
@@ -130,3 +131,12 @@
     
 </body>
 </html>
+=======
+{% block content %}
+ Profile
+ 
+ <h1> Logged in as: {{ request.user.email}} </h>
+
+    <a href="{% url 'account_logout' %}">Logout</a>
+{% endblock %}
+>>>>>>> fb48dc2 (putting my code to the side to pull)

@@ -24,6 +24,9 @@ urlpatterns = [
     # allauth
     path('accounts/', include('allauth.urls')),
     # path('accounts/profile/', views.profile, name="profile"),
+<<<<<<< HEAD
     path('graph', include('aifit_app.urls'))
+=======
+>>>>>>> fb48dc2 (putting my code to the side to pull)
 ]
 
