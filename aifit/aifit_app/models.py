@@ -53,7 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin):
       verbose_name_plural = 'Users'
 
     def get_short_name(self):
+<<<<<<< HEAD
 
+=======
+>>>>>>> 66c78c6 (hehe)
       return self.email.split('@')[0]
 #Workout model -alyssa
 class Workout(models.Model):

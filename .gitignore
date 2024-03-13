@@ -10,6 +10,7 @@ aifit/aifit_app/__pycache__/views.cpython-311.pyc
 \aifit\aifit_app\__pycache__
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 *.pyc
 aifit/fire/.env
@@ -20,3 +21,8 @@ python3 -m venv djangoenv/bin/activate
 =======
 *.pyc
 >>>>>>> b1b68f1 (Created a static file to keep javascript, css, and images inside. also created a template file to copy from to include in your html.)
+=======
+*.pyc
+aifit/fire/.env
+python3 -m venv djangoenv/bin/activate
+>>>>>>> 66c78c6 (hehe)
