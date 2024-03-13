@@ -18,6 +18,7 @@ aifit/aifit_app/__pycache__/views.cpython-311.pyc
 aifit/fire/.env
 python3 -m venv djangoenv/bin/activate
 
+<<<<<<< HEAD
 .env
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
 =======
@@ -43,3 +44,6 @@ djangoenv
 aifit/fire/.env
 python3 -m venv djangoenv/bin/activate
 >>>>>>> 618aa41 (models n stuff for graph and workouts)
+=======
+.env
+>>>>>>> e8e23b5 (added .env in gitignore)
