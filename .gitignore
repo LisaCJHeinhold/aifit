@@ -11,3 +11,5 @@ aifit/aifit_app/__pycache__/views.cpython-311.pyc
 *.pyc
 aifit/fire/.env
 python3 -m venv djangoenv/bin/activate
+
+.env
