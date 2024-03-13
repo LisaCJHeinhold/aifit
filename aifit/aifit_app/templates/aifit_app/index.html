@@ -1,4 +1,5 @@
 {% extends "aifit_app/navbar.html" %}
+{% load static %}
 
 {% block title %}
 AiFit
@@ -45,7 +46,7 @@ AiFit
     </div>
     <div class="image">
         <h3>Graph: </h3>
-        <img src="examplegraph.gif" alt="Picture of Graph">
+        <img src="{% static 'images/examplegraph.gif' %}" alt="Picture of Graph">
     </div>
     </div>
 {% endblock %}

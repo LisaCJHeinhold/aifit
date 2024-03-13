@@ -77,6 +77,9 @@ class LineChartJSONView(BaseLineChartView):
 
 # previous workouts function testing
 def workouts(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
+    
     previous_workouts = firestore.client().collection('workouts').where('user_id', '== ', 'user_workouts.user_id').stream()
     workouts = []
     for workout in previous_workouts:
@@ -208,22 +211,35 @@ def dashboard(request):
     return render(request,'aifit_app/dashboard.html')
 
 def chat(request):
+    print("User Id: ",request.user.id)
     return render(request,'aifit_app/chat.html')
 
 def profile(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request,'aifit_app/profile.html')
 
 def goals(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request,'aifit_app/goals.html')
 
 def graph(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request,'aifit_app/graph.html')
 
 def previous_workouts(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request,'aifit_app/previousworkouts.html')
 
 def line_chart(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request, 'aifit_app/graph.html')
 
 def workout(request):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     return render(request, 'aifit_app/workouts.html')
