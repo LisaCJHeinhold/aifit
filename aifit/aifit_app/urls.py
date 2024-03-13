@@ -14,5 +14,7 @@ urlpatterns = [
     path('graph/', views.graph, name='graph'),
     path('previous_workouts/', views.previous_workouts, name='previous_workouts'),
     
+    # allauth
+    path('accounts/profile/', views.profile, name="profile"),
     
 ]
