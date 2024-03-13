@@ -17,5 +17,8 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('profile/', views.profile, name='profile'),
     path('goals/', views.goals, name='goals'),
-    path('previousworkouts/', views.previous_workouts, name='previous_workouts'),
+    path('graph/', views.graph, name='graph'),
+    path('previous_workouts/', views.previous_workouts, name='previous_workouts'),
+    
+    
 ]

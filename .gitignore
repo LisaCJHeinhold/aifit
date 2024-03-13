@@ -8,5 +8,6 @@ aifit/aifit_app/migrations/__pycache__
 aifit/aifit_app/__pycache__/views.cpython-311.pyc
 *__pycache__/
 \aifit\aifit_app\__pycache__
+*.pyc
 aifit/fire/.env
 python3 -m venv djangoenv/bin/activate
