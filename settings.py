@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import firebase_admin
-from firebase_admin import credentials
 import os
-
-# Load environment variables from .env file
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
-# FIREBASE CREDENTIALS
-cred = credentials.Certificate("./fire/aifit-42d60-4b74ea669715.json")
-firebase_admin.initialize_app(cred)
+# Firebase Config
+FIREBASE_CONFIG = {
+    "apiKey": os.getenv("API_KEY"),
+    "authDomain": os.getenv("AUTH_DOMAIN"),
+    "projectId": os.getenv("PROJECT_ID"),
+    "storageBucket": os.getenv("STORAGE_BUCKET"),
+    "messagingSenderId": os.getenv("MESSAGING_SENDER_ID"),
+    "appId": os.getenv("APP_ID"),
+    "measurementId": os.getenv("MEASUREMENT_ID")
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-AUTH_USER_MODEL = 'aifit_app.User'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -40,7 +43,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,18 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chartjs',
+
     'tailwind',
     'theme',
     'aifit_app',
     'django_browser_reload',
-    
-    #ALLAUTH
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    #
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -83,8 +79,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    # Required by allauth
-    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'aifit.urls'
@@ -159,36 +153,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# ALLAUTH
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
-]
-
-# Retrieve Google OAuth client ID and client secret from environment variables
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-
-SOCIALACCOUNT_PROVIDERS = {
-     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
-        'APP': {
-            'client_id': GOOGLE_CLIENT_ID,
-            'secret': GOOGLE_CLIENT_SECRET,
-        },
-        'redirect_uris': ['http://127.0.0.1:8000/accounts/google/login/callback/']
-    }
-}
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-ACCOUNT_AUTHENTICATION_METHOD = 'EMAIL'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
