@@ -4,28 +4,49 @@
  Goals
 {% endblock %}
 
-{% load static tailwind_tags %}
 {% block content %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Goals</title>
       {% tailwind_css %}
+      
   </head>
+
   <body class="bg-black">
+<<<<<<< HEAD
     
     <div class="bg-light-green max-w-md m-8 mt-10 rounded">
       <!-- Progress bar  -->
       <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
         <div class="flex bg-dark-green items-center justify-center w-1/4 h-full overflow-hidden text-white break-all rounded-t">
           25% Complete
+=======
+    <div class="flex flex-wrap justify-around h-screen">
+      <!-- Daily Goals -->
+      <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
+        <!-- Daily progress bar -->
+        <div id="dailyProgressBar" class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+          <div class="flex bg-dark-green items-center justify-center w-0 h-full overflow-hidden text-white break-all rounded-t">
+            0% Complete
+          </div>  
+        </div>  
+        <div class="bg-dark-green m-0">
+          <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Daily Goals</h1>
+>>>>>>> 27cfe1f (Added to the goals page)
         </div>
-      </div>  
-      <div class="bg-dark-green m-0">
-        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Weekly Goals</h1>
+        <form method="post" class="flex flex-col px-10 py-5">
+          {% csrf_token %}
+          <button type="button" id="addButton1" class="bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
+          <div id="inputContainer1"></div>
+          <ul id="inputList1"></ul>
+        </form>
       </div>
+<<<<<<< HEAD
       <form method="post" class="flex flex-col px-10 py-5">
         {% csrf_token %}
         
@@ -39,11 +60,47 @@
       <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
         <div class="flex bg-dark-green items-center justify-center w-1/2 h-full overflow-hidden text-white break-all rounded-t">
           50% Complete
+=======
+
+      <!-- Weekly Goals -->
+      <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
+        <!-- Weekly progress bar -->
+        <div id="weeklyProgressBar" class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+          <div class="flex bg-dark-green items-center justify-center w-0 h-full overflow-hidden text-white break-all rounded-t">
+            0% Complete
+          </div>  
+        </div>  
+        <div class="bg-dark-green m-0">
+          <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Weekly Goals</h1>
+>>>>>>> 27cfe1f (Added to the goals page)
         </div>
+        <form method="post" class="flex flex-col px-10 py-5">
+          {% csrf_token %}
+          <button type="button" id="addButton2" class="bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
+          <div id="inputContainer2"></div>
+          <ul id="inputList2"></ul>
+        </form>
       </div>
-      <div class="bg-dark-green m-0">
-        <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Overall Goals</h1>
+
+      <!-- Overall Goals -->
+      <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
+        <!-- Overall progress bar  -->
+        <div id="overallProgressBar" class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
+          <div class="flex bg-dark-green items-center justify-center w-0 h-full overflow-hidden text-white break-all rounded-t">
+            0% Complete
+          </div>
+        </div>  
+        <div class="bg-dark-green m-0">
+          <h1 class="text-3xl font-bold py-5 text-center text-light-gray">All-Time Goals</h1>
+        </div>
+        <form method="post" class="flex flex-col px-10 py-5">
+          {% csrf_token %}
+          <button type="button" id="addButton3" class="bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
+          <div id="inputContainer3"></div>
+          <ul id="inputList3"></ul>
+        </form>
       </div>
+<<<<<<< HEAD
       {% block goals_content %}
       <form method="post" class="flex flex-col px-10 py-5">
         {% csrf_token %}
@@ -63,6 +120,24 @@
     <script>
       
       document.getElementById("addButton").addEventListener("click", function() {
+=======
+    </div>
+    <script>
+      // Function to update completion for progress bars
+      function updateCompletion(container, list, progressBarId) {
+        var completionElement = document.getElementById(progressBarId).querySelector('.flex .bg-dark-green');
+        var list = document.getElementById(list);
+        var progressBar = document.getElementById(progressBarId)
+        var completion = (list.childElementCount > 0) ? (list.querySelectorAll('input[type="checkbox"]:checked').length / list.childElementCount) * 100 : 0;
+
+        // Update progress bar text and fill
+        completionElement.textContent = completion.toFixed(0) + '% Complete';
+        completionElement.style.width = completion.toFixed(0) + '%';
+      }
+
+      // Function to add a new goal
+      function addGoal(containerId, listId, progressBarId) {
+>>>>>>> 27cfe1f (Added to the goals page)
         var input = document.createElement("input");
         input.type = "text";
         input.id = "typeGoal";
@@ -84,14 +159,16 @@
             var checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.id = "goalCheckbox" + (list.childElementCount + 1);
-            checkbox.className = "form-checkbox h-5 w-5 text-light-green";
+            checkbox.className = "form-checkbox h-6 w-6 text-light-green";
             checkbox.name = "goal";
 
             var label = document.createElement("label");
             label.htmlFor = checkbox.id;
             label.className = "m1-2 text-light-gray";
             label.textContent = input.value;
-
+            label.style.fontSize = "22px";
+            label.style.verticalAlign = "middle";
+            
             checklistContainer.appendChild(checkbox);
             checklistContainer.appendChild(label);
 
@@ -101,10 +178,41 @@
             inputContainer.remove(); 
 
             input.value = "";
+<<<<<<< HEAD
             
           }
         }); 
       });
+=======
+
+            checkbox.addEventListener("change", function () {
+                updateCompletion(document.querySelector('.bg-light-green'), listId, progressBarId);
+            });
+
+            // Update completion when a goal is added
+            updateCompletion(document.querySelector('#dailyProgressBar'), 'inputList1', 'dailyProgressBar');
+            updateCompletion(document.querySelector('#weeklyProgressBar'), 'inputList2', 'weeklyProgressBar');
+            updateCompletion(document.querySelector('#overallProgressBar'), 'inputList3', 'overallProgressBar');
+          }
+        });
+      }
+
+      // Add event listeners for adding goals
+      // Daily Goals
+      document.getElementById("addButton1").addEventListener("click", function () {
+          addGoal("inputContainer1", "inputList1", "dailyProgressBar");
+      });
+
+      // Weekly Goals
+      document.getElementById("addButton2").addEventListener("click", function () {
+          addGoal("inputContainer2", "inputList2", "weeklyProgressBar");
+      });
+
+      // Overall Goals
+      document.getElementById("addButton3").addEventListener("click", function () {
+          addGoal("inputContainer3", "inputList3", "overallProgressBar");
+      });
+>>>>>>> 27cfe1f (Added to the goals page)
     </script>
   </body>
 </html>

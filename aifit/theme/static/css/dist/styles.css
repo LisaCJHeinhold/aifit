@@ -864,18 +864,25 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .fixed {
   position: fixed;
 }
 
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .absolute {
   position: absolute;
 }
 
 .relative {
   position: relative;
+<<<<<<< HEAD
 }
 
 <<<<<<< HEAD
@@ -885,6 +892,8 @@ select {
 
 .top-0 {
   top: 0px;
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 }
 
 .z-10 {
@@ -904,7 +913,10 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .m-2 {
   margin: 0.5rem;
 }
@@ -919,16 +931,20 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .m-4 {
   margin: 1rem;
 }
 
 =======
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .m-10 {
   margin: 2.5rem;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .m-8 {
   margin: 2rem;
@@ -936,6 +952,10 @@ select {
 .m-3 {
   margin: 0.75rem;
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+.m-3 {
+  margin: 0.75rem;
+>>>>>>> 27cfe1f (Added to the goals page)
 }
 
 .mx-auto {
@@ -954,6 +974,7 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .ml-2 {
   margin-left: 0.5rem;
 =======
@@ -961,6 +982,11 @@ select {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+>>>>>>> 27cfe1f (Added to the goals page)
 }
 
 .mt-10 {
@@ -979,9 +1005,12 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .mt-5 {
   margin-top: 1.25rem;
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .mt-40 {
   margin-top: 10rem;
 }
@@ -990,6 +1019,7 @@ select {
   margin-top: 6rem;
 }
 
+<<<<<<< HEAD
 .block {
   display: block;
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
@@ -1003,6 +1033,8 @@ select {
   margin-top: 1rem;
 }
 
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .block {
   display: block;
 }
@@ -1012,9 +1044,12 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .hidden {
   display: none;
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .grid {
   display: grid;
 }
@@ -1025,7 +1060,10 @@ select {
 
 .h-4 {
   height: 1rem;
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 }
 
 .h-5 {
@@ -1033,9 +1071,26 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .h-8 {
   height: 2rem;
+=======
+.h-8 {
+  height: 2rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-6 {
+  height: 1.5rem;
+>>>>>>> 27cfe1f (Added to the goals page)
 }
 
 .h-full {
@@ -1084,7 +1139,10 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .w-12 {
   width: 3rem;
 }
@@ -1109,7 +1167,10 @@ select {
   width: 1.5rem;
 }
 
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .max-w-md {
   max-width: 28rem;
 }
@@ -1128,12 +1189,21 @@ select {
 
 .flex-wrap {
   flex-wrap: wrap;
+<<<<<<< HEAD
 }
 
 .items-center {
   align-items: center;
 }
 
+=======
+}
+
+.items-center {
+  align-items: center;
+}
+
+>>>>>>> 27cfe1f (Added to the goals page)
 .justify-center {
   justify-content: center;
 }
@@ -1148,7 +1218,10 @@ select {
   justify-content: space-around;
 }
 
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1168,6 +1241,15 @@ select {
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-dark-green {
+  --tw-border-opacity: 1;
+  border-color: rgb(67 105 94 / var(--tw-border-opacity));
 }
 
 .bg-black {
@@ -1211,6 +1293,7 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1233,6 +1316,8 @@ select {
 
 =======
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .text-center {
   text-align: center;
 }
@@ -1281,12 +1366,18 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .uppercase {
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .leading-normal {
   line-height: 1.5;
 }
@@ -1319,13 +1410,19 @@ select {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .hover\:text-dark-green:hover {
   --tw-text-opacity: 1;
   color: rgb(67 105 94 / var(--tw-text-opacity));
 }
 
+<<<<<<< HEAD
 >>>>>>> 9e6933a3a523646334a9997683edebc46ec90677
+=======
+>>>>>>> 27cfe1f (Added to the goals page)
 .hover\:text-light-gray:hover {
   --tw-text-opacity: 1;
   color: rgb(232 240 254 / var(--tw-text-opacity));
