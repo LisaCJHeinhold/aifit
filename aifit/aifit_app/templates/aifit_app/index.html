@@ -3,52 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <style> </style>
     <title>AiFit</title>
-    
 </head>
 <body>
-    <div class="grid-container">
-    <div class="side-bar">
-    <h1 id="logo">AiFit</h1>
-    <h2>Profile</h2>
-    <h2>Graphs</h2>
-    <h2>Workouts</h2>
-    <h2>Settings</h2>
-    </div>
-    <div class="search-bar">
-        <input id="search" type="text">
-        <button type="submit">Search</button>
-    </div>
-    <h1>Dashboard</h1>
-    <div class="quote-section">
-    <h3>Quote of the Day</h3>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada 
-        fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
-        ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam 
-        egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-    <p>- author</p>
-    </div>
-    <div class="checkbox1">
-        <h4>Workouts</h4>
-        <ul>
-            <input type="checkbox" id="item1" name="item1"> <label for="item1">Workout 1</label></br>
-            <input type="checkbox" id="item2" name="item2"> <label for="item2">Workout 2</label></br>
-            <input type="checkbox" id="item3" name="item3"> <label for="item3">Workout 3</label></br>
-        </ul>
-    </div>
-    <div class="checkbox2">
-        <h4>Meals</h4>
-        <ul>
-            <input type="checkbox" id="item1" name="item1"> <label for="item1">Meal 1</label></br>
-            <input type="checkbox" id="item2" name="item2"> <label for="item2">Meal 2</label></br>
-            <input type="checkbox" id="item3" name="item3"> <label for="item3">Meal 3</label></br>
-        </ul>
-    </div>
-    <div class="image">
-        <h3>Graph: </h3>
-        <img src="examplegraph.gif" alt="Picture of Graph">
-    </div>
-    </div>
+        <div class="quote-section">
+        <h3>Quote of the Day</h3>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada 
+            fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+            ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam 
+            egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+        <p>- author</p>
+        </div>
+        {% block goals_content %}
+            {{ goals_content }}
+        {% endblock %}
+        <div class="image">
+            <h3>Graph: </h3>
+        </div>
+        </div>
 </body>
-</html></html>
+</html>

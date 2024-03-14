@@ -4,8 +4,8 @@
  Goals
 {% endblock %}
 
-{% block content %}
 {% load static tailwind_tags %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +15,7 @@
       {% tailwind_css %}
   </head>
   <body class="bg-black">
+    
     <div class="bg-light-green max-w-md m-8 mt-10 rounded">
       <!-- Progress bar  -->
       <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
@@ -33,17 +34,17 @@
         <ul id="inputList"></ul>
       </form>
     </div>
-
     <div class="bg-light-green max-w-md m-8 mt-20 rounded mt-800">
       <!-- Progress bar  -->
       <div class="flex bg-light-gray w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-t flex-start ">
         <div class="flex bg-dark-green items-center justify-center w-1/2 h-full overflow-hidden text-white break-all rounded-t">
           50% Complete
         </div>
-      </div>  
+      </div>
       <div class="bg-dark-green m-0">
         <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Overall Goals</h1>
       </div>
+      {% block goals_content %}
       <form method="post" class="flex flex-col px-10 py-5">
         {% csrf_token %}
         
@@ -51,8 +52,8 @@
         <div id="inputContainer"></div>
         <ul id="inputList"></ul>
       </form>
+      {% endblock %}
     </div>
-
     <div class="flex w-full h-4 overflow-hidden font-sans text-xs font-medium rounded-full flex-start bg-blue-gray-50">
       <div class="flex items-center justify-center w-1/2 h-full overflow-hidden text-white break-all bg-gray-900 rounded-t">
         50% Completed
