@@ -60,20 +60,46 @@ from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
 # GRAPH FUNCTIONS
-class LineChartJSONView(BaseLineChartView):
-    def get_labels(self):
-        """Return 7 labels for the x-axis."""
-        return ["January", "February", "March", "April", "May"]
+from django.views import View
+#import jsonresponse
+from django.http import JsonResponse
 
-    def get_providers(self):
-        """Return names of datasets."""
-        return ["% Body Fat", "% Muscle Mass"]
+class LineChartJSONView(View):
+    user_id='hfIg3WidzBTHgezNF8O2'
 
-    def get_data(self):
-        """Return 2 datasets to plot."""
+    def get(self, request, *args, **kwargs):
+        db = firestore.client()
+        graph_data = db.collection('graph').where('user_id', '==', self.user_id).stream()
 
-        return [[28, 27 , 24, 23, 23, 20, 20],
-                [12, 13, 15, 15, 17, 16, 17]]
+        labels = []
+        body_fat = []
+        muscle_mass = []
+
+        for data in graph_data:
+            data_dict = data.to_dict()
+            labels.append(data_dict['date_created'])
+            body_fat.append(data_dict['body_percentage_fat'])
+            muscle_mass.append(data_dict['muscle_mass_percentage'])
+
+        data = {
+            "labels": labels,
+            "datasets": [
+                {
+                    "label": "% Body Fat",
+                    "data": body_fat,
+                    "borderColor": 'blue',
+                    "backgroundColor": 'rgba(0, 0, 255, 0.1)'
+                },
+                {
+                    "label": "% Muscle Mass",
+                    "data": muscle_mass,
+                    "borderColor": 'red',
+                    "backgroundColor": 'rgba(255, 0, 0, 0.1)'
+                }
+            ]
+        }
+
+        return JsonResponse(data)
 
 # previous workouts function testing
 def workouts(request):
