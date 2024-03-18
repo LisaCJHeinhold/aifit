@@ -1,13 +1,123 @@
-{% extends "aifit_app/navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- The website icon -->
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+   
+    <!-- All styles on the page -->
+    <style>
+
+        @font-face {
+            font-family: 'StretchPro';
+            src: url('./assets/fonts/StretchPro.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Thedus';
+            src: url(./assets/fonts/ThedusWideLight-Regular.otf) format('opentype');
+        }
+
+        h1{
+            font-family: 'StretchPro', sans-serif;
+            color: rgb(210, 255, 209);
+            font-size: 4rem;
+            padding-left: 1rem;
+            margin-bottom: 0;
+            margin-top: 1rem;
+        
+        }
+        h2{
+            font-family: 'StretchPro', sans-serif;
+            color: rgb(210, 255, 209);
+            padding-left: 1rem;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .animated-background {
+            background: linear-gradient(
+                to right, #000000, #1f1f1f, #365533
+            );
+            background-size: 400% 400%;
+            animation: animate-background 10s infinite ease-in-out;
+        }
 
 
-{% block title %}
- Profile
-{% endblock %}
+
+        @keyframes animate-background {
+
+            0%{
+                background-position: 0 50%;
+            }
+            50%{
+                background-position: 100% 50%;
+            }
+            100%{
+                background-position: 0 50%;
+            }
+        }
+
+    
+
+        .container-transparent{
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            height: 80vh;
+            width: 70vw;
+            display: flex;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        #profilePic {
+            
+            border-radius: 50%;
+            height: 6.4rem;
+            position: relative;
+            top: -7rem;
+            transition: .3s smooth;
+            
+        }
+
+        #profilePic:hover{
+            cursor: pointer;
+        }
+
+        #background-pic{
+            width: 80vw;
+            height: 100vh;
+            position: relative;
+            top: -180px;
+            left: 300px;
+        }
 
 
-{% block content %}
- Profile
-{% endblock %}
+
+    </style>
+</head>
 
 
+<body class="animated-background">
+    <div class="container">
+        
+        <h1> AI FIT </h1>
+        <h2> Fit anywhere, anytime </h2>
+        <img src="./assets/background-image (1).png" id="background-pic">
+        <div class="container-transparent">
+            <img src="./assets/profile_placeholder_pic.jpg" id="profilePic">
+        </div>
+    </div>
+ 
+
+    
+</body>
+</html>
