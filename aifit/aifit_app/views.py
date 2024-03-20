@@ -65,12 +65,14 @@ from django.views import View
 from django.http import JsonResponse
 
 class LineChartJSONView(View):
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
     user_id='hfIg3WidzBTHgezNF8O2'
 
     def get(self, request, *args, **kwargs):
         db = firestore.client()
         graph_data = db.collection('graph').where('user_id', '==', self.user_id).stream()
-
+        print(graph_data)
         labels = []
         body_fat = []
         muscle_mass = []
