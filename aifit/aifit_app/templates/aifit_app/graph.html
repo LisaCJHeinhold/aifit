@@ -9,7 +9,7 @@
  graph
  <h1>Muscle Mass & Body Fat</h1>
 
- <canvas id="myChart" width="300" height="200"></canvas>
+ <canvas id="myChart" width="300" height="100"></canvas>
 
  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
  <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
@@ -34,7 +34,17 @@
     var ctx = $("#myChart").get(0).getContext("2d");
     new Chart(ctx, {
         type: 'line',
-        data: chartData
-    });})
+        data: chartData,
+        options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+    });
+    });
  </script>
 {% endblock %}

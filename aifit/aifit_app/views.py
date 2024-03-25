@@ -65,21 +65,22 @@ from django.views import View
 from django.http import JsonResponse
 
 class LineChartJSONView(View):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
     user_id='hfIg3WidzBTHgezNF8O2'
 
+    
+
     def get(self, request, *args, **kwargs):
+        # This command will get the user's id once the user is logged in
+        # -> request.user.id <-
         db = firestore.client()
         graph_data = db.collection('graph').where('user_id', '==', self.user_id).stream()
         print(graph_data)
         labels = []
         body_fat = []
         muscle_mass = []
-
         for data in graph_data:
             data_dict = data.to_dict()
-            labels.append(data_dict['date_created'])
+            labels.append(data_dict['time_period'])
             body_fat.append(data_dict['body_percentage_fat'])
             muscle_mass.append(data_dict['muscle_mass_percentage'])
             #print(data_dict)
@@ -88,6 +89,7 @@ class LineChartJSONView(View):
         print(muscle_mass)
 
         data = {
+            "type":'line',
             "labels": labels,
             "datasets": [
                 {
@@ -294,4 +296,19 @@ def line_chart(request):
 def workout(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
-    return render(request, 'aifit_app/workouts.html')
+    previous_workouts = firestore.client().collection('user_workouts').stream()
+    workouts = []
+    for workout in previous_workouts:
+        workouts_data = workout.to_dict()
+        print(workouts_data)
+        workouts.append({
+            'user_id': workouts_data.get('user_id', ''),
+            'type': workouts_data.get('type', ''),
+            'time': workouts_data.get('time', ''),
+            'date_created': workouts_data.get('date_created', ''),
+            'number_exercises': workouts_data.get('number_exercises', ''),
+        })
+        print(workouts_data.get('type', '')) 
+        print(workouts_data.get('number_exercises', ''))
+    return render(request, 'aifit_app/workouts.html', {'workouts': workouts})
+    
