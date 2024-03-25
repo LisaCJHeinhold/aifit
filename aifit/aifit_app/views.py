@@ -1,20 +1,22 @@
 from django.shortcuts import render, redirect
 from fire.firebase import firebaseInit, Firebase
+# from fire.firebase import firebaseInit, Firebase
 from django.contrib.auth import authenticate, login, logout
 from .models import User
 from .forms import SignUpForm, UserLoginForm
 from firebase_admin import firestore
 from django.contrib import auth
-from fire.firebase_auth import verify_id_token
-from fire.firebase import firebaseInit
+# from fire.firebase_auth import verify_id_token
 from django.conf import settings
 from django.http import JsonResponse
 import firebase_admin
+from firebase_admin import auth
 from firebase_admin import auth, firestore
 from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+from .static.functions.functions import get_goals, get_todays_workout
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -56,6 +58,12 @@ def signup(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+def home(request):
+    # firebaseInit()
+    # Assuming the credentials file is located at 'path/to/your/credentials.json'
+    firebase_instance = Firebase()
+    print(firebase_instance)
 
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
@@ -102,19 +110,16 @@ def workouts(request):
 
 line_chart = TemplateView.as_view(template_name='graph.html')
 line_chart_json = LineChartJSONView.as_view()
-
-def home(request):
-    # firebaseInit()
-    # Assuming the credentials file is located at 'path/to/your/credentials.json'
-    firebase_instance = Firebase()
-    print(firebase_instance)
+# def home(request):
+#     # firebaseInit()
+#     # Assuming the credentials file is located at 'path/to/your/credentials.json'
+#     firebase_instance = Firebase()
+#     print(firebase_instance)
+#      # Now you can use the firebase_instance to interact with Firebase services
+#     data = firebase_instance.get_data(collection='your_collection', document='your_document')
+#     print(data)
     
-     # Now you can use the firebase_instance to interact with Firebase services
-    data = firebase_instance.get_data(collection='your_collection', document='your_document')
-    print(data)
-    
-    return render(request, 'aifit_app/index.html')
-
+#     return render(request, 'aifit_app/dashboard.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -135,7 +140,6 @@ def signup(request):
         form = SignUpForm()
 
     return render(request, 'aifit_app/signup.html', {'form': form})
-
 
 def login(request):
     if request.method == 'POST':
@@ -210,38 +214,21 @@ def logout(request):
 #     return render(request,'aifit_app/login.html')
 
 def dashboard(request):
-    return render(request,'aifit_app/dashboard.html')
+    goals = get_goals()
+    today_workout = get_todays_workout()
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
 
 def chat(request):
-    print("User Id: ",request.user.id)
     return render(request,'aifit_app/chat.html')
 
 def profile(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
     return render(request,'aifit_app/profile.html')
 
 def goals(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
     return render(request,'aifit_app/goals.html')
 
 def graph(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
     return render(request,'aifit_app/graph.html')
 
 def previous_workouts(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
     return render(request,'aifit_app/previousworkouts.html')
-
-def line_chart(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
-    return render(request, 'aifit_app/graph.html')
-
-def workout(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
-    return render(request, 'aifit_app/workouts.html')
