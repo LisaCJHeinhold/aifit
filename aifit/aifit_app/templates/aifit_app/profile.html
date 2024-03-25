@@ -8,4 +8,8 @@
 
 {% block content %}
  Profile
+ 
+ <h1> Logged in as: {{ request.user.email}} </h>
+
+<a href="{% url 'account_logout' %}">Logout</a>
 {% endblock %}

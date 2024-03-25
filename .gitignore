@@ -1,4 +1,5 @@
 djangoenv
+aifit/theme/__pycache__
 aifit/fire/aifit-42d60-4b74ea669715.json
 aifit/fire/__pycache__
 aifit/aifit/__pycache__
@@ -7,4 +8,8 @@ aifit/aifit_app/migrations/__pycache__
 aifit/aifit_app/__pycache__/views.cpython-311.pyc
 *__pycache__/
 \aifit\aifit_app\__pycache__
+*.pyc
+aifit/fire/.env
+python3 -m venv djangoenv/bin/activate
+
 .env
