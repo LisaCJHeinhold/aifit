@@ -3,7 +3,7 @@ from . import views
 from .views import line_chart, line_chart_json, workout
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.dashboard, name='home'),
     # chart graph url
     path('chart', views.line_chart, name='line_chart'),
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
@@ -16,7 +16,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('chat/', views.chat, name='chat'),
     path('profile/', views.profile, name='profile'),
-    path('accounts/profile/', views.profile, name='profile'),
     
     path('goals/', views.goals, name='goals'),
     path('graph/', views.graph, name='graph'),
@@ -24,3 +23,4 @@ urlpatterns = [
     
     # allauth
     path('accounts/profile/', views.profile, name="profile"),
+]

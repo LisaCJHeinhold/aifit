@@ -1,41 +1,74 @@
 from django.shortcuts import render, redirect
-from fire.firebase import firebaseInit, Firebase
-# from fire.firebase import firebaseInit, Firebase
-from django.contrib.auth import authenticate, login, logout
-from .models import User
-from .forms import SignUpForm, UserLoginForm
-from firebase_admin import firestore
 from django.contrib import auth
-# from fire.firebase_auth import verify_id_token
+from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
-from django.http import JsonResponse
-import firebase_admin
-from firebase_admin import auth
-from firebase_admin import auth, firestore
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
 from django.template import loader
-from .models import Workout
+
+from .models import User, Workout
+from .forms import SignUpForm, UserLoginForm
+
+import firebase_admin
+from firebase_admin import auth, firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+
+#FUNCTIONS
 from .static.functions.functions import get_goals, get_todays_workout
-
-def home(request):
-    # firebaseInit()
-    # Assuming the credentials file is located at 'path/to/your/credentials.json'
-    firebase_instance = Firebase()
-    print(firebase_instance)
-
+from fire.firebase import firebaseInit, Firebase
+from django.views import View
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
 # GRAPH FUNCTIONS
-from django.views import View
 #import jsonresponse
-from django.http import JsonResponse
+
+
+##################################################################################################################
+# (Name)
+def dashboard(request):
+    goals = get_goals()
+    today_workout = get_todays_workout()
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
+
+##################################################################################################################
+
+
+
+
+
+##################################################################################################################
+# E 
+
+def chat(request):
+    return render(request,'aifit_app/chat.html')
+
+##################################################################################################################
+
+##################################################################################################################
+# (Name)
+
+def profile(request):
+    return render(request,'aifit_app/profile.html')
+
+##################################################################################################################
+
+##################################################################################################################
+# (Name) 
+def goals(request):
+    return render(request,'aifit_app/goals.html')
+##################################################################################################################
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################
+
+
+##################################################################################################################
+# (Name)
 
 class LineChartJSONView(View):
     user_id='hfIg3WidzBTHgezNF8O2'
-
-    
 
     def get(self, request, *args, **kwargs):
         # This command will get the user's id once the user is logged in
@@ -76,8 +109,8 @@ class LineChartJSONView(View):
         }
 
         return JsonResponse(data)
-
-from django.shortcuts import render
+def graph(request):
+    return render(request,'aifit_app/graph.html')
 
 def previous_workouts(request):
    
@@ -124,28 +157,6 @@ def previous_workouts(request):
 line_chart = TemplateView.as_view(template_name='graph.html')
 line_chart_json = LineChartJSONView.as_view()
 
-def dashboard(request):
-    goals = get_goals()
-    today_workout = get_todays_workout()
-    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
-
-def chat(request):
-    return render(request,'aifit_app/chat.html')
-
-def profile(request):
-    return render(request,'aifit_app/profile.html')
-
-def goals(request):
-    return render(request,'aifit_app/goals.html')
-
-def graph(request):
-    return render(request,'aifit_app/graph.html')
-
-# def previous_workouts(request):
-#     # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
-    #return render(request,'aifit_app/previousworkouts.html')
-
 def line_chart(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
@@ -169,4 +180,25 @@ def workout(request):
         print(workouts_data.get('type', '')) 
         print(workouts_data.get('number_exercises', ''))
     return render(request, 'aifit_app/workouts.html', {'workouts': workouts})
-    
+
+#def previous_workouts(request):
+#     # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
+    #return render(request,'aifit_app/previousworkouts.html')
+
+##################################################################################################################
+
+
+
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################
+
+
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################

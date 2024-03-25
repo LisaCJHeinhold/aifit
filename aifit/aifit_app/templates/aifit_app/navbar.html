@@ -8,11 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-<<<<<<< HEAD
-        {% comment %} /*Need to change colors and the like, add links to the different pages*/ {% endcomment %}
-=======
-        
->>>>>>> 4f44c090d0d58532dd20e73e655ac4622c3faaa8
         .navbar {
             width: 150px; /* Set the width of the vertical navbar */
             background-color: #000000;
@@ -51,48 +46,29 @@
             cursor: pointer;
         }
     </style>
-</head>
-<body>
+    </head>
+    <body>
 
-<<<<<<< HEAD
-<ul class="navbar">
-    <li><a href="accounts/google/login/?process=login">Sign Up</a></li>
+        <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
 
-    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-    <li><a href="{% url 'chat' %}">Chat</a></li>
-    <li><a href="{% url 'profile' %}">Profile Page</a></li>
-    <li><a href="{% url 'goals' %}">Goals</a></li>
-    <li><a href="{% url 'graph' %}">Graph</a></li>
-    <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-</ul>
-=======
+        <!-- the links to the different pages -->
+        <div class="navbar" id="navbar">
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'chat' %}">Chat</a></li>
+                <li><a href="{% url 'goals' %}">Goals</a></li>
+                <li><a href="{% url 'graph' %}">Graph</a></li>
+                <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="../google/login/?process=login">Sign Up</a></li>
 
+            </ul>
+        </div>
 
-<div class="navbar-toggle" onclick="toggleNavbar()">=</div>
-
-<!-- the links to the different pages -->
-<div class="navbar" id="navbar">
-    <ul>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'chat' %}">Chat</a></li>
-        <li><a href="{% url 'goals' %}">Goals</a></li>
-        <li><a href="{% url 'graph' %}">Graph</a></li>
-        <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-        <li><a href="../accounts/google/login/?process=login">Sign Up</a></li>
-
-    </ul>
-</div>
-
-<!-- Content -->
->>>>>>> 4f44c090d0d58532dd20e73e655ac4622c3faaa8
-{% block content %}
-{% endblock %}
-
-
-<script src="{% static 'js/navbar.js' %}"></script>
-
-
-</body>
+        <!-- Content -->
+        {% block content %}
+        {% endblock %}
+        <script src="{% static 'js/navbar.js' %}"></script>
+    </body>
 </html>
 
