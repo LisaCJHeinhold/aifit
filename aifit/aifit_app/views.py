@@ -6,6 +6,7 @@ from .forms import SignUpForm, UserLoginForm
 from firebase_admin import firestore
 from django.contrib import auth
 from fire.firebase_auth import verify_id_token
+from fire.firebase import firebaseInit
 from django.conf import settings
 from django.http import JsonResponse
 import firebase_admin
@@ -101,6 +102,7 @@ def workouts(request):
 
 line_chart = TemplateView.as_view(template_name='graph.html')
 line_chart_json = LineChartJSONView.as_view()
+
 def home(request):
     # firebaseInit()
     # Assuming the credentials file is located at 'path/to/your/credentials.json'
