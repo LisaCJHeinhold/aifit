@@ -26,6 +26,6 @@ urlpatterns = [
     # allauth
     path('accounts/', include('allauth.urls')),
     # path('accounts/profile/', views.profile, name="profile"),
-    path('graph', include('aifit_app.urls'))
+    # path('graph', include('aifit_app.urls'))
 ]
 

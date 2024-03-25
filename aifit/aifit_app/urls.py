@@ -12,12 +12,7 @@ urlpatterns = [
     path('workout', views.workout, name='workout'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('signup/', views.signup, name='signup'),
-<<<<<<< HEAD
     # path('accounts/signup/', views.signup, name='signup'),
-    
-=======
->>>>>>> 4f44c090d0d58532dd20e73e655ac4622c3faaa8
     path('dashboard/', views.dashboard, name='dashboard'),
     path('chat/', views.chat, name='chat'),
     path('profile/', views.profile, name='profile'),
@@ -29,5 +24,3 @@ urlpatterns = [
     
     # allauth
     path('accounts/profile/', views.profile, name="profile"),
-    
-]
