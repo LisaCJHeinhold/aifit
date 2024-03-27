@@ -15,7 +15,14 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+<<<<<<< Updated upstream
 from .static.functions.functions import get_goals, get_todays_workout, get_todays_date, get_time, get_num_of_exercises, get_workout_ideas
+=======
+from .static.functions.functions import get_goals, get_todays_workout
+from django.views.generic import TemplateView
+from chartjs.views.lines import BaseLineChartView
+
+>>>>>>> Stashed changes
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -63,9 +70,12 @@ def logout(request):
 #     # Assuming the credentials file is located at 'path/to/your/credentials.json'
 #     firebase_instance = Firebase()
 #     print(firebase_instance)
+<<<<<<< Updated upstream
 
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
+=======
+>>>>>>> Stashed changes
 
 # GRAPH FUNCTIONS
 from django.views import View
@@ -168,6 +178,7 @@ line_chart_json = LineChartJSONView.as_view()
 #     # Assuming the credentials file is located at 'path/to/your/credentials.json'
 #     firebase_instance = Firebase()
 #     print(firebase_instance)
+    
 #      # Now you can use the firebase_instance to interact with Firebase services
 #     data = firebase_instance.get_data(collection='your_collection', document='your_document')
 #     print(data)

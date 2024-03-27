@@ -1,9 +1,45 @@
 <!-- Boston is working on this-->
+<<<<<<< Updated upstream
 {% load static %}
 
 {% block content %}
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+>>>>>>> Stashed changes
 <body>
     <h1>Dashboard</h1>
+    <body>
+        <div class="navbar" id="navbar">
+        <ul>
+        <li><a href="{% url 'chat' %}">Chat</a></li>
+        <li><a href="{% url 'goals' %}">Goals</a></li>
+        <li><a href="{% url 'graph' %}">Graph</a></li>
+        <li><a href="{% url 'previousworkouts' %}">Previous Workouts</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        </ul>
+        </div>
+        
+        <div class="ml-0 p-4 mt-16">
+        <h1></h1>
+        <p></p>
+        </div>
+    
+        <script>
+        let prevScrollPos = window.pageYOffset;
+        window.onscroll = function() {
+        let currentScrollPos = window.pageYOffset;
+        if (prevScrollPos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").classList.add('hidden-nav');
+        }
+        prevScrollPos = currentScrollPos;
+        }
+        </script>
     <div>
         <h3>Quote of the Day</h3>
         <div>
