@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-        
         .navbar {
             width: 150px; /* Set the width of the vertical navbar */
             background-color: #000000;
@@ -47,12 +46,10 @@
             cursor: pointer;
         }
     </style>
-</head>
-<body>
+    </head>
+    <body>
 
-
-
-<div class="navbar-toggle" onclick="toggleNavbar()">=</div>
+        <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
 
 <!-- the links to the different pages -->
 <div class="navbar" id="navbar">
@@ -61,111 +58,17 @@
         <li><a href="{% url 'chat' %}">Chat</a></li>
         <li><a href="{% url 'goals' %}">Goals</a></li>
         <li><a href="{% url 'graph' %}">Graph</a></li>
+        <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
         <li><a href="{% url 'profile' %}">Profile</a></li>
         <li><a href="../accounts/google/login/?process=login">Sign Up</a></li>
 
     </ul>
 </div>
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizontal Navbar</title>
-    Include Tailwind CSS
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        
-        .navbar {
-            background-color: #000000;
-            position: fixed; /* Fix the navbar position */
-            top: 0; 
-            width: 100%; /* Make the navbar full width */
-            overflow-x: auto; 
-            white-space: nowrap; /* Prevent line breaks */
-            z-index: 1000; /* Ensure navbar appears above other content */
-            transition: top 0.3s; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 10px 20px; 
-            box-sizing: border-box; 
-        }
-
-        .navbar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex; /* Use flexbox to align items horizontally */
-        }
-
-        .navbar li {
-            margin-right: 200px; /* Add some space between navbar items */
-        }
-
-        .navbar li a {
-            display: block;
-            color: white;
-            padding: 20px;
-            text-decoration: none;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .navbar li a:hover {
-            background-color: #000000;
-            color: #104303;
-        }
-
-        /* JavaScript to hide navbar on scroll down */
-        .hidden-nav {
-            top: -100px; /* Move navbar above viewport */
-        }
-    </style>
-</head>
-<body>
-
-<div class="navbar" id="navbar">
-    <ul>
-        <li><a href="{% url 'chat' %}">Chat</a></li>
-        <li><a href="{% url 'goals' %}">Goals</a></li>
-        <li><a href="{% url 'graph' %}">Graph</a></li>
-        <li><a href="{% url 'previousworkouts' %}">Previous Workouts</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-    </ul>
-</div>
-
-<div class="ml-0 p-4 mt-16">
-    <h1></h1>
-    <p></p>
-    
-</div>
-<script>
-    let prevScrollPos = window.pageYOffset;
-    window.onscroll = function() {
-        let currentScrollPos = window.pageYOffset;
-        if (prevScrollPos > currentScrollPos) {
-            document.getElementById("navbar").style.top = "0";
-        } else {
-            document.getElementById("navbar").classList.add('hidden-nav');
-        }
-        prevScrollPos = currentScrollPos;
-    }
-</script>
-
-</body>
-</html>
--->
-
-<!-- Content -->
-{% block content %}
-{% endblock %}
-
-
-<script src="{% static 'js/navbar.js' %}"></script>
-
-
-</body>
+        <!-- Content -->
+        {% block content %}
+        {% endblock %}
+        <script src="{% static 'js/navbar.js' %}"></script>
+    </body>
 </html>
 

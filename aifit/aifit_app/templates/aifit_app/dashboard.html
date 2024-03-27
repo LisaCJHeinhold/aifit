@@ -3,43 +3,17 @@
 {% load static %}
 
 {% block content %}
+ Dashboard
+{% endblock %}
 =======
+<!-- Boston is working on this-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Dashboard</title>
 </head>
->>>>>>> Stashed changes
 <body>
     <h1>Dashboard</h1>
-    <body>
-        <div class="navbar" id="navbar">
-        <ul>
-        <li><a href="{% url 'chat' %}">Chat</a></li>
-        <li><a href="{% url 'goals' %}">Goals</a></li>
-        <li><a href="{% url 'graph' %}">Graph</a></li>
-        <li><a href="{% url 'previousworkouts' %}">Previous Workouts</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-        </ul>
-        </div>
-        
-        <div class="ml-0 p-4 mt-16">
-        <h1></h1>
-        <p></p>
-        </div>
-    
-        <script>
-        let prevScrollPos = window.pageYOffset;
-        window.onscroll = function() {
-        let currentScrollPos = window.pageYOffset;
-        if (prevScrollPos > currentScrollPos) {
-            document.getElementById("navbar").style.top = "0";
-        } else {
-            document.getElementById("navbar").classList.add('hidden-nav');
-        }
-        prevScrollPos = currentScrollPos;
-        }
-        </script>
     <div>
         <h3>Quote of the Day</h3>
         <div>
@@ -48,19 +22,16 @@
         </div>
     </div>
     <!--Today's Workouts-->
-    <div>
-    <h3>{{ date }}'s workout:</h3>
-    <h4>{{ workouts }}</h4>
+    <div> 
+    {% if days_schedule %}
     <ul>
-    <li>Time: {{ time }} minutes</li>
-    <li>Number of exercises: {{ number_exercises }}</li>
-    </ul>
-    <h4>Workout Ideas: </h4>
-    <ul>
-    {% for workout in workout_ideas %}
-        <li>{{ workout }}</li>
+        {% for workout in days_schedule %}
+            <li>{{ workout }}</li>
         {% endfor %}
     </ul>
+    {% else %}
+        <p>No workouts scheduled for today.</p>
+    {% endif %}
     </div>
     <!-- Goals -->
     <div>
@@ -70,13 +41,12 @@
             <input type="checkbox" id="task1" name="task1" value="task1">
                 <label>{{ goal }}</label>
                 <br>
-            {% endfor %}
-        </form>
-    </div>
+        {% endfor %}
+    </form>
+</div>
     <!-- Graph-->
-    <div>
+<div>
        
     </div>
 </body>
 </html>
-{% endblock %}

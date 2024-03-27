@@ -1,28 +1,18 @@
 from django.shortcuts import render, redirect
+from fire.firebase import firebaseInit, Firebase
 # from fire.firebase import firebaseInit, Firebase
 from django.contrib.auth import authenticate, login, logout
-from .models import User
-from .forms import SignUpForm, UserLoginForm
-from firebase_admin import firestore
-from django.contrib import auth
-# from fire.firebase_auth import verify_id_token
 from django.conf import settings
-from django.http import JsonResponse
-import firebase_admin
-from firebase_admin import auth
-from firebase_admin import auth, firestore
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
 from django.template import loader
-from .models import Workout
-from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-<<<<<<< Updated upstream
-from .static.functions.functions import get_goals, get_todays_workout, get_todays_date, get_time, get_num_of_exercises, get_workout_ideas
-=======
-from .static.functions.functions import get_goals, get_todays_workout
-from django.views.generic import TemplateView
-from chartjs.views.lines import BaseLineChartView
 
->>>>>>> Stashed changes
+from .models import User, Workout
+from .forms import SignUpForm, UserLoginForm
+
+import firebase_admin
+from firebase_admin import auth, firestore
+from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+from .static.functions.functions import get_goals, get_todays_workout
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -65,12 +55,11 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-# def home(request):
-#     # firebaseInit()
-#     # Assuming the credentials file is located at 'path/to/your/credentials.json'
-#     firebase_instance = Firebase()
-#     print(firebase_instance)
-<<<<<<< Updated upstream
+def home(request):
+    # firebaseInit()
+    # Assuming the credentials file is located at 'path/to/your/credentials.json'
+    firebase_instance = Firebase()
+    print(firebase_instance)
 
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
@@ -78,14 +67,55 @@ from chartjs.views.lines import BaseLineChartView
 >>>>>>> Stashed changes
 
 # GRAPH FUNCTIONS
-from django.views import View
 #import jsonresponse
-from django.http import JsonResponse
+
+
+##################################################################################################################
+# (Name)
+def dashboard(request):
+    goals = get_goals()
+    today_workout = get_todays_workout()
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
+
+##################################################################################################################
+
+
+
+
+
+##################################################################################################################
+# E 
+
+def chat(request):
+    return render(request,'aifit_app/chat.html')
+
+##################################################################################################################
+
+##################################################################################################################
+# (Name)
+
+def profile(request):
+    return render(request,'aifit_app/profile.html')
+
+##################################################################################################################
+
+##################################################################################################################
+# (Name) 
+def goals(request):
+    return render(request,'aifit_app/goals.html')
+##################################################################################################################
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################
+
+
+##################################################################################################################
+# (Name)
 
 class LineChartJSONView(View):
     user_id='hfIg3WidzBTHgezNF8O2'
-
-    
 
     def get(self, request, *args, **kwargs):
         # This command will get the user's id once the user is logged in
@@ -126,8 +156,8 @@ class LineChartJSONView(View):
         }
 
         return JsonResponse(data)
-
-from django.shortcuts import render
+def graph(request):
+    return render(request,'aifit_app/graph.html')
 
 def previous_workouts(request):
    
@@ -178,7 +208,6 @@ line_chart_json = LineChartJSONView.as_view()
 #     # Assuming the credentials file is located at 'path/to/your/credentials.json'
 #     firebase_instance = Firebase()
 #     print(firebase_instance)
-    
 #      # Now you can use the firebase_instance to interact with Firebase services
 #     data = firebase_instance.get_data(collection='your_collection', document='your_document')
 #     print(data)
@@ -280,11 +309,7 @@ def logout(request):
 def dashboard(request):
     goals = get_goals()
     today_workout = get_todays_workout()
-    date = get_todays_date()
-    time = get_time()
-    number_exercises = get_num_of_exercises()
-    workout_ideas = get_workout_ideas()
-    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'workouts': today_workout, 'date': date, 'time': time, 'number_exercises' : number_exercises, 'workout_ideas': workout_ideas})
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
 
 def chat(request):
     return render(request,'aifit_app/chat.html')
@@ -326,4 +351,25 @@ def workout(request):
         print(workouts_data.get('type', '')) 
         print(workouts_data.get('number_exercises', ''))
     return render(request, 'aifit_app/workouts.html', {'workouts': workouts})
-    
+
+#def previous_workouts(request):
+#     # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
+    #return render(request,'aifit_app/previousworkouts.html')
+
+##################################################################################################################
+
+
+
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################
+
+
+
+##################################################################################################################
+# (Name)
+
+##################################################################################################################
