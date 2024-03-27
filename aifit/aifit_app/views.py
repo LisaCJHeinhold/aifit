@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from fire.firebase import firebaseInit, Firebase
 # from fire.firebase import firebaseInit, Firebase
 from django.contrib.auth import authenticate, login, logout
 from .models import User
@@ -16,7 +15,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-from .static.functions.functions import get_goals, get_todays_workout
+from .static.functions.functions import get_goals, get_todays_workout, get_todays_date, get_time, get_num_of_exercises, get_workout_ideas
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -59,11 +58,11 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-def home(request):
-    # firebaseInit()
-    # Assuming the credentials file is located at 'path/to/your/credentials.json'
-    firebase_instance = Firebase()
-    print(firebase_instance)
+# def home(request):
+#     # firebaseInit()
+#     # Assuming the credentials file is located at 'path/to/your/credentials.json'
+#     firebase_instance = Firebase()
+#     print(firebase_instance)
 
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
@@ -270,7 +269,11 @@ def logout(request):
 def dashboard(request):
     goals = get_goals()
     today_workout = get_todays_workout()
-    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
+    date = get_todays_date()
+    time = get_time()
+    number_exercises = get_num_of_exercises()
+    workout_ideas = get_workout_ideas()
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'workouts': today_workout, 'date': date, 'time': time, 'number_exercises' : number_exercises, 'workout_ideas': workout_ideas})
 
 def chat(request):
     return render(request,'aifit_app/chat.html')

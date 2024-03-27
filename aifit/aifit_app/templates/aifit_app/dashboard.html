@@ -1,19 +1,7 @@
-{% extends "aifit_app/navbar.html" %}
-
-{% block title %}
- Dashboard
-{% endblock %}
+<!-- Boston is working on this-->
+{% load static %}
 
 {% block content %}
- Dashboard
-{% endblock %}
-=======
-<!-- Boston is working on this-->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
 <body>
     <h1>Dashboard</h1>
     <div>
@@ -24,16 +12,19 @@
         </div>
     </div>
     <!--Today's Workouts-->
-    <div> 
-    {% if days_schedule %}
+    <div>
+    <h3>{{ date }}'s workout:</h3>
+    <h4>{{ workouts }}</h4>
     <ul>
-        {% for workout in days_schedule %}
-            <li>{{ workout }}</li>
+    <li>Time: {{ time }} minutes</li>
+    <li>Number of exercises: {{ number_exercises }}</li>
+    </ul>
+    <h4>Workout Ideas: </h4>
+    <ul>
+    {% for workout in workout_ideas %}
+        <li>{{ workout }}</li>
         {% endfor %}
     </ul>
-    {% else %}
-        <p>No workouts scheduled for today.</p>
-    {% endif %}
     </div>
     <!-- Goals -->
     <div>
@@ -52,3 +43,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

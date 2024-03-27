@@ -16,15 +16,48 @@ def get_goals():
 def get_graph():
     pass
 
-def get_todays_workout():
+def get_todays_date():
     current_date = datetime.today()
-    
     day_of_week = current_date.strftime('%A')
 
-    docs = db.collection('user_workouts').where('day_of_week', '==', day_of_week).get()
-    
+    return day_of_week
+
+def get_todays_workout():
+    docs = db.collection('user_workouts').get()
+    today = get_todays_date()
+
     for doc in docs:
         workout_data = doc.to_dict()
-        return workout_data.get('day_schedule')
-    
-    return None 
+        if workout_data['day_schedule'] == today:
+            return workout_data.get('type')
+    return "error"
+
+def get_time():
+    docs = db.collection('user_workouts').get()
+    today = get_todays_date()
+
+    for doc in docs:
+        workout_data = doc.to_dict()
+        if workout_data['day_schedule'] == today:
+            return workout_data['time']
+    return "error"
+
+def get_num_of_exercises():
+    docs = db.collection('user_workouts').get()
+    today = get_todays_date()
+
+    for doc in docs:
+        workout_data = doc.to_dict()
+        if workout_data['day_schedule'] == today:
+            return workout_data['number_exercises']
+    return "error"
+
+def get_workout_ideas():
+    docs = db.collection('user_workouts').get()
+    today = get_todays_date()
+
+    for doc in docs:
+        workout_data = doc.to_dict()
+        if workout_data['day_schedule'] == today:
+            return workout_data['workout_ideas']
+    return "error"
