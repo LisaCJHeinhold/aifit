@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect
-from fire.firebase import firebaseInit, Firebase
 # from fire.firebase import firebaseInit, Firebase
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.template import loader
-
 from .models import User, Workout
 from .forms import SignUpForm, UserLoginForm
-
 import firebase_admin
 from firebase_admin import auth, firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-from .static.functions.functions import get_goals, get_todays_workout
+from .static.functions.functions import get_goals, get_todays_workout, get_num_of_exercises, get_time, get_todays_date, get_workout_ideas
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -55,16 +52,14 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-def home(request):
-    # firebaseInit()
-    # Assuming the credentials file is located at 'path/to/your/credentials.json'
-    firebase_instance = Firebase()
-    print(firebase_instance)
+# def home(request):
+#     # firebaseInit()
+#     # Assuming the credentials file is located at 'path/to/your/credentials.json'
+#     firebase_instance = Firebase()
+#     print(firebase_instance)
 
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
-=======
->>>>>>> Stashed changes
 
 # GRAPH FUNCTIONS
 #import jsonresponse
@@ -114,48 +109,48 @@ def goals(request):
 ##################################################################################################################
 # (Name)
 
-class LineChartJSONView(View):
-    user_id='hfIg3WidzBTHgezNF8O2'
+# class LineChartJSONView(View):
+#     user_id='hfIg3WidzBTHgezNF8O2'
 
-    def get(self, request, *args, **kwargs):
-        # This command will get the user's id once the user is logged in
-        # -> request.user.id <-
-        db = firestore.client()
-        graph_data = db.collection('graph').where('user_id', '==', self.user_id).stream()
-        print(graph_data)
-        labels = []
-        body_fat = []
-        muscle_mass = []
-        for data in graph_data:
-            data_dict = data.to_dict()
-            labels.append(data_dict['time_period'])
-            body_fat.append(data_dict['body_percentage_fat'])
-            muscle_mass.append(data_dict['muscle_mass_percentage'])
-            #print(data_dict)
+#     def get(self, request, *args, **kwargs):
+#         # This command will get the user's id once the user is logged in
+#         # -> request.user.id <-
+#         db = firestore.client()
+#         graph_data = db.collection('graph').where('user_id', '==', self.user_id).stream()
+#         print(graph_data)
+#         labels = []
+#         body_fat = []
+#         muscle_mass = []
+#         for data in graph_data:
+#             data_dict = data.to_dict()
+#             labels.append(data_dict['time_period'])
+#             body_fat.append(data_dict['body_percentage_fat'])
+#             muscle_mass.append(data_dict['muscle_mass_percentage'])
+#             #print(data_dict)
 
-        print(body_fat)
-        print(muscle_mass)
+#         print(body_fat)
+#         print(muscle_mass)
 
-        data = {
-            "type":'line',
-            "labels": labels,
-            "datasets": [
-                {
-                    "label": "% Body Fat",
-                    "data": body_fat,
-                    "borderColor": 'blue',
-                    "backgroundColor": 'rgba(0, 0, 255, 0.1)'
-                },
-                {
-                    "label": "% Muscle Mass",
-                    "data": muscle_mass,
-                    "borderColor": 'red',
-                    "backgroundColor": 'rgba(255, 0, 0, 0.1)'
-                }
-            ]
-        }
+#         data = {
+#             "type":'line',
+#             "labels": labels,
+#             "datasets": [
+#                 {
+#                     "label": "% Body Fat",
+#                     "data": body_fat,
+#                     "borderColor": 'blue',
+#                     "backgroundColor": 'rgba(0, 0, 255, 0.1)'
+#                 },
+#                 {
+#                     "label": "% Muscle Mass",
+#                     "data": muscle_mass,
+#                     "borderColor": 'red',
+#                     "backgroundColor": 'rgba(255, 0, 0, 0.1)'
+#                 }
+#             ]
+#         }
 
-        return JsonResponse(data)
+#         return JsonResponse(data)
 def graph(request):
     return render(request,'aifit_app/graph.html')
 
@@ -202,7 +197,7 @@ def previous_workouts(request):
 #         # return HttpResponse(template.render(context, request))
 
 line_chart = TemplateView.as_view(template_name='graph.html')
-line_chart_json = LineChartJSONView.as_view()
+# line_chart_json = LineChartJSONView.as_view()
 # def home(request):
 #     # firebaseInit()
 #     # Assuming the credentials file is located at 'path/to/your/credentials.json'
@@ -309,7 +304,12 @@ def logout(request):
 def dashboard(request):
     goals = get_goals()
     today_workout = get_todays_workout()
-    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout})
+    day = get_todays_date()
+    time = get_time() 
+    workout_ideas = get_workout_ideas()
+    number_of_workouts = get_num_of_exercises()
+    
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout, 'day': day, 'time': time, 'workout_ideas': workout_ideas, 'num_of_workouts': number_of_workouts})
 
 def chat(request):
     return render(request,'aifit_app/chat.html')

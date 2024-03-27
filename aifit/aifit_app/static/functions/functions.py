@@ -16,28 +16,15 @@ def get_goals():
 def get_graph():
     pass
 
-<<<<<<< Updated upstream
 def get_todays_date():
-=======
-def get_day_of_week():
->>>>>>> Stashed changes
     current_date = datetime.today()
     day_of_week = current_date.strftime('%A')
-    return day_of_week
-
-<<<<<<< Updated upstream
     return day_of_week
 
 def get_todays_workout():
     docs = db.collection('user_workouts').get()
     today = get_todays_date()
 
-=======
-def get_todays_workout():
-    
-    docs = db.collection('user_workouts').where('day_of_week', '==', get_day_of_week()).get()
-    
->>>>>>> Stashed changes
     for doc in docs:
         workout_data = doc.to_dict()
         if workout_data['day_schedule'] == today:
