@@ -14,6 +14,7 @@ from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 
 #FUNCTIONS
 from .static.functions.functions import get_goals, get_todays_workout
+from .static.functions.goals import update_goal_completion, add_goal, get_goal_lists
 from fire.firebase import firebaseInit, Firebase
 from django.views import View
 from django.views.generic import TemplateView
@@ -33,9 +34,6 @@ def dashboard(request):
 ##################################################################################################################
 
 
-
-
-
 ##################################################################################################################
 # E 
 
@@ -53,13 +51,17 @@ def profile(request):
 ##################################################################################################################
 
 ##################################################################################################################
-# (Name) 
-def goals(request):
-    return render(request,'aifit_app/goals.html')
-##################################################################################################################
+# Jennifer
 
-##################################################################################################################
-# (Name)
+def goals(request):
+
+    daily_goals, weekly_goals, longterm_goals = get_goal_lists()
+
+    return render(request,'aifit_app/goals.html', {
+        'daily_goals': daily_goals,
+        'weekly_goals': weekly_goals,
+        'longterm_goals': longterm_goals
+        }) 
 
 ##################################################################################################################
 
