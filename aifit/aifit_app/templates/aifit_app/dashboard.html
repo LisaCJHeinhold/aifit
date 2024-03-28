@@ -1,38 +1,45 @@
-{% extends "aifit_app/navbar.html" %}
-
-{% block title %}
- Dashboard
-{% endblock %}
+<!-- Boston is working on this-->
+{% load static %}
 
 {% block content %}
+{% endblock %}
 
 <!-- Boston is working on this-->
-
-<h1>Dashboard</h1>
-<div>
-    <h3>Quote of the Day</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
     <div>
-        <p>Being ignorant is not so much a shame, as being unwilling to learn.”</p>
-        <p>- Benjamin Franklin</p>
+        <h3>Quote of the Day</h3>
+        <div>
+            <p>Being ignorant is not so much a shame, as being unwilling to learn.”</p>
+            <p>- Benjamin Franklin</p>
+        </div>
     </div>
-</div>
-<!--Today's Workouts-->
-<div> 
-    {% if days_schedule %}
-        <ul>
-            {% for workout in days_schedule %}
-                <li>{{ workout }}</li>
-            {% endfor %}
+    <!--Today's Workouts-->
+    <div> 
+    <h3>{{ day }}'s workout!</h3>
+    <h4> {{ today_workout }} day: </h4>
+    <ul>
+    <li>Time: {{ time }} minutes</li>
+    <li>Number of Workouts: {{ num_of_workouts }}</li>
+    </ul>
+    <h4> {{ workout }} ideas: </h4>
+    {% for workout_idea in workout_ideas %}
+    <ul>    
+            <li> {{ workout_idea }}</li>
         </ul>
-    {% else %}
-        <p>No workouts scheduled for today.</p>
-    {% endif %}
-</div>
-<!-- Goals -->
-<div>
-    <h3>Goals</h3>
-    <form>
-        {% for goal in goals %}
+        {% endfor %}
+    </ul>
+    </div>
+    <!-- Goals -->
+    <div>
+        <h3>Goals</h3>
+        <form>
+            {% for goal in goals %}
             <input type="checkbox" id="task1" name="task1" value="task1">
                 <label>{{ goal }}</label>
                 <br>
@@ -42,6 +49,6 @@
     <!-- Graph-->
 <div>
        
-</div>
-{% endblock %}
- 
+    </div>
+</body>
+</html>

@@ -1,12 +1,12 @@
 from django.urls import path
 from . import views
-from .views import line_chart, line_chart_json, workout
+# from .views import line_chart, line_chart_json, workout
 
 urlpatterns = [
     path('', views.dashboard, name='home'),
     # chart graph url
     path('chart', views.line_chart, name='line_chart'),
-    path('chartJSON', views.line_chart_json, name='line_chart_json'),
+    # path('chartJSON', views.line_chart_json, name='line_chart_json'),
     path('line_chart', views.line_chart, name='line_chart'),
     # other urls
     path('workout', views.workout, name='workout'),
