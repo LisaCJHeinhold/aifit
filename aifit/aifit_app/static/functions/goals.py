@@ -5,13 +5,13 @@ from aifit_app.forms import AddGoalForm
 
 db = firestore.client()
 
-def get_goal_lists():
+def get_goal_lists(user_id):
 
     daily_goals = []
     weekly_goals = []
     longterm_goals = []
 
-    docs = db.collection('goals').get()
+    docs = db.collection('goals').where('user_id', '==', user_id).stream()
     for doc in docs:
         goal_data = doc.to_dict()
 

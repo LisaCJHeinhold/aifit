@@ -101,7 +101,7 @@ def profile(request):
 
 def goals(request):
 
-    daily_goals, weekly_goals, longterm_goals = get_goal_lists()
+    daily_goals, weekly_goals, longterm_goals = get_goal_lists(request.user.id)
 
     return render(request,'aifit_app/goals.html', {
         'daily_goals': daily_goals,
