@@ -323,9 +323,6 @@ def chat(request):
 def profile(request):
     return render(request,'aifit_app/profile.html')
 
-def goals(request):
-    return render(request,'aifit_app/goals.html')
-
 def graph(request):
     return render(request,'aifit_app/graph.html')
 
