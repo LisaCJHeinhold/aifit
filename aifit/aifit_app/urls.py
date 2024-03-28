@@ -18,6 +18,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     
     path('goals/', views.goals, name='goals'),
+    path('goals/add_goal/', views.add_goal, name='add_goal'),
+    path('goals/update_goal/<str:goal_id>/', views.update_goal_completion, name='update_goal_completion'),
     path('graph/', views.graph, name='graph'),
     path('previous_workouts/', views.previous_workouts, name='previous_workouts'),
     

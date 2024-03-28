@@ -20,3 +20,7 @@ class SignUpForm(UserCreationForm):
 class UserLoginForm(forms.Form):
   email = forms.EmailField()
   password = forms.CharField(widget=forms.PasswordInput)
+
+class AddGoalForm(forms.Form):
+    content = forms.CharField(max_length=100, label='Goal Content')
+    type = forms.CharField(widget=forms.HiddenInput())
