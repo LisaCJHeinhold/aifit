@@ -15,6 +15,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 from django.shortcuts import render
@@ -43,6 +44,10 @@ class LineChartJSONView(BaseLineChartView):
 line_chart = TemplateView.as_view(template_name='graph.html')
 line_chart_json = LineChartJSONView.as_view()
 >>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
+=======
+#Sofia: import getfirstname, getlastname
+from .static.functions.functions import get_first_name, get_last_name
+>>>>>>> Stashed changes
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -73,7 +78,7 @@ def login(request):
             return JsonResponse({"uid": user["localId"]})
         except firebase_admin.auth.UserNotFoundError:
             # Firebase user doesn't exist
-            return JsonResponse({"error": "User not found"}, status==400)
+            return JsonResponse({"error": "User not found"}, status=400)
     
     return render(request, "aifit_app/login.html")
 
@@ -298,6 +303,7 @@ def workout(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     return render(request, 'aifit_app/workouts.html')
+<<<<<<< Updated upstream
 =======
     return render(request,'aifit_app/previousworkouts.html')
 
@@ -323,3 +329,18 @@ def workout(request):
     # -> request.user.id <-
     return render(request, 'aifit_app/workouts.html')
 >>>>>>> 157c0db (Added)
+=======
+
+
+#Sofia:
+def display_first_name(request):
+    first_names = get_first_name()
+    return render(request,  'aifit_app/profile.html', {'first_name': first_names})
+
+def display_last_name(request):
+    last_names = get_last_name()
+    return render(request, 'aifit_app/profile.html', {'last_name': last_names})
+
+#
+#
+>>>>>>> Stashed changes

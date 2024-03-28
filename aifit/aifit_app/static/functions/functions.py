@@ -16,6 +16,7 @@ def get_goals():
         goals_dictionary = doc.to_dict()
         print(goals_dictionary['goal'])
 
+<<<<<<< Updated upstream
 
 # sofia: get first name from the database
 def display_first_name(request):
@@ -40,3 +41,23 @@ def display_last_name(request):
     # Pass last name to the  html
     return render(request, '/templates/profile.html', {'last name': last_name})
 
+=======
+# Sofia : get profiles info from firebase
+def get_first_name():
+    first_name = []
+    docs = db.collection('profiles').get()
+    for doc in docs:
+        fname_dictionary = doc.to_dict()
+        first_name.append(fname_dictionary['first_name'])
+        
+    return first_name
+
+def get_last_name():
+    last_name = []
+    docs = db.collection('profiles').get()
+    for doc in docs:
+        lname_dictionary = doc.to_dict()
+        last_name.append(lname_dictionary['last_name'])
+        
+    return last_name
+>>>>>>> Stashed changes
