@@ -21,16 +21,10 @@ urlpatterns = [
     path('', include('aifit_app.urls')),
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
-<<<<<<< HEAD
+
     # allauth
     path('accounts/', include('allauth.urls')),
     # path('accounts/profile/', views.profile, name="profile"),
-<<<<<<< HEAD
     path('graph', include('aifit_app.urls'))
-=======
->>>>>>> fb48dc2 (putting my code to the side to pull)
-=======
-    path('graph', include('aifit_app.urls'))
->>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
 ]
 

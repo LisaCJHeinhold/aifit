@@ -5,8 +5,8 @@ from firebase_admin import firestore
 from django.shortcuts import render
 
 
-cred = credentials.Certificate("/Users/bostonwilliams/Desktop/GitHub/aifit/aifit/fire/aifit-42d60-4b74ea669715.json")
-firebase_admin.initialize_app(cred)
+# cred = credentials.Certificate("fire/aifit-42d60-4b74ea669715.json")
+# firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
@@ -16,15 +16,13 @@ def get_goals():
         goals_dictionary = doc.to_dict()
         print(goals_dictionary['goal'])
 
-<<<<<<< Updated upstream
-
 # sofia: get first name from the database
 def display_first_name(request):
     first_name = []
     docs = db.collection('profiles').get()
     for doc in docs:
         profile_data = doc.to_dict()
-        if 'first_name' in profile_data:
+        if 'first_name' in profle_data:
             first_name.append(profile_data['first_name'])
     
     # Pass first name to the  html
@@ -41,7 +39,7 @@ def display_last_name(request):
     # Pass last name to the  html
     return render(request, '/templates/profile.html', {'last name': last_name})
 
-=======
+
 # Sofia : get profiles info from firebase
 def get_first_name():
     first_name = []
@@ -60,4 +58,4 @@ def get_last_name():
         last_name.append(lname_dictionary['last_name'])
         
     return last_name
->>>>>>> Stashed changes
+

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from django.shortcuts import render, redirect
 from fire.firebase import firebaseInit, Firebase
 from django.contrib.auth import authenticate, login, logout
@@ -15,39 +15,32 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Workout
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
-from django.shortcuts import render
-from django.views.generic import TemplateView
-from chartjs.views.lines import BaseLineChartView
-
-=======
->>>>>>> 618aa41 (models n stuff for graph and workouts)
-
-class LineChartJSONView(BaseLineChartView):
-    def get_labels(self):
-        """Return 7 labels for the x-axis."""
-        return ["January", "February", "March", "April", "May"]
-
-    def get_providers(self):
-        """Return names of datasets."""
-        return ["% Body Fat", "% Muscle Mass"]
-
-    def get_data(self):
-        """Return 2 datasets to plot."""
-
-        return [[28, 27 , 24, 23, 23, 20, 20],
-                [12, 13, 15, 15, 17, 16, 17]]
-
-
-line_chart = TemplateView.as_view(template_name='graph.html')
-line_chart_json = LineChartJSONView.as_view()
->>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
-=======
-#Sofia: import getfirstname, getlastname
 from .static.functions.functions import get_first_name, get_last_name
->>>>>>> Stashed changes
+
+from django.views.generic import TemplateView
+
+# from chartjs.views.lines import BaseLineChartView
+
+# class LineChartJSONView(BaseLineChartView):
+#     def get_labels(self):
+#         """Return 7 labels for the x-axis."""
+#         return ["January", "February", "March", "April", "May"]
+
+#     def get_providers(self):
+#         """Return names of datasets."""
+#         return ["% Body Fat", "% Muscle Mass"]
+
+#     def get_data(self):
+#         """Return 2 datasets to plot."""
+
+#         return [[28, 27 , 24, 23, 23, 20, 20],
+#                 [12, 13, 15, 15, 17, 16, 17]]
+
+
+# line_chart = TemplateView.as_view(template_name='graph.html')
+# line_chart_json = LineChartJSONView.as_view()
+
+#Sofia: import getfirstname, getlastname
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -90,42 +83,32 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-from django.views.generic import TemplateView
-from chartjs.views.lines import BaseLineChartView
 
-# GRAPH FUNCTIONS
-class LineChartJSONView(BaseLineChartView):
-    def get_labels(self):
-        """Return 7 labels for the x-axis."""
-        return ["January", "February", "March", "April", "May"]
+# # GRAPH FUNCTIONS
+# class LineChartJSONView(BaseLineChartView):
+#     def get_labels(self):
+#         """Return 7 labels for the x-axis."""
+#         return ["January", "February", "March", "April", "May"]
 
-    def get_providers(self):
-        """Return names of datasets."""
-        return ["% Body Fat", "% Muscle Mass"]
+#     def get_providers(self):
+#         """Return names of datasets."""
+#         return ["% Body Fat", "% Muscle Mass"]
 
-    def get_data(self):
-        """Return 2 datasets to plot."""
+#     def get_data(self):
+#         """Return 2 datasets to plot."""
 
-        return [[28, 27 , 24, 23, 23, 20, 20],
-                [12, 13, 15, 15, 17, 16, 17]]
+#         return [[28, 27 , 24, 23, 23, 20, 20],
+#                 [12, 13, 15, 15, 17, 16, 17]]
 
 # previous workouts function testing
 def workouts(request):
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    # This command will get the user's id once the user is logged in
+    # -> request.user.id <-
+ 
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     
-=======
->>>>>>> 66c78c6 (hehe)
-=======
->>>>>>> 618aa41 (models n stuff for graph and workouts)
-=======
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
-    
->>>>>>> 157c0db (Added)
     previous_workouts = firestore.client().collection('workouts').where('user_id', '== ', 'user_workouts.user_id').stream()
     workouts = []
     for workout in previous_workouts:
@@ -146,9 +129,10 @@ def workouts(request):
         # return HttpResponse(template.render(context, request))
 
 line_chart = TemplateView.as_view(template_name='graph.html')
-line_chart_json = LineChartJSONView.as_view()
+# line_chart_json = LineChartJSONView.as_view()
+
 def home(request):
-<<<<<<< HEAD
+
     # firebaseInit()
     # Assuming the credentials file is located at 'path/to/your/credentials.json'
     firebase_instance = Firebase()
@@ -209,15 +193,8 @@ def login(request):
     #         messages.error(request, "Sign-up failed. Please try again.")
     #         return render(request,'aifit_app/signup.html')
         
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     # return render(request,'aifit_app/signup.html')
-=======
-    return render(request,'aifit_app/signup.html')
->>>>>>> 00b6b73 (error fixes)
-=======
-    # return render(request,'aifit_app/signup.html')
->>>>>>> fb48dc2 (putting my code to the side to pull)
 
 def logout(request):
     logout(request)
@@ -285,10 +262,7 @@ def graph(request):
     return render(request,'aifit_app/graph.html')
 
 def previous_workouts(request):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 157c0db (Added)
+
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     return render(request,'aifit_app/previousworkouts.html')
@@ -296,41 +270,20 @@ def previous_workouts(request):
 def line_chart(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
-<<<<<<< HEAD
+
     return render(request, 'aifit_app/graph.html')
 
 def workout(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     return render(request, 'aifit_app/workouts.html')
-<<<<<<< Updated upstream
-=======
-    return render(request,'aifit_app/previousworkouts.html')
-
-=======
-    return render(request, 'aifit_app/index.html')
-
->>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
 def line_chart(request):
     return render(request, 'aifit_app/graph.html')
 
 def workout(request):
-<<<<<<< HEAD
-    return render(request, 'aifit_app/workouts.html')
->>>>>>> 66c78c6 (hehe)
-=======
-    return render(request, 'aifit_app/workouts.html')
->>>>>>> 749e940 (graph changes, and hecka stuff for workouts)
-=======
-    return render(request, 'aifit_app/graph.html')
-
-def workout(request):
     # This command will get the user's id once the user is logged in
     # -> request.user.id <-
     return render(request, 'aifit_app/workouts.html')
->>>>>>> 157c0db (Added)
-=======
-
 
 #Sofia:
 def display_first_name(request):
@@ -343,4 +296,4 @@ def display_last_name(request):
 
 #
 #
->>>>>>> Stashed changes
+
