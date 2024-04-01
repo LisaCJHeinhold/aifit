@@ -13,9 +13,6 @@ def get_goals():
         goals.append(goals_dictionary['goal'])
     return goals
 
-def get_graph():
-    pass
-
 def get_todays_date():
     current_date = datetime.today()
     day_of_week = current_date.strftime('%A')
@@ -59,4 +56,36 @@ def get_workout_ideas():
         workout_data = doc.to_dict()
         if workout_data['day_schedule'] == today:
             return workout_data['workout_ideas']
+    return "error"
+
+def get_body_fat():
+    docs = db.collection('graph').get()
+
+    for doc in docs:
+        graph_data = doc.to_dict()
+        return graph_data['body_percentage_fat']
+    
+
+def get_muscle_mass():
+    docs = db.collection('graph').get()
+
+    for doc in docs:
+        graph_data = doc.to_dict()
+        return graph_data['muscle_mass_percentage']     
+
+def get_weight():
+    docs = db.collection('graph').get()
+
+    for doc in docs: 
+        graph_data = doc.to_dict()
+        return graph_data['weight']
+    
+def get_workout():
+    docs = db.collection('user_workouts').get()
+    today = get_todays_date()
+
+    for doc in docs:
+        workout_data = doc.to_dict()
+        if workout_data['day_schedule'] == today:
+            return workout_data['type']
     return "error"
