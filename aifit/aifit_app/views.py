@@ -9,7 +9,7 @@ from .forms import SignUpForm, UserLoginForm
 import firebase_admin
 from firebase_admin import auth, firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-from .static.functions.functions import get_goals, get_todays_workout, get_num_of_exercises, get_time, get_todays_date, get_workout_ideas
+from .static.functions.functions import get_goals, get_todays_workout, get_num_of_exercises, get_time, get_todays_date, get_workout_ideas, get_body_fat, get_muscle_mass, get_weight, get_workout
 
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
@@ -61,7 +61,7 @@ def logout(request):
 #FUNCTIONS
 from .static.functions.functions import get_goals, get_todays_workout
 from .static.functions.goals import update_goal_completion, add_goal, get_goal_lists
-from fire.firebase import firebaseInit, Firebase
+# from fire.firebase import firebaseInit, Firebase
 from django.views import View
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
@@ -314,8 +314,12 @@ def dashboard(request):
     time = get_time() 
     workout_ideas = get_workout_ideas()
     number_of_workouts = get_num_of_exercises()
+    body_fat = get_body_fat()
+    muscle_mass = get_muscle_mass()
+    weight = get_weight()
+    workout = get_workout()
     
-    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout, 'day': day, 'time': time, 'workout_ideas': workout_ideas, 'num_of_workouts': number_of_workouts})
+    return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout, 'day': day, 'time': time, 'workout_ideas': workout_ideas, 'num_of_workouts': number_of_workouts, 'body_fat': body_fat, 'muscle_mass': muscle_mass, 'weight': weight, 'workout': workout})
 
 def chat(request):
     return render(request,'aifit_app/chat.html')

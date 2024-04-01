@@ -1,24 +1,18 @@
 <!-- Boston is working on this-->
-{% load static %}
+{% extends "aifit_app/navbar.html" %}
 
-{% block content %}
+{% block title %}
+Dashboard
 {% endblock %}
 
-<!-- Boston is working on this-->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <div>
-        <h3>Quote of the Day</h3>
-        <div>
-            <p>Being ignorant is not so much a shame, as being unwilling to learn.”</p>
-            <p>- Benjamin Franklin</p>
-        </div>
-    </div>
+{% block content %}
+<div>
+<h3>Quote of the Day</h3>
+<div>
+    <p>Being ignorant is not so much a shame, as being unwilling to learn.”</p>
+    <p>- Benjamin Franklin</p>
+</div>
+</div>
     <!--Today's Workouts-->
     <div> 
     <h3>{{ day }}'s workout!</h3>
@@ -27,7 +21,7 @@
     <li>Time: {{ time }} minutes</li>
     <li>Number of Workouts: {{ num_of_workouts }}</li>
     </ul>
-    <h4> {{ workout }} ideas: </h4>
+    <h4> {{ workout }} Ideas: </h4>
     {% for workout_idea in workout_ideas %}
     <ul>    
             <li> {{ workout_idea }}</li>
@@ -48,7 +42,11 @@
 </div>
     <!-- Graph-->
 <div>
-       
-    </div>
+<h3>User Stats: </h3>
+<p>Body Fat Percentage: {{ body_fat }}% </p>  
+<p> Muscle Mass Percentage: {{ muscle_mass }}% </p>
+<p> Weight: {{ weight }} lbs</p>
+</div>
 </body>
 </html>
+{% endblock %}
