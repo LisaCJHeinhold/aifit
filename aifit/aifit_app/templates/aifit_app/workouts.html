@@ -116,77 +116,74 @@ AiFit Workout Page
         color: white;
     }
 </style>
-</head>
+
 <body>
-<main>
-    <section id = "workout-landing">
-        
-        <h1>NO EXCUSES, JUST RESULTS.</h1>
-    </section>
+    <main>
+        <section id = "workout-landing">
+            <h1>NO EXCUSES, JUST RESULTS.</h1>
+        </section>
     
-    <h2 class="h2-w">Workouts</h2>
-    <div id="workout-types">
-        <section class="flex">
-        <div class="grid">
-           <h2 >Leg Day</h2>
-            <p>Est. Time: 45 min</p>
-            <p>7 Exercises</p>
-            <p>Last completed: 12/25/23</p>
+        <h2 class="h2-w">Workouts</h2>
+        <div id="workout-types">
+            <section class="flex">
+                <div class="grid">
+                    <h2>Leg Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/25/23</p>
+                </div>
+                <div class="grid">
+                    <h2 class="uppercase">Pull Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/12/23</p>
+                </div>
+                <div class="grid">
+                    <h2 class="uppercase">Push Day</h2>
+                    <p>Est. Time: 45 min</p>
+                    <p>7 Exercises</p>
+                    <p>Last completed: 12/2/23</p>
+                </div>
+            </section> 
+            <button> create new type </button> 
         </div>
-        <div class="grid">
-            <h2 class="uppercase">Pull Day</h2>
-            <p>Est. Time: 45 min</p>
-            <p>7 Exercises</p>
-            <p>Last completed: 12/12/23</p>
-        </div>
-        <div class="grid">
-            <h2 class="uppercase">Push Day</h2>
-            <p>Est. Time: 45 min</p>
-            <p>7 Exercises</p>
-            <p>Last completed: 12/2/23</p>
-        </div>
-        </section>
-        
-        <button> create new type </button>
-       
-    </div>
 
-    <div id="exercises">
-        <h2 class="h2-w">Leg Day Exercises</h2>
-        <section id="exercise-section">
-            {% for exercise in exercises %}
-                <section class="flex">
-                    <p class="sets">{{ exercise.sets }}</p>
-                    <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
-                    <p class="exerciseName">{{ exercise.name }}</p>
-                    <p class="personal">PERSONAL BEST: {{ exercise.personal_best }}</p>
-                </section>
-            {% endfor %}
-        </section>
-        <form action="" method="post" id="exerciseForm">
-            <input type="text" name="exercise" id="exercise" placeholder="Exercise Name" required/>
-            <input type="text" name="sets" id="sets" placeholder="Sets" required/>
-            <input type="text" name="personal_best" id="personal_best" placeholder="Personal Best" required/>
-            <input type="hidden" name="userid" value="{{ userid }}">
+        <div id="exercises">
+            <h2 class="h2-w">Leg Day Exercises</h2>
+            <section id="exercise-section">
+                {% for exercise in exercises %}
+                    <section class="flex">
+                        <p class="sets">{{ exercise.sets }}</p>
+                        <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
+                        <p class="exerciseName">{{ exercise.name }}</p>
+                        <p class="personal">PERSONAL BEST: {{ exercise.personal_best }}</p>
+                    </section>
+                {% endfor %}
+            </section>
+            <form action="" method="post" id="exerciseForm">
+                <input type="text" name="exercise" id="exercise" placeholder="Exercise Name" required/>
+                <input type="text" name="sets" id="sets" placeholder="Sets" required/>
+                <input type="text" name="personal_best" id="personal_best" placeholder="Personal Best" required/>
+                <input type="hidden" name="userid" value="{{ userid }}">
+                <button id="addExercise"> Add Exercise</button>
+            </form>
             <button id="addExercise"> Add Exercise</button>
-        </form>
-        <button id="addExercise"> Add Exercise</button>
-    </div>
-
-    <div id="previous-workouts">
-        <h2 class="h2-w">Recently Completed Workouts</h2>
-        <div class="grid">
-          {% for workout in workouts %}
-            <div class="workout">
-            <p>Type: {{ workout.type }}</p>
-            <p>Time: {{ workout.time }}</p>
-            <p>Date Created: {{ workout.date_created }}</p>
-            <p>Number of Exercises: {{ workout.number_exercises }}</p>
-            </div>
-          {% endfor %}
-            
         </div>
-        <button> View All Past Workouts</button>
-    </div>
-</main> 
+
+        <div id="previous-workouts">
+            <h2 class="h2-w">Recently Completed Workouts</h2>
+            <div class="grid">
+                {% for workout in workouts %}
+                    <div class="workout">
+                        <p>Type: {{ workout.type }}</p>
+                        <p>Time: {{ workout.time }}</p>
+                        <p>Date Created: {{ workout.date_created }}</p>
+                        <p>Number of Exercises: {{ workout.number_exercises }}</p>
+                    </div>
+                {% endfor %}  
+            </div>
+            <button> View All Past Workouts</button>
+        </div>
+    </main> 
+</body>
 {% endblock %}

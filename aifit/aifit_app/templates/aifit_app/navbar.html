@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-        
         .navbar {
             width: 150px; /* Set the width of the vertical navbar */
             background-color: #000000;
@@ -47,12 +46,10 @@
             cursor: pointer;
         }
     </style>
-</head>
-<body>
+    </head>
+    <body>
 
-
-
-<div class="navbar-toggle" onclick="toggleNavbar()">=</div>
+        <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
 
 <!-- the links to the different pages -->
 <div class="navbar" id="navbar">
@@ -68,14 +65,10 @@
     </ul>
 </div>
 
-<!-- Content -->
-{% block content %}
-{% endblock %}
-
-
-<script src="{% static 'js/navbar.js' %}"></script>
-
-
-</body>
+        <!-- Content -->
+        {% block content %}
+        {% endblock %}
+        <script src="{% static 'js/navbar.js' %}"></script>
+    </body>
 </html>
 
