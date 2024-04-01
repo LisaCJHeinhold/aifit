@@ -60,7 +60,7 @@ def logout(request):
 
 #FUNCTIONS
 from .static.functions.functions import get_goals, get_todays_workout
-from .static.functions.goals import update_goal_completion, add_goal, get_goal_lists
+from .static.functions.goals import update_goal_completion, add_goal, delete_goal, get_goal_lists
 # from fire.firebase import firebaseInit, Firebase
 from django.views import View
 from django.views.generic import TemplateView
