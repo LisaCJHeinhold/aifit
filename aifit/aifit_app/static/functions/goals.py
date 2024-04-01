@@ -66,6 +66,9 @@ def add_goal(request):
             }
             goal_ref.set(goal_data)
             return redirect('goals')
+
+        else:
+            return redirect('goals')
         
 def update_goal_completion(request, goal_id):
    
