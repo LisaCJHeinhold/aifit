@@ -7,6 +7,7 @@ Goals
 {% block content %}
 {% load static tailwind_tags %}
 {% tailwind_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <body class="bg-black"> 
 <div class="flex flex-wrap justify-around h-screen">
@@ -26,12 +27,16 @@ Goals
     </div>
     <ul class="list-group pl-10">
       {% for goal in daily_goals %}
-        <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post">
-          {% csrf_token %}
-          <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
-          {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+      <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post">
+        {% csrf_token %}
+        <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
+        {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
           <label class="text-base">{{ goal.goal }}</label>
-        </form>
+      </form>
+      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
+        {% csrf_token %}
+        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
+      </form>
       {% endfor %}
     </ul>
   </div>
@@ -57,6 +62,10 @@ Goals
         {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
           <label class="text-base">{{ goal.goal }}</label>
       </form>
+      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
+        {% csrf_token %}
+        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
+      </form>
       {% endfor %}
     </ul>
   </div>
@@ -81,6 +90,10 @@ Goals
         <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
         {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
           <label class="text-base">{{ goal.goal }}</label>
+      </form>
+      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
+        {% csrf_token %}
+        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
       </form>
       {% endfor %}
     </ul>
