@@ -149,15 +149,15 @@
         <input class="side-menu" type="checkbox" id="side-menu"/>
         <label class="hamb" for="side-menu"><span class="hamb-line" ></span></label>
         <nav class="navbar">
-        <ul class="menu">
-            <li class="nav-li"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li class="nav-li"><a href="{% url 'chat' %}">Chat</a></li>
-            <li class="nav-li"><a href="{% url 'goals' %}">Goals</a></li>
-            <li class="nav-li"><a href="{% url 'graph' %}">Graph</a></li>
-            <li class="nav-li"><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-            <li class="nav-li"><a href="{% url 'profile' %}">Profile</a></li>
-            <li class="nav-li"><a href="../accounts/google/login/?process=login">Sign Up</a></li>
-        </ul>
+          <ul class="menu">
+              <li class="nav-li"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              <li class="nav-li"><a href="{% url 'chat' %}">Chat</a></li>
+              <li class="nav-li"><a href="{% url 'goals' %}">Goals</a></li>
+              <li class="nav-li"><a href="{% url 'graph' %}">Graph</a></li>
+              <li class="nav-li"><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+              <li class="nav-li"><a href="{% url 'profile' %}">Profile</a></li>
+              <li class="nav-li"><a href="../accounts/google/login/?process=login">Sign Up</a></li>
+          </ul>
         </nav>
         <!-- Content -->
         {% block content %}
