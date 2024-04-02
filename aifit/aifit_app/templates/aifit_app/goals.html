@@ -1,103 +1,193 @@
 {% extends "aifit_app/navbar.html" %}
-
+{% load static %}
 {% block title %}
 Goals
 {% endblock %}
 
 {% block content %}
-{% load static tailwind_tags %}
-{% tailwind_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 
-<body class="bg-black"> 
-<div class="flex flex-wrap justify-around h-screen">
+<style>
+  body {
+    background-color: var(--black);
+    color: var(--white);
+  }
+  .all-goals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+  }
+  .daily, .weekly, .long-term {
+    background-color: var(--green-gray);
+    padding: 10px 15px 15px 15px;
+    border-radius: 10px;
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .daily h1, .weekly h1, .long-term h1 {
+    padding: 0 0 10px 0;
+    font-size: 20px;
+  }
+  .entry-form {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-box {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+  }
+  .add-goal {
+    background-color: var(--green);
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 50%;
+  }
+  .goals-list div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+  .delete button {
+    background-color: var(--green-gray);
+    border: none;
+  }
+  .block {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .all-goals {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 50vh;
+      align-items: self-start;
+    }
+    .daily, .weekly, .long-term {
+      width: 30%;
+    }
+    .block {
+      display: block;
+      padding: 200px;
+      background-image: url(../../static/images/boxbox.jpg);
+      background-size: cover;
+      background-position: center;
+      margin: 30px auto;
+    }
+  }
+</style>
 
-  <!-- Daily Goals -->
-  <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
-    <div class="bg-dark-green m-0">
-      <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Daily Goals</h1>
-    </div>
-    <div class="row">
-      <form action="add_goal/" method="post" class="flex flex-col px-10 py-5">
-        {% csrf_token %}
-        <input type="text" name="content" class="form-control mb-2 mr-sm-2" placeholder="Enter daily goal">
-        <input type="hidden" name="type" value="daily">
-        <button type="Submit" class="btn btn-primary bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
-      </form>
-    </div>
-    <ul class="list-group pl-10">
-      {% for goal in daily_goals %}
-      <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
-        {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-          <label class="text-base">{{ goal.goal }}</label>
-      </form>
-      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
-      </form>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <!-- Weekly Goals -->
-  <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
-    <div class="bg-dark-green m-0">
-      <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Weekly Goals</h1>
-    </div>
-    <div class="row">
-      <form action="add_goal/" method="post" class="flex flex-col px-10 py-5">
-        {% csrf_token %}
-        <input type="text" name="content" class="form-control mb-2 mr-sm-2" placeholder="Enter weekly goal">
-        <input type="hidden" name="type" value="weekly">
-        <button type="Submit" class="btn btn-primary bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
-      </form>
-    </div>
-    <ul class="list-group pl-10">
-      {% for goal in weekly_goals %}
-      <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
-        {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-          <label class="text-base">{{ goal.goal }}</label>
-      </form>
-      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
-      </form>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <!-- Long-Term Goals -->
-  <div class="bg-light-green mx-2 mt-24 rounded" style="width: 28%; height: 65%; overflow: auto;">
-    <div class="bg-dark-green m-0">
-      <h1 class="text-3xl font-bold py-5 text-center text-light-gray">Long-Term Goals</h1>
-    </div>
-    <div class="row">
-      <form action="add_goal/" method="post" class="flex flex-col px-10 py-5">
-        {% csrf_token %}
-        <input type="text" name="content" class="form-control mb-2 mr-sm-2" placeholder="Enter long-term goal">
-        <input type="hidden" name="type" value="long-term">
-        <button type="Submit" class="btn btn-primary bg-dark-green hover:text-light-gray text-white font-bold my-2 h-8">Add goal</button>
-      </form>
-    </div>
-    <ul class="list-group pl-10">
-      {% for goal in longterm_goals %}
-      <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <input type="checkbox" name="is_completed" class="w-5 h-5" value="true" 
-        {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-          <label class="text-base">{{ goal.goal }}</label>
-      </form>
-      <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post">
-        {% csrf_token %}
-        <button type="Submit" class="color: black"><i class="fas fa-trash"></i></button>
-      </form>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-{% endblock %}
+<body> 
+  <section class="block"></section>
+  <section class="all-goals">
+    <section class="daily">
+      <div>
+        <h1>Daily Goals</h1>
+      </div>
+      <div>
+        <form action="add_goal/" method="post" class="entry-form">
+          {% csrf_token %}
+          <input type="text" name="content" placeholder="Enter daily goal" class="input-box">
+          <input type="hidden" name="type" value="daily">
+          <button type="Submit" class="add-goal">Add goal</button>
+        </form>
+      </div>
+      <ul class="goals-list">
+        {% for goal in daily_goals %}
+        <div>
+          <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+            {% csrf_token %}
+            <input type="checkbox" name="is_completed" value="true" 
+            {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+              <label>{{ goal.goal }}</label>
+          </form>
+          <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+            {% csrf_token %}
+            <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+          </form>
+        </div>
+        {% endfor %}
+      </ul>
+    </section>
+    
+      <!-- Weekly Goals -->
+      <section class="weekly">
+        <div>
+          <h1>Weekly Goals</h1>
+        </div>
+        <div>
+          <form action="add_goal/" method="post" class="entry-form">
+            {% csrf_token %}
+            <input type="text" name="content" placeholder="Enter weekly goal" class="input-box">
+            <input type="hidden" name="type" value="weekly">
+            <button type="Submit" class="add-goal">Add goal</button>
+          </form>
+        </div>
+        <ul class="goals-list">
+          {% for goal in weekly_goals %}
+          <div>
+            <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+              {% csrf_token %}
+              <input type="checkbox" name="is_completed" value="true" 
+              {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+                <label>{{ goal.goal }}</label>
+            </form>
+            <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+              {% csrf_token %}
+              <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+            </form>
+          </div>
+          {% endfor %}
+        </ul>
+      </section>
+    
+      <!-- Long-Term Goals -->
+      <section class="long-term">
+        <div>
+          <h1>Long-Term Goals</h1>
+        </div>
+        <div>
+          <form action="add_goal/" method="post" class="entry-form">
+            {% csrf_token %}
+            <input type="text" name="content" placeholder="Enter long-term goal" class="input-box">
+            <input type="hidden" name="type" value="long-term">
+            <button type="Submit" class="add-goal">Add goal</button>
+          </form>
+        </div>
+        <ul class="goals-list">
+          {% for goal in longterm_goals %}
+          <div>
+            <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+              {% csrf_token %}
+              <input type="checkbox" name="is_completed" value="true" 
+              {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+                <label>{{ goal.goal }}</label>
+            </form>
+            <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+              {% csrf_token %}
+              <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+            </form>
+          </div>
+          {% endfor %}
+        </ul>
+      </section>
+  </section>
 </body>
+<script src="https://kit.fontawesome.com/940affec7d.js" crossorigin="anonymous"></script>
+{% endblock %}
