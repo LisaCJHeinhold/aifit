@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chartjs',
-    'tailwind',
+    # 'tailwind',
     'theme',
     'aifit_app',
     'django_browser_reload',

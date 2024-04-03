@@ -1,4 +1,3 @@
-from collections import Counter
 from firebase_admin import firestore
 from django.shortcuts import redirect
 from aifit_app.forms import AddGoalForm
@@ -51,7 +50,7 @@ def get_goal_lists(user_id):
     return daily_goals, weekly_goals, longterm_goals
 
 def add_goal(request):
-    db = firestore.client()
+   
     if request.method == "POST":
         form = AddGoalForm(request.POST)
         if form.is_valid():
@@ -67,6 +66,9 @@ def add_goal(request):
             }
             goal_ref.set(goal_data)
             return redirect('goals')
+
+        else:
+            return redirect('goals')
         
 def update_goal_completion(request, goal_id):
    
@@ -76,4 +78,12 @@ def update_goal_completion(request, goal_id):
         goal_ref = db.collection('goals').document(goal_id)
         goal_ref.update({'is_completed': is_completed})
         
+        return redirect('goals')
+
+def delete_goal(request, goal_id):
+
+    if request.method == 'POST':
+        goal_ref = db.collection('goals').document(goal_id)
+        goal_ref.delete()
+
         return redirect('goals')

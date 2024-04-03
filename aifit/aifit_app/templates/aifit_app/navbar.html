@@ -7,71 +7,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-        .navbar {
-            width: 150px; /* Set the width of the vertical navbar */
-            background-color: #000000;
-            position: fixed; /* Fix the navbar position */
-            height: 100%; /* Make the navbar full height */
-            overflow-y: auto; /* Add scroll if needed? */
-            display: none; /* Initially hide the navbar */
+        :root {
+          --black: #010101;
+          --white: #ffffff;
+          --green-gray: #454f45;
+          --light-gray: #858985;
+          --green: #87f031;
+          --sage: #bcd5b0;
         }
-
-        .navbar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: Arial, Helvetica, sans-serif;
         }
-
-        .navbar li a {
+      
+      
+        .navbar{
+          width: 100%;
+          height: 100%;
+          position: fixed;
+          background-color: var(--black);
+          overflow: hidden;
+        }
+        .menu {
+          list-style-type: none;
+        }
+        .nav-li a{
             display: block;
-            color: white;
-            padding: 16px;
+            padding: 30px;
+            color: var(--white);
             text-decoration: none;
-            font-family: 'Arial', sans-serif;
+            font-size: 20px;
         }
-
-        .navbar li a:hover {
-            background-color: #000000;
-            color: #104303;
+        .menu a:hover{
+            background-color: var(--green-gray);
         }
-
-        
-        .navbar-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            color: #104303;
-            font-size: 24px;
+        .navbar{
+            max-height: 0;
+            transition: max-height .5s ease-out;
+        }
+      
+        /* Menu Icon */
+        .hamb{
             cursor: pointer;
+            float: right;
+            padding: 40px 20px;
+        }/* Style label tag */
+      
+        .hamb-line {
+            background: var(--white);
+            display: block;
+            height: 2px;
+            position: relative;
+            width: 24px;
+            z-index: 100;
+      
+        } /* Style span tag */
+      
+        .hamb-line::before,
+        .hamb-line::after{
+            background: var(--white);
+            content: '';
+            display: block;
+            height: 100%;
+            position: absolute;
+            transition: all .2s ease-out;
+            width: 100%;
+            z-index: 100;
         }
-    </style>
+        .hamb-line::before{
+            top: 5px;
+        }
+        .hamb-line::after{
+            top: -5px;
+        }
+      
+        .side-menu {
+            display: none;
+        } /* Hide checkbox */
+      
+          /* Toggle menu icon */
+        .side-menu:checked ~ nav{
+            max-height: 100%;
+        }
+        .side-menu:checked ~ .hamb .hamb-line {
+            background: transparent;
+        }
+        .side-menu:checked ~ .hamb .hamb-line::before {
+            transform: rotate(-45deg);
+            top:0;
+        }
+        .side-menu:checked ~ .hamb .hamb-line::after {
+            transform: rotate(45deg);
+            top:0;
+        }
+        /* Responsiveness */
+      @media (min-width: 900px) {
+      
+          .hamb{
+              display: none;
+          }
+          .navbar {
+            overflow: visible;
+          }
+          .navbar .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            z-index: 1000;
+          }
+          .nav-li {
+            padding: 8px 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+          }
+          .nav-li:hover {
+            background-color: var(--green-gray);
+            border-radius: 100px;
+          }
+          .nav-li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 20px;
+            padding: 0;
+          }
+          .nav-li a:hover {
+            color: var(--white);
+          }
+      }
+      </style>
     </head>
     <body>
 
-        <div class="navbar-toggle" onclick="toggleNavbar()">=</div>
+        <!-- <div class="navbar-toggle" onclick="toggleNavbar()">=</div> -->
 
 <!-- the links to the different pages -->
-<div class="navbar" id="navbar">
-    <ul>
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'chat' %}">Chat</a></li>
-        <li><a href="{% url 'goals' %}">Goals</a></li>
-        <li><a href="{% url 'graph' %}">Graph</a></li>
-        <li><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-        <li><a href="../accounts/google/login/?process=login">Sign Up</a></li>
-        {% comment %} <li><a href="{% provider_login_url 'google' %}">Sign up with Google</a></li> {% endcomment %}
-
-    </ul>
-</div>
-
+        <input class="side-menu" type="checkbox" id="side-menu"/>
+        <label class="hamb" for="side-menu"><span class="hamb-line" ></span></label>
+        <nav class="navbar">
+          <ul class="menu">
+              <li class="nav-li"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              <li class="nav-li"><a href="{% url 'chat' %}">Chat</a></li>
+              <li class="nav-li"><a href="{% url 'goals' %}">Goals</a></li>
+              <li class="nav-li"><a href="{% url 'graph' %}">Graph</a></li>
+              <li class="nav-li"><a href="{% url 'previous_workouts' %}">Previous Workouts</a></li>
+              <li class="nav-li"><a href="{% url 'profile' %}">Profile</a></li>
+              <li class="nav-li"><a href="../accounts/google/login/?process=login">Sign Up</a></li>
+          </ul>
+        </nav>
         <!-- Content -->
         {% block content %}
         {% endblock %}
-        <script src="{% static 'js/navbar.js' %}"></script>
+        <!-- <script src="{% static 'js/navbar.js' %}"></script> -->
     </body>
 </html>
-
