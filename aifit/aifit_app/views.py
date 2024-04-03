@@ -10,7 +10,10 @@ import firebase_admin
 from firebase_admin import auth, firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 from .static.functions.functions import get_goals, get_todays_workout, get_num_of_exercises, get_time, get_todays_date, get_workout_ideas
-
+from .static.functions.open_ai import open_ai_conversation, log_conversation, ChatCompletionMessage, get_messages
+from django.contrib.auth.decorators import login_required
+import json
+from datetime import datetime
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
 #     if request.method == 'POST':
@@ -23,6 +26,42 @@ from .static.functions.functions import get_goals, get_todays_workout, get_num_o
 #             # Handle invalid login
 #             pass
 #     return render(request, 'aifit_app/login.html')
+
+import os
+from django.views.decorators.csrf import csrf_exempt
+from google.oauth2 import id_token
+from google.auth.transport import requests
+import jwt
+
+
+def sign_in(request):
+    return render(request, 'aifit_app/auth/sign_in.html')
+
+@csrf_exempt
+def auth_receiver(request):
+    """
+    Google calls this URL after the user has signed in with their Google account.
+    """
+    token = request.POST['credential']
+
+    try:
+        user_data = id_token.verify_oauth2_token(
+            token, requests.Request(), os.environ['GOOGLE_OAUTH_CLIENT_ID']
+        )
+    except ValueError:
+        return HttpResponse(status=403)
+
+    # In a real app, I'd also save any new user here to the database. See below for a real example I wrote for Photon Designer.
+    # You could also authenticate the user here using the details from Google (https://docs.djangoproject.com/en/4.2/topics/auth/default/#how-to-log-a-user-in)
+    request.session['user_data'] = user_data
+
+    return redirect('sign_in')
+
+
+def sign_out(request):
+    del request.session['user_data']
+    return redirect('sign_in')
+
 
 def login(request):
     if request.method == "POST":
@@ -83,8 +122,76 @@ def dashboard(request):
 ##################################################################################################################
 # E 
 
+def create_conversation(role, message):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return {
+        "role": role,
+        "message": message,
+        "timestamp": timestamp
+    }
+# @login_required
 def chat(request):
-    return render(request,'aifit_app/chat.html')
+    # get_conversation = get_messages()
+    get_conversation = ''
+    
+    
+    if request.method == 'POST':
+        print("Post button was clicked")
+        action = request.POST.get('action')
+        print('action', action)
+        
+        # if action == 'send_message':
+            # print("add_post button was clicked")
+            # target_user_id = user_id
+            # post_content = request.POST.get('comment')
+            # post_image_url = request.FILES.get('picture')
+            
+            # return redirect('profile')
+    
+        user_input = request.POST.get('user_input', '')
+        print('user_input', user_input)
+        # Get AI response using OpenAI conversation
+        ai_response = open_ai_conversation(user_input)
+        print('ai_response', ai_response)
+        # Check if AI response is valid
+        if ai_response is not None:
+            # Create a ChatCompletionMessage object
+            completion_message = ChatCompletionMessage(ai_response)
+
+            # Serialize the object to JSON using the custom method
+            json_data = completion_message.to_json()
+
+            # Log user input and AI response
+            log_conversation(role="user", message=user_input)
+            log_conversation(role="ai_model", message=json_data)
+
+            context = {
+                'conversation': get_conversation
+            }
+            # Return AI response as JSON
+            return render(request,'aifit_app/chat.html', context)
+
+
+        else:
+            # If AI response is invalid, return an error response
+            return JsonResponse({'error': 'Invalid AI response'}, status=400)
+    
+    conversation_data = [
+        {"role": "user", "message": "Hello, how are you?", "timestamp": "2024-04-03 14:30:00"},
+        {"role": "ai", "message": "I'm fine, thank you.", "timestamp": "2024-04-03 14:31:00"},
+        {"role": "user", "message": "That's good to hear!", "timestamp": "2024-04-03 14:32:00"},
+        {"role": "ai", "message": "How can I assist you today?", "timestamp": "2024-04-03 14:33:00"}
+    ]
+
+    # Convert conversation data to JSON
+    conversation_json = json.dumps(conversation_data)
+
+    context = {
+        'conversation_data': conversation_json,
+        'conversation': get_conversation
+    }
+    # If request method is not POST, render the template without context
+    return render(request,'aifit_app/chat.html', context)
 
 ##################################################################################################################
 
@@ -317,8 +424,6 @@ def dashboard(request):
     
     return render(request,'aifit_app/dashboard.html', {'goals': goals, 'today_workout': today_workout, 'day': day, 'time': time, 'workout_ideas': workout_ideas, 'num_of_workouts': number_of_workouts})
 
-def chat(request):
-    return render(request,'aifit_app/chat.html')
 
 def profile(request):
     return render(request,'aifit_app/profile.html')

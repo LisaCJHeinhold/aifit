@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard, name='home'),
+    
+    path('sign-in', views.sign_in, name='sign_in'),
+    path('sign-out', views.sign_out, name='sign_out'),
+    path('auth-receiver', views.auth_receiver, name='auth_receiver'),
+    
     # chart graph url
     path('chart', views.line_chart, name='line_chart'),
     # path('chartJSON', views.line_chart_json, name='line_chart_json'),
@@ -25,4 +30,6 @@ urlpatterns = [
     
     # allauth
     path('accounts/profile/', views.profile, name="profile"),
+    
+    
 ]

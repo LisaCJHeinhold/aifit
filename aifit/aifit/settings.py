@@ -23,6 +23,9 @@ load_dotenv()
 # FIREBASE CREDENTIALS
 cred = credentials.Certificate("./fire/aifit-42d60-4b74ea669715.json")
 firebase_admin.initialize_app(cred)
+# OPEN AI KEY
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 AUTH_USER_MODEL = 'aifit_app.User'
@@ -62,6 +65,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     #
+    'channels',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -85,6 +89,8 @@ MIDDLEWARE = [
     'django_browser_reload.middleware.BrowserReloadMiddleware',
     # Required by allauth
     'allauth.account.middleware.AccountMiddleware',
+    # 
+    # 'channels.middleware.WebSocketMiddleware',
 ]
 
 ROOT_URLCONF = 'aifit.urls'
@@ -154,6 +160,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

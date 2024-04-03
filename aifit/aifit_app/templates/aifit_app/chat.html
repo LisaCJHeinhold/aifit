@@ -7,7 +7,177 @@
 
 
 {% block content %}
-<h1> User Id: {{ request.user.id}} </h>
+<style>
+    .sidebar {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+    }
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: scroll;
+    }
+    .chat-container {
+        margin-bottom: 20px;
+    }
+    .message {
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        max-width: 70%;
+    }
+    .message.other {
+        background-color: #e9e9e9;
+        color: #000000;
+        align-self: flex-start;
+    }
+    .message-input {
+        margin-top: 20px;
+    }
+    .message-input form {
+        display: flex;
+    }
+    .message-input input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+    }
+    .message-input button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .chat-container {
+        width: 300px; /* Adjust the width as needed */
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow-y: auto;
+        height: 400px; /* Adjust the height as needed */
+    }
+    
+    .chat-bubble {
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 70%; /* Adjust the maximum width as needed */
+        word-wrap: break-word;
+    }
+    
+    .user-bubble {
+        background-color: #e2f3f5; /* Light blue background color */
+        float: right;
+    }
+    
+    .ai-bubble {
+        background-color: #f0f0f0; /* Light gray background color */
+        float: left;
+    }
+    
+</style>
+<script>
+    function sendMessage() {
+        var messageInput = document.getElementById('messageInput').value;
+        
+        if (!messageInput.trim()) {
+            alert('Please enter a message');
+            return false;
+        }
+        
+        // Proceed with form submission
+        return true;
+    }
+</script>
+{% comment %} <script>
+    const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/');
 
- chat
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        console.log('Received message:', data.message);
+        // Handle the incoming message here
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    // Send a message to the WebSocket server
+    function sendMessage(message) {
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+    }
+
+    // Example usage
+    sendMessage('Hello, WebSocket!');
+</script> {% endcomment %}
+    <div class="chat-container" id="chatContainer"></div>
+
+    <script>
+        // Load conversation data passed from Django view
+        var conversationData = {{ conversation_data|safe }};
+
+        // Function to render chat bubbles
+        function renderChatBubbles() {
+            var chatContainer = document.getElementById('chatContainer');
+            chatContainer.innerHTML = '';
+            conversationData.forEach(function(item) {
+                var bubbleClass = (item.role === 'user') ? 'user-bubble' : 'ai-bubble';
+                var bubble = document.createElement('div');
+                bubble.className = 'chat-bubble ' + bubbleClass;
+                bubble.innerHTML = '<p>' + item.message + '</p><span>' + item.timestamp + '</span>';
+                chatContainer.appendChild(bubble);
+            });
+        }
+
+        // Render chat bubbles when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            renderChatBubbles();
+        });
+    </script>
+
+
+<h1> User Id: {{ request.user.id}} </h>
+    <div class="main-content">
+        <div class="chat-container" id="chatContainer">
+            {% for conversation in user_conversations %}
+                {% for message in conversation %}
+                    {% if message.user_id == request.user.email %}
+                        <div class="message">{{ message.message }}</div>
+                    {% else %}
+                        {% if message.user_id == request.user.email %}
+                            <div class="message">
+                                {{ message.message }}
+                                <button>+</button>
+                            </div>
+                        {% else %}
+                            <div class="message other">{{ message.message }}</div>
+                        {% endif %}    
+
+                    {% endif %}    
+                        {% comment %} <li>{{ message.time_stamp }} - {{ message.user_id }}: {{ message.message }}</li> {% endcomment %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="user_input" placeholder="Type your message" autocomplete="off">
+            <input type="hidden" name="action" id="" value="send_message">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+
 {% endblock %}
