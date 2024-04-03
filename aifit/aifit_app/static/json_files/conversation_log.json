@@ -1,0 +1,12 @@
+[
+    {
+        "role": "user",
+        "message": "hello, create me a workout for leg day",
+        "timestamp": "2024-04-03 18:45:08"
+    },
+    {
+        "role": "ai",
+        "message": "Workout: Leg Day\n\n1. Squats:\n   - 4 sets of 12 reps\n\n2. Lunges:\n   - 3 sets of 15 reps (each leg)\n\n3. Deadlifts:\n   - 3 sets of 10 reps\n\n4. Leg Press:\n   - 4 sets of 12 reps\n\n5. Calf Raises:\n   - 3 sets of 20 reps\n\nRemember to warm up before starting the workout and cool down/stretch after completing it. Good luck with your leg day workout!",
+        "timestamp": "2024-04-03 18:45:08"
+    }
+]

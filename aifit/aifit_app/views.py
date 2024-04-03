@@ -131,69 +131,116 @@ def create_conversation(role, message):
         "message": message,
         "timestamp": timestamp
     }
-# @login_required
+    import json
+
 def chat(request):
-    # get_conversation = get_messages()
-    get_conversation = ''
-    
-    
+    # Get conversation data initially
+    get_conversation = get_messages()
+    print('get_conversation', get_conversation)
     if request.method == 'POST':
         print("Post button was clicked")
         action = request.POST.get('action')
         print('action', action)
         
-        # if action == 'send_message':
-            # print("add_post button was clicked")
-            # target_user_id = user_id
-            # post_content = request.POST.get('comment')
-            # post_image_url = request.FILES.get('picture')
-            
-            # return redirect('profile')
-    
         user_input = request.POST.get('user_input', '')
         print('user_input', user_input)
+        
         # Get AI response using OpenAI conversation
         ai_response = open_ai_conversation(user_input)
         print('ai_response', ai_response)
-        # Check if AI response is valid
+        
         if ai_response is not None:
-            # Create a ChatCompletionMessage object
-            completion_message = ChatCompletionMessage(ai_response)
-
-            # Serialize the object to JSON using the custom method
-            json_data = completion_message.to_json()
-
             # Log user input and AI response
-            log_conversation(role="user", message=user_input)
-            log_conversation(role="ai_model", message=json_data)
+            log_conversation("user", user_input)
+            log_conversation("ai", ai_response)
 
+            # Update conversation data
+            get_conversation = get_messages()
+
+            # Convert conversation data to JSON
+            conversation_json = json.dumps(get_conversation)
             context = {
+                'conversation_data': conversation_json,
                 'conversation': get_conversation
             }
+
             # Return AI response as JSON
-            return render(request,'aifit_app/chat.html', context)
-
-
+            return render(request, 'aifit_app/chat.html', context)
         else:
             # If AI response is invalid, return an error response
             return JsonResponse({'error': 'Invalid AI response'}, status=400)
     
-    conversation_data = [
-        {"role": "user", "message": "Hello, how are you?", "timestamp": "2024-04-03 14:30:00"},
-        {"role": "ai", "message": "I'm fine, thank you.", "timestamp": "2024-04-03 14:31:00"},
-        {"role": "user", "message": "That's good to hear!", "timestamp": "2024-04-03 14:32:00"},
-        {"role": "ai", "message": "How can I assist you today?", "timestamp": "2024-04-03 14:33:00"}
-    ]
-
-    # Convert conversation data to JSON
-    conversation_json = json.dumps(conversation_data)
-
+    # If request method is not POST, render the template with initial conversation data
+    conversation_json = json.dumps(get_conversation)
     context = {
         'conversation_data': conversation_json,
         'conversation': get_conversation
     }
-    # If request method is not POST, render the template without context
-    return render(request,'aifit_app/chat.html', context)
+    return render(request, 'aifit_app/chat.html', context)
+
+# @login_required
+# def chat(request):
+#     get_conversation = get_messages()
+#     # get_conversation = ''
+    
+#     if request.method == 'POST':
+#         print("Post button was clicked")
+#         action = request.POST.get('action')
+#         print('action', action)
+        
+#         # if action == 'send_message':
+#             # print("add_post button was clicked")
+#             # target_user_id = user_id
+#             # post_content = request.POST.get('comment')
+#             # post_image_url = request.FILES.get('picture')
+            
+#             # return redirect('profile')
+    
+#         user_input = request.POST.get('user_input', '')
+#         print('user_input', user_input)
+#         # Get AI response using OpenAI conversation
+#         ai_response = open_ai_conversation(user_input)
+#         print('ai_response', ai_response)
+#         # Check if AI response is valid
+#         if ai_response is not None:
+#             # Create a ChatCompletionMessage object
+#             completion_message = ChatCompletionMessage(ai_response)
+
+#             # Serialize the object to JSON using the custom method
+#             json_data = completion_message.to_json()
+
+#             # Log user input and AI response
+#             log_conversation("user", user_input)
+#             log_conversation("ai", json_data)
+#             conversation_json = json.dumps(get_conversation)
+#             context = {
+#                 'conversation_data':conversation_json,
+#                 'conversation': get_conversation
+#             }
+#             # Return AI response as JSON
+#             return render(request,'aifit_app/chat.html', context)
+
+
+#         else:
+#             # If AI response is invalid, return an error response
+#             return JsonResponse({'error': 'Invalid AI response'}, status=400)
+    
+    # conversation_data = [
+    #     {"role": "user", "message": "Hello, how are you?", "timestamp": "2024-04-03 14:30:00"},
+    #     {"role": "ai", "message": "I'm fine, thank you.", "timestamp": "2024-04-03 14:31:00"},
+    #     {"role": "user", "message": "That's good to hear!", "timestamp": "2024-04-03 14:32:00"},
+    #     {"role": "ai", "message": "How can I assist you today?", "timestamp": "2024-04-03 14:33:00"}
+    # ]
+
+#     # Convert conversation data to JSON
+#     # conversation_json = json.dumps(conversation_data)
+#     conversation_json = json.dumps(get_conversation)
+#     context = {
+#         'conversation_data': conversation_json,
+#         'conversation': get_conversation
+#     }
+#     # If request method is not POST, render the template without context
+#     return render(request,'aifit_app/chat.html', context)
 
 ##################################################################################################################
 

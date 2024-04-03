@@ -124,7 +124,12 @@
     sendMessage('Hello, WebSocket!');
 </script> {% endcomment %}
     <div class="chat-container" id="chatContainer"></div>
-
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="user_input" placeholder="Type your message" autocomplete="off">
+        <input type="hidden" name="action" id="" value="send_message">
+        <button type="submit">Send</button>
+    </form>
     <script>
         // Load conversation data passed from Django view
         var conversationData = {{ conversation_data|safe }};
@@ -137,7 +142,9 @@
                 var bubbleClass = (item.role === 'user') ? 'user-bubble' : 'ai-bubble';
                 var bubble = document.createElement('div');
                 bubble.className = 'chat-bubble ' + bubbleClass;
-                bubble.innerHTML = '<p>' + item.message + '</p><span>' + item.timestamp + '</span>';
+                bubble.innerHTML = '<p>' + item.message + '</p><span>';
+
+                //bubble.innerHTML = '<p>' + item.message + '</p><span>' + item.timestamp + '</span>';
                 chatContainer.appendChild(bubble);
             });
         }
@@ -149,7 +156,7 @@
     </script>
 
 
-<h1> User Id: {{ request.user.id}} </h>
+{% comment %} <h1> User Id: {{ request.user.id}} </h>
     <div class="main-content">
         <div class="chat-container" id="chatContainer">
             {% for conversation in user_conversations %}
@@ -167,7 +174,6 @@
                         {% endif %}    
 
                     {% endif %}    
-                        {% comment %} <li>{{ message.time_stamp }} - {{ message.user_id }}: {{ message.message }}</li> {% endcomment %}
                 {% endfor %}
             {% endfor %}
         </div>
@@ -177,7 +183,7 @@
             <input type="hidden" name="action" id="" value="send_message">
             <button type="submit">Send</button>
         </form>
-    </div>
+    </div> {% endcomment %}
 
 
 {% endblock %}

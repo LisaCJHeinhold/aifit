@@ -37,7 +37,7 @@ def open_ai_conversation(user_input):
 # # Renders a page displaying logged conversations from a JSON file.
 def log_conversation(role, message):
     # Create the conversation_data directory if it doesn't exist
-    conversation_data_dir = os.path.join(settings.BASE_DIR, 'aifit_app', 'static/json_files/conversation_data')
+    conversation_data_dir = os.path.join(settings.STATIC_ROOT, 'json_files')
     if not os.path.exists(conversation_data_dir):
         os.makedirs(conversation_data_dir)
     
@@ -48,7 +48,11 @@ def log_conversation(role, message):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Create a new entry for the user's input or AI response
-    log_entry = {"timestamp": timestamp, "role": role, "message": message}
+    log_entry = {
+        "role": role,
+        "message": message,
+        "timestamp": timestamp
+    }
 
     # Load existing data from the file or initialize as an empty list
     if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
@@ -65,29 +69,100 @@ def log_conversation(role, message):
         json.dump(data, file, indent=4)
     # Explicitly close the file
     file.close()
-    
-    
+
 def get_messages():
-    # Ensuring the necessary directory exists or creating it if it doesn't
-    # conversation_data_dir = os.path.join(settings.BASE_DIR, 'json_files', 'conversation_data')
-    # conversation_data_dir = os.path.join(settings.BASE_DIR, 'static', 'json_files')
+    # Define the directory path for conversation data
     conversation_data_dir = os.path.join(settings.STATIC_ROOT, 'json_files')
     
+    # Create the directory if it doesn't exist
     if not os.path.exists(conversation_data_dir):
         os.makedirs(conversation_data_dir)
     
-    # Preparing the file path for reading the conversation log
+    # Prepare the file path for reading the conversation log
     file_name = 'conversation_log.json'
     file_path = os.path.join(conversation_data_dir, file_name)
     
-    # Opening and reading the JSON file
-    with open(file_path) as f:
-        data = json.load(f)
+    # Check if the file exists and is not empty
+    if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+        try:
+            # Open and read the JSON file
+            with open(file_path) as f:
+                data = json.load(f)
 
-    # Separating messages by role and combining them into pairs for display
-    user_messages = [item["message"] for item in data if item["role"] == "user"]
-    ai_model_messages = [item["message"] for item in data if item["role"] == "ai_model"]
-    messages = list(zip(user_messages, ai_model_messages))
+            # Return the messages
+            return data
+        except json.JSONDecodeError as e:
+            print("Error decoding JSON:", e)
+            return []
+    else:
+        print("Conversation log file is empty or doesn't exist.")
+        return []
 
-    # Passing the messages to the template for rendering
-    return messages
+# def get_messages():
+#     # Define the directory path for conversation data
+#     conversation_data_dir = os.path.join(settings.STATIC_ROOT, 'json_files')
+    
+#     # Create the directory if it doesn't exist
+#     if not os.path.exists(conversation_data_dir):
+#         os.makedirs(conversation_data_dir)
+    
+#     # Prepare the file path for reading the conversation log
+#     file_name = 'conversation_log.json'
+#     file_path = os.path.join(conversation_data_dir, file_name)
+    
+#     # Check if the file exists and is not empty
+#     if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+#         try:
+#             # Open and read the JSON file
+#             with open(file_path) as f:
+#                 data = json.load(f)
+
+#             # Separate messages by role and combine them into pairs for display
+#             user_messages = [item["message"] for item in data if item["role"] == "user"]
+#             ai_model_messages = [item["message"] for item in data if item["role"] == "ai"]
+#             messages = list(zip(user_messages, ai_model_messages))
+
+#             # Return the messages
+#             return messages
+#         except json.JSONDecodeError as e:
+#             print("Error decoding JSON:", e)
+#             return []
+#     else:
+#         print("Conversation log file is empty or doesn't exist.")
+#         return []
+    
+    
+    
+# def get_messages():
+#     # Define the directory path for conversation data
+#     conversation_data_dir = os.path.join(settings.STATIC_ROOT, 'json_files')
+    
+#     # Create the directory if it doesn't exist
+#     if not os.path.exists(conversation_data_dir):
+#         os.makedirs(conversation_data_dir)
+    
+#     # Prepare the file path for reading the conversation log
+#     file_name = 'conversation_log.json'
+#     file_path = os.path.join(conversation_data_dir, file_name)
+    
+#     # Check if the file exists and is not empty
+#     if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+#         try:
+#             # Open and read the JSON file
+#             with open(file_path) as f:
+#                 data = json.load(f)
+
+#             # Separate messages by role and combine them into pairs for display
+#             user_messages = [item["message"] for item in data if item["role"] == "user"]
+#             ai_model_messages = [item["message"] for item in data if item["role"] == "ai"]
+#             messages = list(zip(user_messages, ai_model_messages))
+
+#             # Return the messages
+#             return messages
+#         except json.JSONDecodeError as e:
+#             print("Error decoding JSON:", e)
+#             return []
+#     else:
+#         print("Conversation log file is empty or doesn't exist.")
+#         return []
+
