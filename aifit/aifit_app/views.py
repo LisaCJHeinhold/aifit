@@ -11,6 +11,30 @@ from firebase_admin import auth, firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 from .static.functions.functions import get_goals, get_todays_workout, get_num_of_exercises, get_time, get_todays_date, get_workout_ideas, get_body_fat, get_muscle_mass, get_weight, get_workout
 
+#################################################
+# Sofia - importing functions from functions.py #
+#################################################
+from .static.functions.functions import get_first_names, get_last_names, get_current_weights
+
+
+def profile(request):
+  
+    first_names = get_first_names()
+    last_names = get_last_names()
+    current_weights = get_current_weights()
+
+    
+    context = {
+        'first_names': first_names,
+        'last_names': last_names,
+        'current_weights': current_weights
+    }
+
+    return render(request, 'aifit_app/profile.html', context)
+
+
+
+
 # def login(request):
 #     firebase_config = settings.FIREBASE_CONFIG
 #     if request.method == 'POST':

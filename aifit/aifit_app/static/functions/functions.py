@@ -3,6 +3,7 @@ from django.shortcuts import render
 from firebase_admin import credentials, firestore
 from datetime import datetime 
 
+
 db = firestore.client()
 
 def get_goals():
@@ -89,3 +90,33 @@ def get_workout():
         if workout_data['day_schedule'] == today:
             return workout_data['type']
     return "error"
+
+
+############################################
+# Sofia : get first name / last name / weight     
+############################################
+def get_first_names():
+    first_names = []
+    docs = db.collection('profiles').get()
+    for doc in docs:
+        profile_data = doc.to_dict()
+        first_names.append(profile_data.get('first_name'))
+    return first_names
+
+def get_last_names():
+    last_names = []
+    docs = db.collection('profiles').get()
+    for doc in docs:
+        profile_data = doc.to_dict()
+        last_names.append(profile_data.get('last_name'))
+    return last_names
+
+def get_current_weights():
+    current_weights = []
+    docs = db.collection('profiles').get()
+    for doc in docs:
+        profile_data = doc.to_dict()
+        current_weights.append(profile_data.get('current_weight'))
+    return current_weights
+
+
