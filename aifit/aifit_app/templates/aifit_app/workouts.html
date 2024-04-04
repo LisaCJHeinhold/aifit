@@ -13,6 +13,11 @@ AiFit Workout Page
 <link rel="stylesheet" href="style.css">
 {% tailwind_css %}
 <style>
+    #completeWorkout{
+        margin: 0 auto;
+        width: 80%;
+        display: grid;
+    }
     main{
         background-color: black;
         color: white;
@@ -115,7 +120,66 @@ AiFit Workout Page
         background-color: black;
         color: white;
     }
+    input{
+        color:black;
+    }
+    select{
+        color:black;
+    }
 </style>
+<script>
+
+document.getElementById("workout").addEventListener("change", function() {
+    var workoutId = this.value;
+    var workoutIdeas = getWorkoutIdeas(workoutId);
+    var form = document.getElementById("workoutForm");
+    var exerciseSection = document.getElementById("exercise-section");
+    
+    // Clear existing form and exercise section
+    form.innerHTML = "";
+    exerciseSection.innerHTML = "";
+    
+    // Generate form inputs for workout ideas
+    workoutIdeas.forEach(function(idea) {
+        var div = document.createElement("div");
+        div.classList.add("exercise-input");
+        
+        var label = document.createElement("label");
+        label.textContent = idea;
+        
+        var repsInput = document.createElement("input");
+        repsInput.type = "text";
+        repsInput.name = "actual_reps";
+        repsInput.placeholder = "Reps";
+        repsInput.required = true;
+        
+        var setsInput = document.createElement("input");
+        setsInput.type = "text";
+        setsInput.name = "actual_sets";
+        setsInput.placeholder = "Sets";
+        setsInput.required = true;
+        
+        var weightInput = document.createElement("input");
+        weightInput.type = "text";
+        weightInput.name = "actual_weight";
+        weightInput.placeholder = "Weight";
+        weightInput.required = true;
+        
+        div.appendChild(label);
+        div.appendChild(repsInput);
+        div.appendChild(setsInput);
+        div.appendChild(weightInput);
+        
+        exerciseSection.appendChild(div);
+    });
+});
+
+function getWorkoutIdeas(workoutId) {
+    // Replace with your logic to fetch workout ideas based on workoutId
+    // Return an array of workout ideas
+    return [];
+}
+</script>
 </head>
 <body>
 <main>
@@ -123,6 +187,30 @@ AiFit Workout Page
         
         <h1>NO EXCUSES, JUST RESULTS.</h1>
     </section>
+    <h2>Complete Workout</h2>
+    <form method="post" id="completeWorkout">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="complete_workout">
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        <select id="workout" name="workout_id">
+            {% for workout in workouts %}
+                <option value="{{ workout.id }}">{{ workout.type }}</option>
+            {% endfor %}
+        </select>
+        
+            {% for exercise in exercises %}
+                <input class="complete_exercise_input" type="checkbox" value="{{ exercise.exercise_name }}">{{ exercise.exercise_name }} {{exercise.}}</input>
+            {% endfor %}
+    
+        {% for selected_exercise in selected_exercises %}
+            <input type="hidden" name="selected_exercises" value="{{ selected_exercise.id }}">
+            <input type="text" name="actual_reps" id="actual_reps" placeholder="Reps" required/>
+            <input type="text" name="actual_weight" id="actual_weight" placeholder="Weight" required/>
+            <input type="text" name="actual_sets" id="actual_sets" placeholder="Sets" required/>
+        {% endfor %}
+        
+        <button type="submit">Complete Workout</button>
+    </form>
     
     <h2 class="h2-w">Workouts</h2>
     <div id="workout-types">
@@ -146,42 +234,67 @@ AiFit Workout Page
             <p>Last completed: 12/2/23</p>
         </div>
         </section>
+
+        <form method="post" id="workoutForm">
+            {% csrf_token %}
+            <input type="text" name="workout_type" id="workout" placeholder="Workout Name" required/>
+            <input type="text" name="workout_time" id="time" placeholder="Time" required/>
+            <input type="text" name="number_exercises" id="number_exercises" placeholder="Number of Exercises" required/>
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="action" value="create_workout">
+
+            <button type="submit"> Add Workout</button>
+        </form>
         
         <button> create new type </button>
        
     </div>
 
     <div id="exercises">
-        <h2 class="h2-w">Leg Day Exercises</h2>
+        <h2 class="h2-w"> Exercises</h2>
         <section id="exercise-section">
-            {% for exercise in exercises %}
-                <section class="flex">
-                    <p class="sets">{{ exercise.sets }}</p>
-                    <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
-                    <p class="exerciseName">{{ exercise.name }}</p>
-                    <p class="personal">PERSONAL BEST: {{ exercise.personal_best }}</p>
-                </section>
+            {% for user_exercise in user_exercises %}
+                <!-- {% if user_exercise.workout_id == 1 %} -->
+                    <section class="flex">
+                        <p class="sets">{{ user_exercise.goal_sets }}</p>
+                        <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
+                        <p class="exerciseName">{{ user_exercise.exercise_name }}</p>
+                        <p class="personal">PERSONAL BEST: {{ user_exercise.best_weight }}</p>
+                    </section>
+                <!-- {% endif %} -->
             {% endfor %}
         </section>
-        <form action="" method="post" id="exerciseForm">
-            <input type="text" name="exercise" id="exercise" placeholder="Exercise Name" required/>
-            <input type="text" name="sets" id="sets" placeholder="Sets" required/>
-            <input type="text" name="personal_best" id="personal_best" placeholder="Personal Best" required/>
-            <input type="hidden" name="userid" value="{{ userid }}">
-            <button id="addExercise"> Add Exercise</button>
+        <form method="post" id="exerciseForm" name="create_exercise">
+            {% csrf_token %}
+            <select id="workout" name="workout_id">
+                {% for workout in workouts %}
+                    <option name="workout_id" value="{{ workout.id }}">{{ workout.type }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="exercise_name" id="exercise" placeholder="Exercise Name" required/>
+            <input type="text" name="goal_sets" id="sets" placeholder="Goal Sets" required/>
+            <input type="text" name="exercise_best" id="exercise_best" placeholder="Personal Best" required/>
+            <input type="text" name="goal_weight" id="weight" placeholder="Goal Weight" required/>
+            <input type="text" name="goal_reps" id="goal_reps" placeholder="Goal Reps" required>
+            <input type="text" name="order" id="order" placeholder="Order" required>
+            <!-- <input type="hidden" name="user_id" value="{{ userid }}"> -->
+            <input type="hidden" name="action" value="create_exercise">
+            <button type='submit' id="addExercise"> Add Exercise</button>
         </form>
+
         <button id="addExercise"> Add Exercise</button>
     </div>
 
     <div id="previous-workouts">
         <h2 class="h2-w">Recently Completed Workouts</h2>
         <div class="grid">
-          {% for workout in workouts %}
+          {% for workout in completed_workouts %}
             <div class="workout">
             <p>Type: {{ workout.type }}</p>
-            <p>Time: {{ workout.time }}</p>
-            <p>Date Created: {{ workout.date_created }}</p>
-            <p>Number of Exercises: {{ workout.number_exercises }}</p>
+            <p>Day Completed: {{ workout.day_completed }}</p>
+            {% for exercise in workout.exercises %}
+                <p>{{ exercise.exercise_name }}: {{ exercise.actual_sets }} sets, {{ exercise.actual_reps }} reps, {{ exercise.actual_weight }} lbs</p>
+            {% endfor %}
             </div>
           {% endfor %}
             

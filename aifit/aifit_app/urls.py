@@ -8,6 +8,9 @@ urlpatterns = [
     path('chart', views.line_chart, name='line_chart'),
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
     path('line_chart', views.line_chart, name='line_chart'),
+    #create workout post url & create exercise url
+
+
     # other urls
     path('workout', views.workout, name='workout'),
     path('login/', views.login, name='login'),
