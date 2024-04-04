@@ -12,6 +12,10 @@ Goals
     background-color: var(--black);
     color: var(--white);
   }
+  .big-container {
+      max-width: 90%;
+      margin: auto;
+  }
   .all-goals {
     display: flex;
     flex-direction: column;
@@ -22,7 +26,7 @@ Goals
     margin: auto;
   }
   .daily, .weekly, .long-term {
-    background-color: var(--green-gray);
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 10px 15px 15px 15px;
     border-radius: 10px;
     width: 90%;
@@ -71,6 +75,11 @@ Goals
   .block {
     display: none;
   }
+  .sub-title {
+      color: var(--green);
+      font-size: 3rem;
+      margin: 0 0 10px 30px;
+  }
   @media (min-width: 900px) {
     .all-goals {
       display: flex;
@@ -95,98 +104,101 @@ Goals
 
 <body> 
   <section class="block"></section>
-  <section class="all-goals">
-    <section class="daily">
-      <div>
-        <h1>Daily Goals</h1>
-      </div>
-      <div>
-        <form action="add_goal/" method="post" class="entry-form">
-          {% csrf_token %}
-          <input type="text" name="content" placeholder="Enter daily goal" class="input-box">
-          <input type="hidden" name="type" value="daily">
-          <button type="Submit" class="add-goal">Add goal</button>
-        </form>
-      </div>
-      <ul class="goals-list">
-        {% for goal in daily_goals %}
+  <section class="big-container">
+    <h1 class="sub-title">Goals</h1>
+    <section class="all-goals">
+      <section class="daily">
         <div>
-          <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+          <h1>Daily Goals</h1>
+        </div>
+        <div>
+          <form action="add_goal/" method="post" class="entry-form">
             {% csrf_token %}
-            <input type="checkbox" name="is_completed" value="true" 
-            {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-              <label>{{ goal.goal }}</label>
-          </form>
-          <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
-            {% csrf_token %}
-            <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+            <input type="text" name="content" placeholder="Enter daily goal" class="input-box">
+            <input type="hidden" name="type" value="daily">
+            <button type="Submit" class="add-goal">Add goal</button>
           </form>
         </div>
-        {% endfor %}
-      </ul>
+        <ul class="goals-list">
+          {% for goal in daily_goals %}
+          <div>
+            <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+              {% csrf_token %}
+              <input type="checkbox" name="is_completed" value="true" 
+              {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+                <label>{{ goal.goal }}</label>
+            </form>
+            <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+              {% csrf_token %}
+              <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+            </form>
+          </div>
+          {% endfor %}
+        </ul>
+      </section>
+      
+        <!-- Weekly Goals -->
+        <section class="weekly">
+          <div>
+            <h1>Weekly Goals</h1>
+          </div>
+          <div>
+            <form action="add_goal/" method="post" class="entry-form">
+              {% csrf_token %}
+              <input type="text" name="content" placeholder="Enter weekly goal" class="input-box">
+              <input type="hidden" name="type" value="weekly">
+              <button type="Submit" class="add-goal">Add goal</button>
+            </form>
+          </div>
+          <ul class="goals-list">
+            {% for goal in weekly_goals %}
+            <div>
+              <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+                {% csrf_token %}
+                <input type="checkbox" name="is_completed" value="true" 
+                {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+                  <label>{{ goal.goal }}</label>
+              </form>
+              <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+                {% csrf_token %}
+                <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+              </form>
+            </div>
+            {% endfor %}
+          </ul>
+        </section>
+      
+        <!-- Long-Term Goals -->
+        <section class="long-term">
+          <div>
+            <h1>Long-Term Goals</h1>
+          </div>
+          <div>
+            <form action="add_goal/" method="post" class="entry-form">
+              {% csrf_token %}
+              <input type="text" name="content" placeholder="Enter long-term goal" class="input-box">
+              <input type="hidden" name="type" value="long-term">
+              <button type="Submit" class="add-goal">Add goal</button>
+            </form>
+          </div>
+          <ul class="goals-list">
+            {% for goal in longterm_goals %}
+            <div>
+              <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
+                {% csrf_token %}
+                <input type="checkbox" name="is_completed" value="true" 
+                {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
+                  <label>{{ goal.goal }}</label>
+              </form>
+              <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
+                {% csrf_token %}
+                <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+              </form>
+            </div>
+            {% endfor %}
+          </ul>
+        </section>
     </section>
-    
-      <!-- Weekly Goals -->
-      <section class="weekly">
-        <div>
-          <h1>Weekly Goals</h1>
-        </div>
-        <div>
-          <form action="add_goal/" method="post" class="entry-form">
-            {% csrf_token %}
-            <input type="text" name="content" placeholder="Enter weekly goal" class="input-box">
-            <input type="hidden" name="type" value="weekly">
-            <button type="Submit" class="add-goal">Add goal</button>
-          </form>
-        </div>
-        <ul class="goals-list">
-          {% for goal in weekly_goals %}
-          <div>
-            <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
-              {% csrf_token %}
-              <input type="checkbox" name="is_completed" value="true" 
-              {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-                <label>{{ goal.goal }}</label>
-            </form>
-            <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
-              {% csrf_token %}
-              <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
-            </form>
-          </div>
-          {% endfor %}
-        </ul>
-      </section>
-    
-      <!-- Long-Term Goals -->
-      <section class="long-term">
-        <div>
-          <h1>Long-Term Goals</h1>
-        </div>
-        <div>
-          <form action="add_goal/" method="post" class="entry-form">
-            {% csrf_token %}
-            <input type="text" name="content" placeholder="Enter long-term goal" class="input-box">
-            <input type="hidden" name="type" value="long-term">
-            <button type="Submit" class="add-goal">Add goal</button>
-          </form>
-        </div>
-        <ul class="goals-list">
-          {% for goal in longterm_goals %}
-          <div>
-            <form action="{% url 'update_goal_completion' goal_id=goal.id %}" method="post" class="created-form">
-              {% csrf_token %}
-              <input type="checkbox" name="is_completed" value="true" 
-              {% if goal.is_completed %}checked{% endif %} onchange="this.form.submit()">
-                <label>{{ goal.goal }}</label>
-            </form>
-            <form action="{% url 'delete_goal' goal_id=goal.id %}" method="post" class="delete">
-              {% csrf_token %}
-              <button type="Submit"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
-            </form>
-          </div>
-          {% endfor %}
-        </ul>
-      </section>
   </section>
 </body>
 <script src="https://kit.fontawesome.com/940affec7d.js" crossorigin="anonymous"></script>
