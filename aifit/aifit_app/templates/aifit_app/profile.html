@@ -1,4 +1,13 @@
 {% extends "aifit_app/navbar.html" %}
+{% load static %}
+
+
+
+
+
+
+
+
 
 
 {% block title %}
@@ -6,10 +15,162 @@
 {% endblock %}
 
 
-{% block content %}
- Profile
- 
- <h1> Logged in as: {{ request.user.email}} </h>
 
-<a href="{% url 'account_logout' %}">Logout</a>
+
+
+
+{% block content %}
+
+
+<style>
+    body {
+        background-image: url("../../static/images/profile-background-main.png");
+        background-size: cover;
+        max-width: 1800px;
+        height: 1vh;
+        color: white;
+    }
+
+
+    .middle-part-transparent{
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 32px;
+        min-height: 80vh;
+        min-width: 30vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .profile-picture {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: #ccc; /* Placeholder color */
+    margin: 20px 0;
+    transition: .5s;
+    }
+
+
+    .profile-picture:hover{
+        cursor: pointer;
+    }
+
+
+    .profile-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .profile-info h1{
+        margin-bottom: 10px;
+        font-size: 2.5em;
+        color: #87f031;
+
+
+    }
+
+
+    .profile-info span{
+        margin-bottom: 8px;
+        font-size: 1.3em;
+    }
+
+
+    .right-part-transparent{
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32 px 0 rgba(0, 0, 0, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 32px;
+        height: 80vh;
+        width: 20vw;
+    }
+
+
+    .container{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 5.5rem;
+    }
+
+
+    .left-part h1 {
+        color: #87f031;
+        font-size: 35px;
+
+
+    }
+
+
+    li{
+        list-style-type: none;
+    }
+
+
+   
+</style>
+
+
+
+
+<body>
+    <div class="container">
+
+
+        <div class="left-part">
+            <h1>FIT ANYTIME, ANYWHERE </h1>
+        </div>
+
+
+        <div class="middle-part-transparent">
+            <img class="profile-picture" src="../../static/images/profile-placeholder.jpg">
+       
+           
+            <div class="profile-info">
+                <h1>Profile</h1>
+                <span>First Name: Sofia</span>
+                <span>Last Name: Whatever </span>
+                <span>Date of Last Completed Workout: 01/01/2222</span>
+            </div>
+        </div>
+
+
+        <div class="right-part-transparent">
+            <ul>
+                {% for first_name in first_names %}
+                <li>{{ first_name }}</li>
+                {% endfor %}
+
+
+                {% for last_name in last_names %}
+                <li> {{ last_name }}</li>
+                {% endfor %}
+
+
+                {% for current_weight in current_weights %}
+                <li> {{ current_weight }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+    </div>
+ 
+        <h1> Logged in as: {{ request.user.email}} </h>
+
+
+        <a href="{% url 'account_logout' %}">Logout</a>
+</body>
+
+
 {% endblock %}

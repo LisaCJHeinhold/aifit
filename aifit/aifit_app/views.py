@@ -242,13 +242,35 @@ def chat(request):
 #     # If request method is not POST, render the template without context
 #     return render(request,'aifit_app/chat.html', context)
 
-##################################################################################################################
+#################################################
+# Sofia - importing functions from functions.py #
+#################################################
+from .static.functions.functions import get_first_names, get_last_names, get_current_weights
 
-##################################################################################################################
-# (Name)
+
+
 
 def profile(request):
-    return render(request,'aifit_app/profile.html')
+ 
+    first_names = get_first_names()
+    last_names = get_last_names()
+    current_weights = get_current_weights()
+
+
+   
+    context = {
+        'first_names': first_names,
+        'last_names': last_names,
+        'current_weights': current_weights
+    }
+
+
+    return render(request, 'aifit_app/profile.html', context)
+
+
+
+
+
 
 ##################################################################################################################
 
