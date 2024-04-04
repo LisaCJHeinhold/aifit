@@ -1,5 +1,5 @@
 {% extends "aifit_app/navbar.html" %}
-{% load static tailwind_tags%}
+
 {% load static %}
 
 
@@ -10,180 +10,394 @@ AiFit Workout Page
 
 
 {% block content %}
-<link rel="stylesheet" href="style.css">
-{% tailwind_css %}
-<style>
-    main{
-        background-color: black;
-        color: white;
-    }
-   
-    body{
-        background-color: black;
-    }
+<!-- <link rel="stylesheet" href="style.css"> -->
+
+<!-- <style>
+   #completeWorkout{
+       margin: 0 auto;
+       width: 80%;
+       display: grid;
+   }
+   main{
+       background-color: black;
+       color: white;
+   }
   
-    #workout-types {
-        overflow-x: scroll;
-        overflow: scroll;
-        justify-content: space-between;
-        margin: 0 auto;
-        width: 90%;
-    }
-    
+   body{
+       background-color: black;
+   }
+ 
+   #workout-types {
+       overflow-x: scroll;
+       overflow: scroll;
+       justify-content: space-between;
+       margin: 0 auto;
+       width: 90%;
+   }
    
-    .flex{
-        justify-content: space-between;
-    }
+  
+   .flex{
+       justify-content: space-between;
+   }
 
-    .grid {
-        border: 1px solid black;
-        border-radius: 20px;
-        margin:.52rem;
-        padding: 1.3rem;
-        width: 400px;
-        text-align: center;
-        background-color: #6BA679;
-        color: white;
-    }
-    button {
-        font-size: .9rem;
-        color: white;
-        border-radius: 7px;
-        border: 1px solid white;
-        padding: 17px;
-        margin: 30px 10px;
-    }
-    button:hover {
-        background-color: #4D7D4A;
-        border:none;
-    }
-    .grid h2 {
-        font-size: 35px;
-        text-transform: uppercase;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-    }
+   .grid {
+       border: 1px solid black;
+       border-radius: 20px;
+       margin:.52rem;
+       padding: 1.3rem;
+       width: 400px;
+       text-align: center;
+       background-color: #6BA679;
+       color: white;
+   }
+   button {
+       font-size: .9rem;
+       color: white;
+       border-radius: 7px;
+       border: 1px solid white;
+       padding: 17px;
+       margin: 30px 10px;
+   }
+   button:hover {
+       background-color: #4D7D4A;
+       border:none;
+   }
+   .grid h2 {
+       font-size: 35px;
+       text-transform: uppercase;
+       font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+   }
 
-    .grid p {
-        margin: 10px 0;
+   .grid p {
+       margin: 10px 0;
 
+   }
+   #workout-landing{
+       height: 90vh;
+      background-image: url("{% static 'images/cindy-koops-unsplash.jpg' %}");
+       position: relative;
+       background-size: cover;
+       border-bottom: 1px solid white;
+   }
+   #workout-landing h1{
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       font-size: 3rem;
+       color: white;
+   }
+   .h2-w{
+       text-align: left;
+       margin: 2rem 6rem;
+       text-transform: uppercase;
+       font-size: 2rem;
+   }
+
+   .sets, .personal{
+       border:1px solid white;
+       padding: 1rem;
+       margin-bottom: 20px;
+       width: 200px;
+   }
+
+   .exerciseName{
+      background-color: #6BA679;
+       padding: 1rem;
+       margin-bottom: 20px;
+       width: 400px;
+   }
+
+   #exercises{
+       margin: 90px auto;
+       width: 80%;
+   }
+   .exInput{
+       border: 1px solid white;
+       padding: 1rem;
+       margin-bottom: 20px;
+       width: 200px;
+       background-color: black;
+       color: white;
+   }
+   input{
+       color:black;
+   }
+   select{
+       color:black;
+   }
+</style> -->
+<style>
+    body {
+        background-color: var(--black);
+        color: var(--white);
     }
-    #workout-landing{
-        height: 90vh;
-       background-image: url("{% static 'images/cindy-koops-unsplash.jpg' %}");
-        position: relative;
-        background-size: cover;
-        border-bottom: 1px solid white;
+    #workout-landing {
+        height: 80px;
     }
-    #workout-landing h1{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3rem;
-        color: white;
+    #workout-landing h1 {
+        display: none;
     }
-    .h2-w{
-        text-align: left;
-        margin: 2rem 6rem;
-        text-transform: uppercase;
+    .content {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+    h2 {
+        color: var(--green-gray);
         font-size: 2rem;
     }
-
-    .sets, .personal{
-        border:1px solid white;
-        padding: 1rem;
-        margin-bottom: 20px;
-        width: 200px;
+    select {
+        padding: 5px;
+        border-radius: 5px;
+        margin: 5px;
     }
-
-    .exerciseName{
-       background-color: #6BA679;
-        padding: 1rem;
-        margin-bottom: 20px;
-        width: 400px;
+    input {
+        padding: 5px;
+        border-radius: 5px;
+        margin: 5px;
     }
-
-    #exercises{
-        margin: 90px auto;
-        width: 80%;
+    .complete_exercise_input {
+        margin: 5px;
+        padding: 5px;
     }
-    .exInput{
-        border: 1px solid white;
-        padding: 1rem;
-        margin-bottom: 20px;
-        width: 200px;
-        background-color: black;
-        color: white;
+    button {
+        background-color: var(--green);
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+    }
+    .flex {
+        flex-direction: column;
+    }
+    
+    .grid {
+        background-color: rgba(255, 255, 255, 0.2);
+        /* border: 1px solid var(--green); */
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+    }
+    .grid h3 {
+        text-decoration: underline;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    .grid div {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        padding: 10px;
+    }
+    @media (min-width: 900px) {
+        .flex {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+        }
+        #workout-landing {
+            background-image: url("{% static 'images/cindy-koops-unsplash.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+        
+        #workout-landing h1 {
+            display: block;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--green);
+        }
     }
 </style>
+<script>
 
+document.getElementById("workout").addEventListener("change", function() {
+   var workoutId = this.value;
+   var workoutIdeas = getWorkoutIdeas(workoutId);
+   var form = document.getElementById("workoutForm");
+   var exerciseSection = document.getElementById("exercise-section");
+   
+   // Clear existing form and exercise section
+   form.innerHTML = "";
+   exerciseSection.innerHTML = "";
+   
+   // Generate form inputs for workout ideas
+   workoutIdeas.forEach(function(idea) {
+       var div = document.createElement("div");
+       div.classList.add("exercise-input");
+       
+       var label = document.createElement("label");
+       label.textContent = idea;
+       
+       var repsInput = document.createElement("input");
+       repsInput.type = "text";
+       repsInput.name = "actual_reps";
+       repsInput.placeholder = "Reps";
+       repsInput.required = true;
+       
+       var setsInput = document.createElement("input");
+       setsInput.type = "text";
+       setsInput.name = "actual_sets";
+       setsInput.placeholder = "Sets";
+       setsInput.required = true;
+       
+       var weightInput = document.createElement("input");
+       weightInput.type = "text";
+       weightInput.name = "actual_weight";
+       weightInput.placeholder = "Weight";
+       weightInput.required = true;
+       
+       div.appendChild(label);
+       div.appendChild(repsInput);
+       div.appendChild(setsInput);
+       div.appendChild(weightInput);
+       
+       exerciseSection.appendChild(div);
+   });
+});
+
+function getWorkoutIdeas(workoutId) {
+   // Replace with your logic to fetch workout ideas based on workoutId
+   // Return an array of workout ideas
+   return [];
+}
+</script>
+</head>
 <body>
-    <main>
-        <section id = "workout-landing">
-            <h1>NO EXCUSES, JUST RESULTS.</h1>
-        </section>
-    
-        <h2 class="h2-w">Workouts</h2>
-        <div id="workout-types">
-            <section class="flex">
+<main>
+   <section id = "workout-landing">
+       
+       <h1>NO EXCUSES, JUST RESULTS.</h1>
+   </section>
+   <section class="content">
+       <section class="comp-workouts">
+           <h2>Complete Workout</h2>
+           <form method="post" id="completeWorkout">
+               {% csrf_token %}
+               <input type="hidden" name="action" value="complete_workout">
+               <input type="hidden" name="user_id" value="{{ user_id }}">
+               <select id="workout" name="workout_id">
+                   {% for workout in workouts %}
+                       <option value="{{ workout.id }}">{{ workout.type }}</option>
+                   {% endfor %}
+               </select>
+               
+                   {% for exercise in exercises %}
+                       <input class="complete_exercise_input" type="checkbox" value="{{ exercise.exercise_name }}">{{ exercise.exercise_name }} {{exercise.}}</input>
+                   {% endfor %}
+           
+               {% for selected_exercise in selected_exercises %}
+                   <input type="hidden" name="selected_exercises" value="{{ selected_exercise.id }}">
+                   <input type="text" name="actual_reps" id="actual_reps" placeholder="Reps" required/>
+                   <input type="text" name="actual_weight" id="actual_weight" placeholder="Weight" required/>
+                   <input type="text" name="actual_sets" id="actual_sets" placeholder="Sets" required/>
+               {% endfor %}
+               
+               <button type="submit" class="complete-btn">Complete Workout</button>
+           </form>
+       </section>
+       <section class="workouts-section">
+           <h2 class="h2-w">Workouts</h2>
+           <div id="workout-types">
+               <section class="flex">
                 <div class="grid">
-                    <h2>Leg Day</h2>
-                    <p>Est. Time: 45 min</p>
-                    <p>7 Exercises</p>
-                    <p>Last completed: 12/25/23</p>
-                </div>
-                <div class="grid">
-                    <h2 class="uppercase">Pull Day</h2>
-                    <p>Est. Time: 45 min</p>
-                    <p>7 Exercises</p>
-                    <p>Last completed: 12/12/23</p>
-                </div>
-                <div class="grid">
-                    <h2 class="uppercase">Push Day</h2>
-                    <p>Est. Time: 45 min</p>
-                    <p>7 Exercises</p>
-                    <p>Last completed: 12/2/23</p>
-                </div>
-            </section> 
-            <button> create new type </button> 
-        </div>
-
-        <div id="exercises">
-            <h2 class="h2-w">Leg Day Exercises</h2>
-            <section id="exercise-section">
-                {% for exercise in exercises %}
-                    <section class="flex">
-                        <p class="sets">{{ exercise.sets }}</p>
-                        <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
-                        <p class="exerciseName">{{ exercise.name }}</p>
-                        <p class="personal">PERSONAL BEST: {{ exercise.personal_best }}</p>
-                    </section>
-                {% endfor %}
-            </section>
-            <form action="" method="post" id="exerciseForm">
-                <input type="text" name="exercise" id="exercise" placeholder="Exercise Name" required/>
-                <input type="text" name="sets" id="sets" placeholder="Sets" required/>
-                <input type="text" name="personal_best" id="personal_best" placeholder="Personal Best" required/>
-                <input type="hidden" name="userid" value="{{ userid }}">
-                <button id="addExercise"> Add Exercise</button>
-            </form>
-            <button id="addExercise"> Add Exercise</button>
-        </div>
-
-        <div id="previous-workouts">
-            <h2 class="h2-w">Recently Completed Workouts</h2>
-            <div class="grid">
-                {% for workout in workouts %}
-                    <div class="workout">
-                        <p>Type: {{ workout.type }}</p>
-                        <p>Time: {{ workout.time }}</p>
-                        <p>Date Created: {{ workout.date_created }}</p>
-                        <p>Number of Exercises: {{ workout.number_exercises }}</p>
+                    <h3 >Leg Day</h3>
+                    <div>
+                        <p>Est. Time: 45 min</p>
+                        <p>7 Exercises</p>
+                        <p>Last completed: 12/25/23</p>
                     </div>
-                {% endfor %}  
-            </div>
-            <button> View All Past Workouts</button>
-        </div>
-    </main> 
-</body>
+                </div>
+                <div class="grid">
+                    <h3 class="uppercase">Pull Day</h3>
+                    <div>
+                        <p>Est. Time: 45 min</p>
+                        <p>7 Exercises</p>
+                        <p>Last completed: 12/12/23</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <h3 class="uppercase">Push Day</h3>
+                    <div>
+                        <p>Est. Time: 45 min</p>
+                        <p>7 Exercises</p>
+                        <p>Last completed: 12/2/23</p>
+                    </div>
+                </div>
+               </section>
+       </section>
+       <section class="create-workout">
+           <form method="post" id="workoutForm">
+               {% csrf_token %}
+               <input type="text" name="workout_type" id="workout" placeholder="Workout Name" required/>
+               <input type="text" name="workout_time" id="time" placeholder="Time" required/>
+               <input type="text" name="number_exercises" id="number_exercises" placeholder="Number of Exercises" required/>
+               <input type="hidden" name="user_id" value="{{ user_id }}">
+               <input type="hidden" name="action" value="create_workout">
+    
+               <button type="submit"> Add Workout</button>
+           </form>
+           
+           <button> Create New Type </button>
+       </section>
+       <section class="exercises-section">
+           <div id="exercises">
+               <h2 class="h2-w"> Exercises</h2>
+               <section id="exercise-section">
+                   {% for user_exercise in user_exercises %}
+                       <!-- {% if user_exercise.workout_id == 1 %} -->
+                           <section class="flex">
+                               <p class="sets">{{ user_exercise.goal_sets }}</p>
+                               <input type="text" name="sets" id="" class="exInput" placeholder="User Input"/>
+                               <p class="exerciseName">{{ user_exercise.exercise_name }}</p>
+                               <p class="personal">PERSONAL BEST: {{ user_exercise.best_weight }}</p>
+                           </section>
+                       <!-- {% endif %} -->
+                   {% endfor %}
+               </section>
+               <form method="post" id="exerciseForm" name="create_exercise">
+                   {% csrf_token %}
+                   <select id="workout" name="workout_id">
+                       {% for workout in workouts %}
+                           <option name="workout_id" value="{{ workout.id }}">{{ workout.type }}</option>
+                       {% endfor %}
+                   </select>
+                   <input type="text" name="exercise_name" id="exercise" placeholder="Exercise Name" required/>
+                   <input type="text" name="goal_sets" id="sets" placeholder="Goal Sets" required/>
+                   <input type="text" name="exercise_best" id="exercise_best" placeholder="Personal Best" required/>
+                   <input type="text" name="goal_weight" id="weight" placeholder="Goal Weight" required/>
+                   <input type="text" name="goal_reps" id="goal_reps" placeholder="Goal Reps" required>
+                   <input type="text" name="order" id="order" placeholder="Order" required>
+                   <!-- <input type="hidden" name="user_id" value="{{ userid }}"> -->
+                   <input type="hidden" name="action" value="create_exercise">
+                   <button type='submit' id="addExercise"> Add Exercise</button>
+               </form>
+        
+               <button id="addExercise"> Add Exercise</button>
+           </div>
+       </section>
+       <section class="recent-comp-workouts">
+           <div id="previous-workouts">
+               <h2 class="h2-w">Recently Completed Workouts</h2>
+               <div class="grid">
+                 {% for workout in completed_workouts %}
+                   <div class="workout">
+                   <p>Type: {{ workout.type }}</p>
+                   <p>Day Completed: {{ workout.day_completed }}</p>
+                   {% for exercise in workout.exercises %}
+                       <p>{{ exercise.exercise_name }}: {{ exercise.actual_sets }} sets, {{ exercise.actual_reps }} reps, {{ exercise.actual_weight }} lbs</p>
+                   {% endfor %}
+                   </div>
+                 {% endfor %}
+                   
+               </div>
+               <button> View All Past Workouts</button>
+           </div>
+       </section>
+   </section>
+</main> 
 {% endblock %}
