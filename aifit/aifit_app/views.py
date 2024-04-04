@@ -495,23 +495,102 @@ def line_chart(request):
     return render(request, 'aifit_app/graph.html')
 
 def workout(request):
-    # This command will get the user's id once the user is logged in
-    # -> request.user.id <-
-    previous_workouts = firestore.client().collection('user_workouts').stream()
-    workouts = []
-    for workout in previous_workouts:
-        workouts_data = workout.to_dict()
-        print(workouts_data)
-        workouts.append({
-            'user_id': workouts_data.get('user_id', ''),
-            'type': workouts_data.get('type', ''),
-            'time': workouts_data.get('time', ''),
-            'date_created': workouts_data.get('date_created', ''),
-            'number_exercises': workouts_data.get('number_exercises', ''),
-        })
-        print(workouts_data.get('type', '')) 
-        print(workouts_data.get('number_exercises', ''))
-    return render(request, 'aifit_app/workouts.html', {'workouts': workouts})
+   # This command will get the user's id once the user is logged in
+   # user =  request.user.id
+   # user_workouts = get_user_workouts(request)
+   # user_exercises = get_user_exercises(request)
+   user = "jhghjgjgjhgghjghjjkh"
+   action = request.POST.get('action')
+   
+   print('action',action)
+   if action == 'create_exercise':
+       print('create_exercise')
+       exercise_name = request.POST.get('exercise_name')
+       exercise_sets = request.POST.get('goal_sets')
+       exercise_reps = request.POST.get('goal_reps')
+       exercise_weight = request.POST.get('goal_weight')
+       exercise_best = request.POST.get('exercise_best')
+       order = request.POST.get('order')
+
+       db = firestore.client()
+       workout_ref = db.collection('user_exercises')
+       workout_ref.add({
+           'user_workout_id': user,
+           'exercise_name': exercise_name,
+           'goal_sets': exercise_sets,
+           'goal_reps': exercise_reps,
+           'goal_weight': exercise_weight,
+           'best_weight': exercise_best,
+           'order': order,
+           'date_created': SERVER_TIMESTAMP
+       })
+       return redirect('workout')
+   elif action == 'create_workout':
+       print('create_workout')
+       workout_type = request.POST.get('workout_type')
+       workout_time = request.POST.get('workout_time')
+       workout_exercises = request.POST.get('workout_exercises')
+
+       db = firestore.client()
+       workout_ref = db.collection('user_workouts')
+       workout_ref.add({
+           'user_id': user,
+           'type': workout_type,
+           'time': workout_time,
+           'number_exercises': workout_exercises,
+           'date_created': SERVER_TIMESTAMP
+       })
+       return redirect('workout')
+   
+
+   user_workouts = firestore.client().collection('user_workouts').stream()
+   workouts = []
+   for workout in user_workouts:
+       workouts_data = workout.to_dict()
+       workouts.append({
+           'user_id': workouts_data.get('user_id', ''),
+           'type': workouts_data.get('type', ''),
+           'time': workouts_data.get('time', ''),
+           'date_created': workouts_data.get('date_created', ''),
+           'number_exercises': workouts_data.get('number_exercises', ''),
+       })
+   
+   db = firestore.client()
+   user_exercises = db.collection('user_exercises').stream()
+   exercises = []
+   for exercise in user_exercises:
+       exercise_data = exercise.to_dict()
+       print(exercise_data)
+       exercises.append({
+           'goal_reps': exercise_data.get('goal_reps', ''),
+           'goal_sets': exercise_data.get('goal_sets', ''),
+           'order': exercise_data.get('order', ''),
+           'type_of_exercise': exercise_data.get('type_of_exercise', ''),
+           'exercise_name': exercise_data.get('exercise_name', ''),
+           'best_weight': exercise_data.get('best_weight', ''),
+           'goal_weight': exercise_data.get('goal_weight', ''),
+       })
+   
+
+   completed_workout = firestore.client().collection('completed_workout').stream()
+   completed_workouts = []
+   for workout in completed_workout:
+       workout_data = workout.to_dict()
+       print(workout_data)
+       completed_workouts.append({
+           'day_completed': workout_data.get('day_completed', ''),
+           'exercises': workout_data.get('exercises', ''),
+           'type': workout_data.get('type', ''),
+       })
+   context = {
+       'workouts': workouts,
+       'exercises': exercises,
+       'completed_workouts': completed_workouts
+   
+   }
+       # print(workouts_data.get('type', '')) 
+       # print(workouts_data.get('number_exercises', ''))
+   return render(request, 'aifit_app/workouts.html', context)   
 
 #def previous_workouts(request):
 #     # This command will get the user's id once the user is logged in
